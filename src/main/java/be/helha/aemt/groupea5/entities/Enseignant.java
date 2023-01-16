@@ -1,6 +1,7 @@
 package be.helha.aemt.groupea5.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,4 +33,72 @@ public class Enseignant implements Serializable {
 		this.remarque = remarque;
 		this.attribution = attribution;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getRemarque() {
+		return remarque;
+	}
+
+	public void setRemarque(String remarque) {
+		this.remarque = remarque;
+	}
+
+	public Attribution getAttribution() {
+		return attribution;
+	}
+
+	public void setAttribution(Attribution attribution) {
+		this.attribution = attribution;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(attribution, id, mail, nom, prenom, remarque);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Enseignant other = (Enseignant) obj;
+		return Objects.equals(attribution, other.attribution) && Objects.equals(id, other.id)
+				&& Objects.equals(mail, other.mail) && Objects.equals(nom, other.nom)
+				&& Objects.equals(prenom, other.prenom) && Objects.equals(remarque, other.remarque);
+	}
+	
 }

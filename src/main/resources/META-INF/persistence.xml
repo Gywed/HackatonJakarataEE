@@ -16,7 +16,7 @@
 	</persistence-unit>
 	<persistence-unit name="groupeA5-LOCAL"
 		transaction-type="RESOURCE_LOCAL">
-		<class>be.helha.aemt.noelhuls.entities.Enseignant</class>
+		<!--  <class>be.helha.aemt.noelhuls.entities.Enseignant</class>-->
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<!-- <property name="jakarta.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/> -->

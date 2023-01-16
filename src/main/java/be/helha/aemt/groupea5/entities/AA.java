@@ -1,5 +1,7 @@
 package be.helha.aemt.groupea5.entities;
 
+import java.util.Objects;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,4 +43,116 @@ public class AA {
 		this.nombreEtudiant = nombreEtudiant;
 		this.fraction = fraction;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getAnneeAcademique() {
+		return anneeAcademique;
+	}
+
+	public void setAnneeAcademique(Integer anneeAcademique) {
+		this.anneeAcademique = anneeAcademique;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getIntitule() {
+		return intitule;
+	}
+
+	public void setIntitule(String intitule) {
+		this.intitule = intitule;
+	}
+
+	public Integer getCredit() {
+		return credit;
+	}
+
+	public void setCredit(Integer credit) {
+		this.credit = credit;
+	}
+
+	public Integer getHeure() {
+		return heure;
+	}
+
+	public void setHeure(Integer heure) {
+		this.heure = heure;
+	}
+
+	public Integer getHeureQ1() {
+		return heureQ1;
+	}
+
+	public void setHeureQ1(Integer heureQ1) {
+		this.heureQ1 = heureQ1;
+	}
+
+	public Integer getHeureQ2() {
+		return heureQ2;
+	}
+
+	public void setHeureQ2(Integer heureQ2) {
+		this.heureQ2 = heureQ2;
+	}
+
+	public Integer getNombreGroupe() {
+		return nombreGroupe;
+	}
+
+	public void setNombreGroupe(Integer nombreGroupe) {
+		this.nombreGroupe = nombreGroupe;
+	}
+
+	public Integer getNombreEtudiant() {
+		return nombreEtudiant;
+	}
+
+	public void setNombreEtudiant(Integer nombreEtudiant) {
+		this.nombreEtudiant = nombreEtudiant;
+	}
+
+	public Fraction getFraction() {
+		return fraction;
+	}
+
+	public void setFraction(Fraction fraction) {
+		this.fraction = fraction;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(anneeAcademique, code, credit, fraction, heure, heureQ1, heureQ2, id, intitule,
+				nombreEtudiant, nombreGroupe);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AA other = (AA) obj;
+		return Objects.equals(anneeAcademique, other.anneeAcademique) && Objects.equals(code, other.code)
+				&& Objects.equals(credit, other.credit) && fraction == other.fraction
+				&& Objects.equals(heure, other.heure) && Objects.equals(heureQ1, other.heureQ1)
+				&& Objects.equals(heureQ2, other.heureQ2) && Objects.equals(id, other.id)
+				&& Objects.equals(intitule, other.intitule) && Objects.equals(nombreEtudiant, other.nombreEtudiant)
+				&& Objects.equals(nombreGroupe, other.nombreGroupe);
+	}
+	
 }
