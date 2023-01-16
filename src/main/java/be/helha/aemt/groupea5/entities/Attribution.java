@@ -14,7 +14,7 @@ public class Attribution {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String anneeAcademique;
+	private Integer anneeAcademique;
 	private List<AA> aas;
 	private List<Mission> missions;
 	
@@ -22,7 +22,7 @@ public class Attribution {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Attribution(String anneeAcademique, List<AA> aas, List<Mission> missions) {
+	public Attribution(Integer anneeAcademique, List<AA> aas, List<Mission> missions) {
 		super();
 		this.anneeAcademique = anneeAcademique;
 		this.aas = aas;
