@@ -1,8 +1,8 @@
 package be.helha.aemt.groupea5.entities;
 
 public enum Fraction {
-	QUATRECENTQUATREVINGT(480),
-	SEPTCENTCINQUANTE(750);
+	_480(480),
+	_750(750);
 
 	private int valeur;
 	
