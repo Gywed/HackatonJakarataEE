@@ -18,14 +18,14 @@ public class Utilisateur implements Serializable{
 	private String prenom;
 	private String email;
 	private String password;
-	private String departement;
+	private Departement departement;
 	private String role;
 		
 	public Utilisateur() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Utilisateur(String nom, String prenom, String email, String password, String departement, String role) {
+	public Utilisateur(String nom, String prenom, String email, String password, Departement departement, String role) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
