@@ -29,4 +29,29 @@ public class AADAO {
 		
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	public AA add(AA e) {
+		if (e == null) return null;
+		if (e == find(e)) return null;
+		return em.merge(e);
+	}
+	
+	public AA delete(AA e) {
+		if (e == null) return null;
+		
+		AA dbE = find(e);
+		if (dbE == null) return null;
+		
+		em.remove(em.merge(dbE));
+		return dbE;
+	}
+
+	public AA update(AA e) {
+		if (e == null) return null;
+		AA dbE = find(e);
+		e.setId(dbE.getId());
+		
+		return em.merge(e);
+				
+	}
 }
