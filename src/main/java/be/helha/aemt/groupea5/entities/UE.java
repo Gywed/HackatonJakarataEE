@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class UE {
@@ -21,6 +22,7 @@ public class UE {
 	private String code;
 	private String intitule;
 	private Integer credit;
+	@ManyToOne
 	private List<AA> aas;
 	
 	public UE() {

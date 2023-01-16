@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Attribution {
@@ -15,7 +16,9 @@ public class Attribution {
 	private Integer id;
 	
 	private Integer anneeAcademique;
+	@ManyToOne
 	private List<AA> aas;
+	@ManyToOne
 	private List<Mission> missions;
 	
 	public Attribution() {
