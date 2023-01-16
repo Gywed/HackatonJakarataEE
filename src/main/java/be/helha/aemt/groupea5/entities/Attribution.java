@@ -17,9 +17,9 @@ public class Attribution {
 	private Integer id;
 	
 	private Integer anneeAcademique;
-	@ManyToOne
+	@ManyToOne(targetEntity = AA.class)
 	private List<AA> aas;
-	@ManyToOne
+	@ManyToOne(targetEntity = Mission.class)
 	private List<Mission> missions;
 	
 	public Attribution() {

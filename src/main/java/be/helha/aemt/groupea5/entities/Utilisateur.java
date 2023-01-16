@@ -20,13 +20,13 @@ public class Utilisateur implements Serializable{
 	private String email;
 	private String password;
 	private Departement departement;
-	private String role;
+	private Role role;
 		
 	public Utilisateur() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Utilisateur(String nom, String prenom, String email, String password, Departement departement, String role) {
+	public Utilisateur(String nom, String prenom, String email, String password, Departement departement, Role role) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -84,11 +84,11 @@ public class Utilisateur implements Serializable{
 		this.departement = departement;
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
