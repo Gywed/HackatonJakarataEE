@@ -37,8 +37,10 @@
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<!-- <property name="jakarta.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/> -->
+<!-- 			<property name="jakarta.persistence.jdbc.url" -->
+<!-- 				value="jdbc:mysql://localhost:3306/dba5" /> -->
 			<property name="jakarta.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/dba5" />
+				value="jdbc:mysql://54.216.125.208:3306/dba5" />
 				
 			<property name="eclipselink.jdbc.property.useSSL" value="false" />
 			<property name="eclipselink.jdbc.property.requireSSL" value="false" />
@@ -49,7 +51,7 @@
 
 			<property name="jakarta.persistence.jdbc.user" value="ga5" />
 			<property name="jakarta.persistence.jdbc.password"
-				value="1111" />
+				value="8732" />
 
 		</properties>
 	</persistence-unit>
