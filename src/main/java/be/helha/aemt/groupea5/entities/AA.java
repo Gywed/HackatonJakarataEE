@@ -6,8 +6,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "findByCode", query ="select a from AA e where a.code = ?1")
+})
 public class AA {
 
 	@Id
