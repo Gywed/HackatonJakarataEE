@@ -2,6 +2,7 @@ package be.helha.aemt.groupea5.dao;
 
 import java.util.List;
 
+
 import be.helha.aemt.groupea5.entities.Mission;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
@@ -17,7 +18,12 @@ public class MissionDAO {
 
 	public MissionDAO() {
 	}
-	
+	public List<Mission> findAll() {
+		// TODO Auto-generated method stub
+		String strQuery="Select m from Mission m";
+		TypedQuery<Mission> query = em.createQuery(strQuery,Mission.class);
+		return query.getResultList();
+	}
 	public Mission find(Mission m) {
 		if(m==null)return null;
 		String strQuery = "select m from Mission m where m.id = ?1 "
@@ -51,5 +57,15 @@ public class MissionDAO {
 		em.remove(mASupp);
 		return mASupp;
 		
+	}
+	
+	public Mission update(Mission m) {
+		if (m==null) {
+			return null;
+		}
+		
+		m.setId(find(m).getId());
+		
+		return em.merge(m);
 	}
 }
