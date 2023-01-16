@@ -28,7 +28,7 @@ public class EnseignantDAO {
 	}
 	
 	public Enseignant find(Enseignant e) {
-		TypedQuery<Enseignant> query = em.createQuery("Select e from Enseignant e where e.email = ?1", Enseignant.class);
+		TypedQuery<Enseignant> query = em.createQuery("Select e from Enseignant e where e.mail = ?1", Enseignant.class);
 		query.setParameter(1, e.getMail());
 		List<Enseignant> result = query.getResultList();
 		System.out.println(result);
