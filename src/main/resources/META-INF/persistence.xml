@@ -6,6 +6,15 @@
 	<persistence-unit name="groupeA5-JTA"
 		transaction-type="JTA">
 		<jta-data-source>jdbc/groupeA5</jta-data-source>
+		<class>be.helha.aemt.groupea5.entities.Mission</class>
+		<class>be.helha.aemt.groupea5.entities.AA</class>
+		<class>be.helha.aemt.groupea5.entities.Attribution</class>
+		<class>be.helha.aemt.groupea5.entities.Departement</class>
+		<class>be.helha.aemt.groupea5.entities.Enseignant</class>
+		<class>be.helha.aemt.groupea5.entities.Section</class>
+		<class>be.helha.aemt.groupea5.entities.UE</class>
+		<class>be.helha.aemt.groupea5.entities.Utilisateur</class>
+		
 		<properties>
 			
 			<property
@@ -16,7 +25,15 @@
 	</persistence-unit>
 	<persistence-unit name="groupeA5-LOCAL"
 		transaction-type="RESOURCE_LOCAL">
-		<!--  <class>be.helha.aemt.noelhuls.entities.Enseignant</class>-->
+		<class>be.helha.aemt.groupea5.entities.Mission</class>
+		<class>be.helha.aemt.groupea5.entities.AA</class>
+		<class>be.helha.aemt.groupea5.entities.Attribution</class>
+		<class>be.helha.aemt.groupea5.entities.Departement</class>
+		<class>be.helha.aemt.groupea5.entities.Enseignant</class>
+		<class>be.helha.aemt.groupea5.entities.Section</class>
+		<class>be.helha.aemt.groupea5.entities.UE</class>
+		<class>be.helha.aemt.groupea5.entities.Utilisateur</class>
+		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<!-- <property name="jakarta.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/> -->
