@@ -3,6 +3,7 @@ package be.helha.aemt.groupea5.dao;
 import java.util.List;
 
 import be.helha.aemt.groupea5.entities.AA;
+import be.helha.aemt.noelhuls.entities.Enseignant;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -28,6 +29,13 @@ public class AADAO {
 		em.clear();
 		
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	public List<AA> findAll() {
+		// TODO Auto-generated method stub
+		String strQuery="Select a from AA a";
+		TypedQuery<AA> query = em.createQuery(strQuery,AA.class);
+		return query.getResultList();
 	}
 	
 	public AA add(AA e) {
