@@ -23,7 +23,7 @@ public class UE {
 	private String code;
 	private String intitule;
 	private Integer credit;
-	@ManyToOne
+	@ManyToOne(targetEntity = AA.class)
 	private List<AA> aas;
 	
 	public UE() {

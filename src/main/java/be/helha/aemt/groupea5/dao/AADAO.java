@@ -3,7 +3,6 @@ package be.helha.aemt.groupea5.dao;
 import java.util.List;
 
 import be.helha.aemt.groupea5.entities.AA;
-import be.helha.aemt.noelhuls.entities.Enseignant;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
