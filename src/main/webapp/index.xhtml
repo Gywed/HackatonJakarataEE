@@ -13,24 +13,11 @@
 			<h:commandButton value = "Sec" action="#{navigationControl.doSec}"/>
 			<h:commandButton value = "Dep" action="#{navigationControl.doDep}"/>
 			<h:commandButton value = "Dom" action="#{navigationControl.doDom}"/>
+			<h:commandButton value = "AddAA" action="#{navigationControl.doAddAA}"/>
+			<h:commandButton value = "ListAA" action="#{navigationControl.doListAA}"/>
 			<h:commandButton value = "Login" action="#{navigationControl.doLogin}"/>
 			
-			<br/>
-			
-			<h:dataTable value = "#{AAControl.doFindAll()}" var = "aa">
-	   
-	   <h:column>    				
-	      <f:facet name = "header">Id</f:facet>    				
-	      #{aa.id}
-	   </h:column>
-	   
-	   <h:column>
-	      <f:facet name = "header">Nom</f:facet>
-	      #{aa.nom}
-	   </h:column>
-	   
-	</h:dataTable>
-			
-		</h:form>
-	</body>
+	</h:form>
+</body>
+
 </html>
