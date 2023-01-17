@@ -15,7 +15,7 @@ public class Mission implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private int anneeAcademique;
+	private AnneeAcademique anneeAcademique;
 	private String intitule;
 	private int heures;
 	
@@ -24,7 +24,7 @@ public class Mission implements Serializable{
 	}
 
 
-	public Mission(int anneeAcademique, String intitule, int heures) {
+	public Mission(Integer id, AnneeAcademique anneeAcademique, String intitule, int heures) {
 		super();
 		this.anneeAcademique = anneeAcademique;
 		this.intitule = intitule;
@@ -42,12 +42,12 @@ public class Mission implements Serializable{
 	}
 
 
-	public int getAnneeAcademique() {
+	public AnneeAcademique getAnneeAcademique() {
 		return anneeAcademique;
 	}
 
 
-	public void setAnneeAcademique(int anneeAcademique) {
+	public void setAnneeAcademique(AnneeAcademique anneeAcademique) {
 		this.anneeAcademique = anneeAcademique;
 	}
 

@@ -22,7 +22,7 @@ public class Attribution implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private Integer anneeAcademique;
+	private AnneeAcademique anneeAcademique;
 	@ManyToOne(targetEntity = AA.class)
 	private List<AA> aas;
 	@ManyToOne(targetEntity = Mission.class)
@@ -32,7 +32,7 @@ public class Attribution implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Attribution(Integer anneeAcademique, List<AA> aas, List<Mission> missions) {
+	public Attribution(AnneeAcademique anneeAcademique, List<AA> aas, List<Mission> missions) {
 		super();
 		this.anneeAcademique = anneeAcademique;
 		this.aas = aas;
@@ -47,11 +47,11 @@ public class Attribution implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getAnneeAcademique() {
+	public AnneeAcademique getAnneeAcademique() {
 		return anneeAcademique;
 	}
 
-	public void setAnneeAcademique(Integer anneeAcademique) {
+	public void setAnneeAcademique(AnneeAcademique anneeAcademique) {
 		this.anneeAcademique = anneeAcademique;
 	}
 
