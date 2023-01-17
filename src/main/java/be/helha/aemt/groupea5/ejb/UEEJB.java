@@ -20,5 +20,9 @@ public class UEEJB {
 	public UE find(UE ue) {
 		return daoUE.find(ue);
 	}
+	
+	public UE add(UE ue) {
+		return daoUE.add(ue);
+	}
 
 }
