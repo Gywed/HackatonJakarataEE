@@ -2,6 +2,7 @@ package be.helha.aemt.groupea5.dao;
 
 import java.util.List;
 
+import be.helha.aemt.groupea5.entities.Enseignant;
 import be.helha.aemt.groupea5.entities.UE;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
@@ -43,5 +44,17 @@ public class UEDAO {
 		}
 		return em.merge(ue);
 	}
+	
+	public UE delete(UE ue) {
+		if (ue==null) {
+			return null;
+		}
+		
+		em.remove(find(ue));
+		
+		return ue;
+	}
+	
+	
 
 }
