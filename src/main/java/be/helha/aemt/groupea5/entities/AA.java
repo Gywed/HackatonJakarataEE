@@ -11,7 +11,8 @@ import jakarta.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name = "findByCode", query ="select a from AA a where a.code = ?1")
+	@NamedQuery(name = "findByCode", query ="select a from AA a where a.code = ?1"),
+	@NamedQuery(name = "findById", query ="select a from AA a where a.id = ?1")
 })
 public class AA {
 
