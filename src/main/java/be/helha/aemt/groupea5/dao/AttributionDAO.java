@@ -2,7 +2,6 @@ package be.helha.aemt.groupea5.dao;
 
 import java.util.List;
 
-import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.Attribution;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
@@ -22,7 +21,7 @@ public class AttributionDAO {
 	}
 	
 	public Attribution findById(Attribution e) {
-		TypedQuery<Attribution> query = em.createNamedQuery("findById", Attribution.class);
+		TypedQuery<Attribution> query = em.createNamedQuery("findAttributionById", Attribution.class);
 		query.setParameter(1, e.getId());
 		List<Attribution> list = query.getResultList();
 		

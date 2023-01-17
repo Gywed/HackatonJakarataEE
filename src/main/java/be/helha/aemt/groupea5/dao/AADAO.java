@@ -21,7 +21,7 @@ public class AADAO {
 	}
 	
 	public AA find(AA e) {
-		TypedQuery<AA> query = em.createNamedQuery("findByCode", AA.class);
+		TypedQuery<AA> query = em.createNamedQuery("findAAByCode", AA.class);
 		query.setParameter(1, e.getCode());
 		List<AA> list = query.getResultList();
 		
@@ -30,7 +30,7 @@ public class AADAO {
 	}
 	
 	public AA findById(AA e) {
-		TypedQuery<AA> query = em.createNamedQuery("findById", AA.class);
+		TypedQuery<AA> query = em.createNamedQuery("findAAById", AA.class);
 		query.setParameter(1, e.getId());
 		List<AA> list = query.getResultList();
 		

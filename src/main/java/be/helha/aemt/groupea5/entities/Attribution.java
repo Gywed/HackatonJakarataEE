@@ -14,7 +14,7 @@ import jakarta.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name = "findById", query ="select a from Attribution a where a.id = ?1")
+	@NamedQuery(name = "findAttributionById", query ="select a from Attribution a where a.id = ?1")
 })
 public class Attribution implements Serializable {
 	
