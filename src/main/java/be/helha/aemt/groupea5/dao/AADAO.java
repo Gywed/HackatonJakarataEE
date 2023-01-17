@@ -26,7 +26,15 @@ public class AADAO {
 		List<AA> list = query.getResultList();
 		
 		em.clear();
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	public AA findById(AA e) {
+		TypedQuery<AA> query = em.createNamedQuery("findById", AA.class);
+		query.setParameter(1, e.getId());
+		List<AA> list = query.getResultList();
 		
+		em.clear();
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
@@ -55,7 +63,7 @@ public class AADAO {
 
 	public AA update(AA e) {
 		if (e == null) return null;
-		AA dbE = find(e);
+		AA dbE = findById(e);
 		e.setId(dbE.getId());
 		
 		return em.merge(e);
