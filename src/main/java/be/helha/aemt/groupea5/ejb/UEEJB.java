@@ -24,5 +24,9 @@ public class UEEJB {
 	public UE add(UE ue) {
 		return daoUE.add(ue);
 	}
+	
+	public UE delete(UE ue) {
+		return daoUE.delete(ue);
+	}
 
 }
