@@ -26,9 +26,8 @@ public class Section implements Serializable{
 	}
 
 
-	public Section(Integer id, String departement, String nom, List<Mission> missions) {
+	public Section(String departement, String nom, List<Mission> missions) {
 		super();
-		this.id = id;
 		this.departement = departement;
 		this.nom = nom;
 		this.missions = missions;

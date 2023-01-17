@@ -10,6 +10,7 @@
   </properties>
   
   <dependencies>
+
 		<!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
 		<dependency>
 		    <groupId>jakarta.platform</groupId>
@@ -33,6 +34,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.30</version>
 		</dependency>
+	
 		
   </dependencies>
   
