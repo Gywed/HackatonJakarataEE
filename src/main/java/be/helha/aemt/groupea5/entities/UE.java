@@ -42,6 +42,15 @@ public class UE {
 		this.credit = credit;
 		this.aas = aas;
 	}
+	
+	/**
+	 * Add an AA in the AA's list
+	 */
+	public Boolean addAA(AA aa) {
+		if(aas.contains(aa))
+			return null;
+		return aas.add(aa);
+	}
 
 	public Integer getId() {
 		return id;
