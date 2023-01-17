@@ -48,9 +48,22 @@ public class UE {
 	 */
 	public Boolean addAA(AA aa) {
 		if(aas.contains(aa))
-			return null;
+			return false;
 		return aas.add(aa);
 	}
+	
+	/**
+	 * Add a range of AAs in AAs list
+	 * @return true if the range has been added
+	 */
+	public boolean addAllAA(List<AA> aaRange) {
+		for (AA aa : aaRange) {
+			if(aas.contains(aa))
+				return false;
+		}
+		return aas.addAll(aaRange);
+	}
+	
 
 	public Integer getId() {
 		return id;
