@@ -32,5 +32,16 @@ public class UEDAO {
 		List<UE> result = query.getResultList();
 		return result.isEmpty() ? null : result.get(0);
 	} 
+	
+	public UE add(UE ue) {
+		if (ue==null) {
+			return null;
+		}
+		
+		if (find(ue) != null) {
+			return null;
+		}
+		return em.merge(ue);
+	}
 
 }
