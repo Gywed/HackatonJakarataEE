@@ -28,9 +28,8 @@ public class Departement implements Serializable{
 	}
 
 
-	public Departement(Integer id, String nom, List<Section> sections, List<Mission> missions) {
+	public Departement(String nom, List<Section> sections, List<Mission> missions) {
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.sections = sections;
 		this.missions = missions;

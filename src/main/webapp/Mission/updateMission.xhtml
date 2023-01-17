@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html">
+<head>
+
+<title>Start Page</title>
+</head>
+	<body>
+		<h1>Hello World!</h1>
+				
+		<h:form class="form">
+			<h2>Modifier une mission</h2>
+			
+			<span>Année académique : </span>
+			<h:inputText value="#{missionControl.mission.anneeAcademique}"/>
+			<br/>
+			<span>Intitulé : </span>
+			<h:inputText value="#{missionControl.mission.intitule}"/>
+			<br/>
+			<span>Heures : </span>
+			<h:inputText value="#{missionControl.mission.heures}"/>
+			<br/>
+			<h:commandButton value="Modifier" action="#{missionControl.doUpdate()}"/>
+			<br/>
+		</h:form>
+		
+		
+	</body>
+</html>
