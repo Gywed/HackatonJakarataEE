@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:h="http://xmlns.jcp.org/jsf/html">
+<head>
+
+<title>Start Page</title>
+<meta http-equiv="  Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+	<body>
+		<h1>Update an AA</h1>
+		
+		<h:form>
+			<h:outputLabel>Annee Academique : </h:outputLabel>
+			<h:inputText value = "#{aAControl.aa.anneeAcademique}" type="text"/> 
+			<br/>
+			<h:outputLabel>Code</h:outputLabel>
+			<h:inputText value = "#{aAControl.aa.code}" type="text"/> 
+			<br/>
+			<h:outputLabel>intitule</h:outputLabel>
+			<h:inputText value = "#{aAControl.aa.intitule}" type="text"/> 
+			<br/>
+			<h:outputLabel>credit</h:outputLabel>
+			<h:inputText value = "#{aAControl.aa.credit}" type="text"/> 
+			<br/>
+			<h:outputLabel>heure</h:outputLabel>
+			<h:inputText value = "#{aAControl.aa.heure}" type="text"/> 
+			<br/>
+			<h:outputLabel>heureQ1</h:outputLabel>
+			<h:inputText value = "#{aAControl.aa.heureQ1}" type="text"/> 
+			<br/>
+			<h:outputLabel>heureQ2</h:outputLabel>
+			<h:inputText value = "#{aAControl.aa.heureQ2}" type="text"/> 
+			<br/>
+			<h:outputLabel>nombreGroupe</h:outputLabel>
+			<h:inputText value = "#{aAControl.aa.nombreGroupe}" type="text"/> 
+			<br/>
+			<h:outputLabel>nombreEtudiant</h:outputLabel>
+			<h:inputText value = "#{aAControl.aa.nombreEtudiant}" type="text"/> 
+			<br/>
+			<h:outputLabel>fraction</h:outputLabel>
+			<h:inputText value = "#{aAControl.aa.fraction}" type="text"/> 
+			
+			<h:commandButton value = "Submit" action="#{aAControl.doUpdateAa()}"/>
+		</h:form>
+	</body>
+</html>
