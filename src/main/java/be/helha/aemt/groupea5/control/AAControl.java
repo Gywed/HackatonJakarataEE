@@ -2,20 +2,20 @@ package be.helha.aemt.groupea5.control;
 
 import java.io.Serializable;
 import java.util.List;
-
-import org.jboss.weld.context.ejb.Ejb;
-
 import be.helha.aemt.groupea5.ejb.AAEJB;
 import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.Fraction;
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
 @Named
 @SessionScoped
 public class AAControl implements Serializable {
-	@Ejb
+	@EJB
 	private AAEJB beanGestion;
+	
+	private AA aa;
 	
 	private Integer anneeAcademique;
 	private String code;
@@ -32,6 +32,19 @@ public class AAControl implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void clearData() {
+		setAnneeAcademique(0);
+		setCode("");
+		setIntitule("");
+		setCredit(0);
+		setHeure(0);
+		setHeureQ1(0);
+		setHeureQ2(0);
+		setNombreEtudiant(0);
+		setNombreGroupe(0);
+		setFraction(null);
+	}
+	
 	public List<AA> doFindAll()
 	{
 		return beanGestion.findAll();
@@ -39,6 +52,31 @@ public class AAControl implements Serializable {
 			
 	public void doAddAa() {
 		beanGestion.add(new AA(anneeAcademique,code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
+		clearData();
+	}
+	public void doDeleteAa(AA aa) {
+		beanGestion.delete(aa);
+	}
+	
+	public String goToUpdateAa(AA aa) {
+		setAa(aa);
+		setAnneeAcademique(aa.getAnneeAcademique());
+		setCode(aa.getCode());
+		setCredit(aa.getCredit());
+		setFraction(aa.getFraction());
+		setHeure(aa.getHeure());
+		setHeureQ1(aa.getHeureQ1());
+		setHeureQ2(aa.getHeureQ2());
+		setIntitule(aa.getIntitule());
+		setNombreEtudiant(aa.getNombreEtudiant());
+		setNombreGroupe(aa.getNombreGroupe());
+		return "updateAA??faces-redirect=true";
+	}
+	
+	public String doUpdateAa() {
+		beanGestion.update(aa);
+		clearData();
+		return "listAA?faces-redirect=true";
 	}
 
 	public AAEJB getBeanGestion() {
@@ -128,7 +166,12 @@ public class AAControl implements Serializable {
 	public void setFraction(Fraction fraction) {
 		this.fraction = fraction;
 	}
-	
-	
 
+	public AA getAa() {
+		return aa;
+	}
+
+	public void setAa(AA aa) {
+		this.aa = aa;
+	}
 }
