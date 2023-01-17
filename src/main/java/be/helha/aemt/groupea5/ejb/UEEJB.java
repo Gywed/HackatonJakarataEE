@@ -28,5 +28,9 @@ public class UEEJB {
 	public UE delete(UE ue) {
 		return daoUE.delete(ue);
 	}
+	
+	public UE updtae(UE ue) {
+		return daoUE.update(ue);
+	}
 
 }
