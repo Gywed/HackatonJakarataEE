@@ -55,6 +55,17 @@ public class UEDAO {
 		return ue;
 	}
 	
+	public UE update(UE ue) {
+		if (ue==null) return null;
+		
+		UE dbE = find(ue);
+		if(dbE==null) return null;
+		ue.setId(dbE.getId());
+		
+		return em.merge(ue);
+	
+	}
+	
 	
 
 }
