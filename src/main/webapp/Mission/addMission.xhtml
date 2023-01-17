@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
 <head>
 
 <title>Start Page</title>
@@ -10,15 +10,15 @@
 			<h2>Ajouter une mission</h2>
 			
 			<span>Année académique : </span>
-			<h:inputText value="#{missionControl.anneeAcademique}"/>
+			<p:inputText value="#{missionControl.anneeAcademique}"/>
 			<br/>
 			<span>Intitulé : </span>
-			<h:inputText value="#{missionControl.intitule}"/>
+			<p:inputText value="#{missionControl.intitule}"/>
 			<br/>
 			<span>Heures : </span>
-			<h:inputText value="#{missionControl.heures}"/>
+			<p:inputText value="#{missionControl.heures}"/>
 			<br/>
-			<h:commandButton value="Add	" action="#{missionControl.doAdd()}"/>
+			<p:commandButton value="Add	" action="#{missionControl.doAdd()}"/>
 			<br/>
 		</h:form>
 	</body>
