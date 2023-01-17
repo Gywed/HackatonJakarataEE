@@ -17,4 +17,7 @@ public class AnneeAcademiqueEJB {
 		return dao.findAll();
 	}
 
+	public AnneeAcademique find(AnneeAcademique a) {
+		return dao.find(a);
+	}
 }
