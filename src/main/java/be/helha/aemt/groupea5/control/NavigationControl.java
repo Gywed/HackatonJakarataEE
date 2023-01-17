@@ -27,6 +27,16 @@ public class NavigationControl implements Serializable{
 	public String doDom() {
 		return "dom?faces-redirect=true";
 	}
+	
+	public String doAddAA() {
+		return "AA/addAA?faces-redirect=true";
+	}
+	
+	public String doListAA() {
+		return "AA/listAA?faces-redirect=true";
+	}
+	
+	
 
 	public String getNom() {
 		return nom;
