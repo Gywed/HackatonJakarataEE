@@ -1,6 +1,7 @@
 package be.helha.aemt.groupea5.control;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import be.helha.aemt.groupea5.ejb.AAEJB;
 import be.helha.aemt.groupea5.entities.AA;
@@ -28,8 +29,11 @@ public class AAControl implements Serializable {
 	private Integer nombreEtudiant;
 	private Fraction fraction;
 	
+	private List<Fraction> fractions;
+	
 	public AAControl() {
 		// TODO Auto-generated constructor stub
+		fractions = Arrays.asList(Fraction.values());
 	}
 	
 	public void clearData() {
@@ -52,7 +56,7 @@ public class AAControl implements Serializable {
 			
 	public void doAddAa() {
 		beanGestion.add(new AA(anneeAcademique,code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
-		clearData();
+		
 	}
 	public void doDeleteAa(AA aa) {
 		beanGestion.delete(aa);
@@ -173,5 +177,13 @@ public class AAControl implements Serializable {
 
 	public void setAa(AA aa) {
 		this.aa = aa;
+	}
+
+	public List<Fraction> getFractions() {
+		return fractions;
+	}
+
+	public void setFractions(List<Fraction> fractions) {
+		this.fractions = fractions;
 	}
 }
