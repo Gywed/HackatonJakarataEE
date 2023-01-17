@@ -16,17 +16,16 @@ public class Section implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String departement;
+	private Departement departement;
 	private String nom;
 	private List<Mission> missions;
-	
 	
 	
 	public Section() {
 	}
 
 
-	public Section(String departement, String nom, List<Mission> missions) {
+	public Section(Departement departement, String nom, List<Mission> missions) {
 		super();
 		this.departement = departement;
 		this.nom = nom;
@@ -44,12 +43,12 @@ public class Section implements Serializable{
 	}
 
 
-	public String getDepartement() {
+	public Departement getDepartement() {
 		return departement;
 	}
 
 
-	public void setDepartement(String departement) {
+	public void setDepartement(Departement departement) {
 		this.departement = departement;
 	}
 
