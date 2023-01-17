@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:h="http://xmlns.jcp.org/jsf/html">
+<html xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:f = "http://java.sun.com/jsf/core">
 <head>
 
 <title>Start Page</title>
@@ -37,7 +38,9 @@
 			<h:inputText value = "#{aAControl.nombreEtudiant}" type="text"/> 
 			<br/>
 			<h:outputLabel>fraction</h:outputLabel>
-			<h:inputText value = "#{aAControl.fraction}" type="text"/> 
+			<h:selectOneMenu value="#{aAControl.fraction}" converter="#{fractionConverter}">
+        		<f:selectItems value="#{aAControl.fractions}"/>
+    		</h:selectOneMenu>
 			
 			<h:commandButton value = "Submit" action="#{aAControl.doAddAa}"/>
 		</h:form>
