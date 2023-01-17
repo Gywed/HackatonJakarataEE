@@ -26,5 +26,11 @@ public class UEDAO {
 		return queryA.getResultList();
 	}
 	
+	public UE find(UE ue) {
+		TypedQuery<UE> query = em.createQuery("Select ue from UE ue where ue.code = ?1", UE.class);
+		query.setParameter(1, ue.getCode());
+		List<UE> result = query.getResultList();
+		return result.isEmpty() ? null : result.get(0);
+	} 
 
 }
