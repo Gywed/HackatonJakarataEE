@@ -20,4 +20,16 @@ public class AnneeAcademiqueEJB {
 	public AnneeAcademique find(AnneeAcademique a) {
 		return dao.find(a);
 	}
+	
+	public AnneeAcademique add(AnneeAcademique a) {
+		return dao.add(a);
+	}
+	
+	public AnneeAcademique delete(AnneeAcademique a) {
+		return dao.delete(a);
+	}
+	
+	public AnneeAcademique updtae(AnneeAcademique a) {
+		return dao.update(a);
+	}
 }

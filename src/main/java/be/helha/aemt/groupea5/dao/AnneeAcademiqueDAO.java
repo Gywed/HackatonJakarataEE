@@ -33,5 +33,39 @@ public class AnneeAcademiqueDAO {
 		List<AnneeAcademique> result = query.getResultList();
 		return result.isEmpty() ? null : result.get(0);
 	}
+	
+	public AnneeAcademique add(AnneeAcademique a) {
+		if (a==null) {
+			return null;
+		}
+		
+		if (find(a) != null) {
+			return null;
+		}
+		return em.merge(a);
+
+		
+	}
+	
+	public AnneeAcademique delete(AnneeAcademique a) {
+		if (a==null) {
+			return null;
+		}
+		
+		em.remove(find(a));
+		
+		return a;
+	}
+	
+	public AnneeAcademique update(AnneeAcademique a) {
+		if (a==null) return null;
+		
+		AnneeAcademique dbE = find(a);
+		if(dbE==null) return null;
+		a.setId(dbE.getId());
+		
+		return em.merge(a);
+	
+	}
 
 }
