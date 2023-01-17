@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import be.helha.aemt.groupea5.ejb.MissionEJB;
+import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Mission;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
@@ -17,7 +18,7 @@ public class MissionControl implements Serializable{
 	private MissionEJB bean;
 	
 	private Mission mission;
-	private int anneeAcademique;
+	private AnneeAcademique anneeAcademique;
 	private String intitule;
 	private int heures;
 	
@@ -49,7 +50,7 @@ public class MissionControl implements Serializable{
 	
 	public void clearData() {
 		setMission(null);
-		setAnneeAcademique(0);
+		setAnneeAcademique(null);
 		setIntitule(null);
 		setHeures(0);
 	}
@@ -64,11 +65,11 @@ public class MissionControl implements Serializable{
 		this.mission = mission;
 	}
 
-	public int getAnneeAcademique() {
+	public AnneeAcademique getAnneeAcademique() {
 		return anneeAcademique;
 	}
 
-	public void setAnneeAcademique(int anneeAcademique) {
+	public void setAnneeAcademique(AnneeAcademique anneeAcademique) {
 		this.anneeAcademique = anneeAcademique;
 	}
 

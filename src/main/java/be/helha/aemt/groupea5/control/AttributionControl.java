@@ -18,7 +18,6 @@ public class AttributionControl implements Serializable {
 	
 	private AA aa;
 	
-	private Integer anneeAcademique;
 	private String code;
 	private String intitule;
 	private Integer credit;
@@ -37,7 +36,6 @@ public class AttributionControl implements Serializable {
 	}
 	
 	public void clearData() {
-		setAnneeAcademique(0);
 		setCode("");
 		setIntitule("");
 		setCredit(0);
@@ -55,7 +53,6 @@ public class AttributionControl implements Serializable {
 	}
 			
 	public void doAddAa() {
-		beanGestion.add(new AA(anneeAcademique,code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
 		
 	}
 	public void doDeleteAa(AA aa) {
@@ -64,7 +61,6 @@ public class AttributionControl implements Serializable {
 	
 	public String goToUpdateAa(AA aa) {
 		setAa(aa);
-		setAnneeAcademique(aa.getAnneeAcademique());
 		setCode(aa.getCode());
 		setCredit(aa.getCredit());
 		setFraction(aa.getFraction());
@@ -89,14 +85,6 @@ public class AttributionControl implements Serializable {
 
 	public void setBeanGestion(AAEJB beanGestion) {
 		this.beanGestion = beanGestion;
-	}
-
-	public Integer getAnneeAcademique() {
-		return anneeAcademique;
-	}
-
-	public void setAnneeAcademique(Integer anneeAcademique) {
-		this.anneeAcademique = anneeAcademique;
 	}
 
 	public String getCode() {

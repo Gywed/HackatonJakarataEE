@@ -24,7 +24,7 @@ public class Mission implements Serializable{
 	}
 
 
-	public Mission(Integer id, AnneeAcademique anneeAcademique, String intitule, int heures) {
+	public Mission(AnneeAcademique anneeAcademique, String intitule, int heures) {
 		super();
 		this.anneeAcademique = anneeAcademique;
 		this.intitule = intitule;

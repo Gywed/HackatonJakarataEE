@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import be.helha.aemt.groupea5.ejb.AAEJB;
 import be.helha.aemt.groupea5.entities.AA;
+import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Fraction;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
@@ -18,7 +19,7 @@ public class AAControl implements Serializable {
 	
 	private AA aa;
 	
-	private Integer anneeAcademique;
+	private AnneeAcademique anneeAcademique;
 	private String code;
 	private String intitule;
 	private Integer credit;
@@ -37,7 +38,7 @@ public class AAControl implements Serializable {
 	}
 	
 	public void clearData() {
-		setAnneeAcademique(0);
+		setAnneeAcademique(null);
 		setCode("");
 		setIntitule("");
 		setCredit(0);
@@ -91,11 +92,11 @@ public class AAControl implements Serializable {
 		this.beanGestion = beanGestion;
 	}
 
-	public Integer getAnneeAcademique() {
+	public AnneeAcademique getAnneeAcademique() {
 		return anneeAcademique;
 	}
 
-	public void setAnneeAcademique(Integer anneeAcademique) {
+	public void setAnneeAcademique(AnneeAcademique anneeAcademique) {
 		this.anneeAcademique = anneeAcademique;
 	}
 
