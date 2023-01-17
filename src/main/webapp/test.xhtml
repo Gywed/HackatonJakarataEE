@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:f = "http://java.sun.com/jsf/core">
+    <h:head>
+    </h:head>
+    <h:body>
+        
+        <h:form>
+    <p:panelGrid columns="2">
+        <p:outputLabel for="name" value="Name:" />
+        <p:inputText id="name" value="#{bean.name}" />
+        
+        <p:outputLabel for="email" value="Email:" />
+        <p:inputText id="email" value="#{bean.email}" type="email" />
+        
+        <p:outputLabel for="password" value="Password:" />
+        <p:password id="password" value="#{bean.password}" />
+        
+        
+<!--         <p:outputLabel for="country" value="Country:" /> -->
+<!--         <p:selectOneMenu id="country" value="#{bean.country}"> -->
+<!--             <f:selectItem itemLabel="Select One" itemValue="" /> -->
+<!--             <f:selectItems value="#{bean.countries}" var="country" itemLabel="#{country.name}" itemValue="#{country}" /> -->
+<!--         </p:selectOneMenu> -->
+        
+        
+        
+   
+        
+<!--         <p:outputLabel for="city" value="City:" /> -->
+<!--         <p:autoComplete id="city" value="#{bean.city}" completeMethod="#{bean.completeCity}" var="city" itemLabel="#{city.name}" itemValue="#{city}" /> -->
+        
+<!--         <p:outputLabel for="birthday" value="Birthday:" /> -->
+<!--         <p:calendar id="birthday" value="#{bean.birthday}" pattern="dd/MM/yyyy" /> -->
+        
+<!--         <p:outputLabel for="hobby" value="Hobby:" /> -->
+<!--         <p:selectManyCheckbox id="hobby" value="#{bean.hobbies}" layout="grid"> -->
+<!--             <f:selectItem itemLabel="Reading" itemValue="reading" /> -->
+<!--             <f:selectItem itemLabel="Music" itemValue="music" /> -->
+<!--             <f:selectItem itemLabel="Sports" itemValue="sports" /> -->
+<!--             <f:selectItem itemLabel="Traveling" itemValue="traveling" /> -->
+<!--         </p:selectManyCheckbox> -->
+        
+<!--         <p:outputLabel for="comments" value="Comments:" /> -->
+<!--         <p:inputTextarea id="comments" value="#{bean.comments}" rows="5" cols="30" /> -->
+        
+<!--         <p:outputLabel for="acceptTerms" value="Accept Terms:" /> -->
+<!--         <p:selectBooleanCheckbox id="acceptTerms" value="#{bean.acceptTerms}" /> -->
+        
+<!--         <p:commandButton value="Submit" action="#{bean.submit}" update="growl" /> -->
+    </p:panelGrid>
+</h:form>
+        
+        
+        
+        
+    </h:body>
+</html>
