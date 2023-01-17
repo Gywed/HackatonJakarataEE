@@ -16,5 +16,9 @@ public class UEEJB {
 	public List<UE> findAll(){
 		return daoUE.findAll();
 	}
+	
+	public UE find(UE ue) {
+		return daoUE.find(ue);
+	}
 
 }
