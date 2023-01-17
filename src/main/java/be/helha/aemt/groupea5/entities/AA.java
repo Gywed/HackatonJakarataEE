@@ -19,7 +19,7 @@ public class AA {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private Integer anneeAcademique;
+	private AnneeAcademique anneeAcademique;
 	private String code;
 	private String intitule;
 	private Integer credit;
@@ -34,7 +34,7 @@ public class AA {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AA(Integer anneeAcademique, String code, String intitule, Integer credit, Integer heure, Integer heureQ1,
+	public AA(AnneeAcademique anneeAcademique, String code, String intitule, Integer credit, Integer heure, Integer heureQ1,
 			Integer heureQ2, Integer nombreGroupe, Integer nombreEtudiant, Fraction fraction) {
 		super();
 		this.anneeAcademique = anneeAcademique;
@@ -57,11 +57,11 @@ public class AA {
 		this.id = id;
 	}
 
-	public Integer getAnneeAcademique() {
+	public AnneeAcademique getAnneeAcademique() {
 		return anneeAcademique;
 	}
 
-	public void setAnneeAcademique(Integer anneeAcademique) {
+	public void setAnneeAcademique(AnneeAcademique anneeAcademique) {
 		this.anneeAcademique = anneeAcademique;
 	}
 
