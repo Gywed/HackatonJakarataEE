@@ -16,7 +16,7 @@ public class UE {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private Integer anneeAcademique;
+	private AnneeAcademique anneeAcademique;
 	private Departement departement;
 	private Section section;
 	private Integer bloc;
@@ -30,7 +30,7 @@ public class UE {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UE(Integer anneeAcademique, Departement departement, Section section, Integer bloc, String code,
+	public UE(AnneeAcademique anneeAcademique, Departement departement, Section section, Integer bloc, String code,
 			String intitule, Integer credit, List<AA> aas) {
 		super();
 		this.anneeAcademique = anneeAcademique;
@@ -73,11 +73,11 @@ public class UE {
 		this.id = id;
 	}
 
-	public Integer getAnneeAcademique() {
+	public AnneeAcademique getAnneeAcademique() {
 		return anneeAcademique;
 	}
 
-	public void setAnneeAcademique(Integer anneeAcademique) {
+	public void setAnneeAcademique(AnneeAcademique anneeAcademique) {
 		this.anneeAcademique = anneeAcademique;
 	}
 
