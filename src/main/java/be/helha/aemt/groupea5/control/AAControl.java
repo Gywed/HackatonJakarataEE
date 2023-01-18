@@ -89,7 +89,7 @@ public class AAControl implements Serializable {
 			
 	public void doAddAa() {
 		System.out.println("test");
-//		beanGestion.add(new AA(anneeAcademique,code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
+		beanGestion.add(new AA(anneeAcademique,code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
 		
 	}
 	public void doDeleteAa(AA aa) {
