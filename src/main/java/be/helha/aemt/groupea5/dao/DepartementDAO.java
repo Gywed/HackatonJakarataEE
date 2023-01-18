@@ -1,7 +1,8 @@
 package be.helha.aemt.groupea5.dao;
 
 import java.util.List;
-import be.helha.aemt.groupea5.entities.Section;
+
+import be.helha.aemt.groupea5.entities.Departement;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -10,36 +11,36 @@ import jakarta.persistence.TypedQuery;
 
 @Stateless
 @LocalBean
-public class SectionDAO 
+public class DepartementDAO 
 {
 	@PersistenceContext(unitName = "groupeA5-JTA")
 	private EntityManager em;
 
 	
-	public SectionDAO() 
+	public DepartementDAO() 
 	{
 	
 	}
 	
-	public Section find(Section section) 
+	public Departement find(Departement e) 
 	{
-		TypedQuery<Section> query = em.createNamedQuery("findDepartementByName",Section.class);
-		query.setParameter(1, section.getNom());
-		List<Section> list = query.getResultList();
+		TypedQuery<Departement> query = em.createNamedQuery("findDepartementByName",Departement.class);
+		query.setParameter(1, e.getNom());
+		List<Departement> list = query.getResultList();
 		
 		em.clear();
 		
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-	public List<Section> findAll() 
+	public List<Departement> findAll() 
 	{
-		String strQuery="Select s from Section s";
-		TypedQuery<Section> query = em.createQuery(strQuery,Section.class);
+		String strQuery="Select d from Departement d";
+		TypedQuery<Departement> query = em.createQuery(strQuery,Departement.class);
 		return query.getResultList();
 	}
 	
-	public Section add(Section e) 
+	public Departement add(Departement e) 
 	{
 		if (e == null) return null;
 		
@@ -48,11 +49,11 @@ public class SectionDAO
 		return em.merge(e);
 	}
 	
-	public Section delete(Section e) 
+	public Departement delete(Departement e) 
 	{
 		if (e == null) return null;
 		
-		Section dbE = find(e);
+		Departement dbE = find(e);
 		if (dbE == null) return null;
 		
 		em.remove(em.merge(dbE));
@@ -60,11 +61,11 @@ public class SectionDAO
 		return dbE;
 	}
 
-	public Section update(Section e) 
+	public Departement update(Departement e) 
 	{
 		if (e == null) return null;
 		
-		Section dbE = find(e);
+		Departement dbE = find(e);
 		
 		e.setId(dbE.getId());
 		
