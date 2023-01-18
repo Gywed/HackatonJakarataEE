@@ -30,22 +30,22 @@
 			<p:inputText value = "#{aAControl.intitule}" type="text"/> 
 			
 			<p:outputLabel>Credit</p:outputLabel>
-			<p:inputText value = "#{aAControl.credit}" type="text"/> 
+			<p:inputText value = "#{aAControl.credit}" type="number"/> 
 			
 			<p:outputLabel>Heure</p:outputLabel>
-			<p:inputText value = "#{aAControl.heure}" type="text"/> 
+			<p:inputText value = "#{aAControl.heure}" type="number"/> 
 			
 			<p:outputLabel>HeureQ1</p:outputLabel>
-			<p:inputText value = "#{aAControl.heureQ1}" type="text"/> 
+			<p:inputText value = "#{aAControl.heureQ1}" type="number"/> 
 			
 			<p:outputLabel>HeureQ2</p:outputLabel>
-			<p:inputText value = "#{aAControl.heureQ2}" type="text"/> 
+			<p:inputText value = "#{aAControl.heureQ2}" type="number"/> 
 			
 			<p:outputLabel>Nombre Groupe</p:outputLabel>
-			<p:inputText value = "#{aAControl.nombreGroupe}" type="text"/> 
+			<p:inputText value = "#{aAControl.nombreGroupe}" type="number"/> 
 			
 			<p:outputLabel>Nombre Etudiant</p:outputLabel>
-			<p:inputText value = "#{aAControl.nombreEtudiant}" type="text"/> 
+			<p:inputText value = "#{aAControl.nombreEtudiant}" type="number"/> 
 			<p:outputLabel>Fraction</p:outputLabel>
 			<p:selectOneMenu value="#{aAControl.fraction}" converter="#{fractionConverter}">
         		<f:selectItems value="#{aAControl.fractions}"/>
