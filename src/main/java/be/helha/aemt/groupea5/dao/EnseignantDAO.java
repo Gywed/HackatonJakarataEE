@@ -35,7 +35,7 @@ public class EnseignantDAO {
 	}
 	
 	public Enseignant add(Enseignant e) {
-		String pattern = "^\\S+@helha.be$";
+		String pattern = "^\\S+@helha\\.be$";
 		
 		if (e==null) {
 			return null;

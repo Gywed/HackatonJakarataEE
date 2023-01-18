@@ -12,7 +12,7 @@
 	<h1>Liste des enseignants</h1>
 	
 <h:form>
-	<p:commandButton type="button" value="Ajouter" icon="pi pi-plus"></p:commandButton>
+	<p:commandButton type="button" value="Ajouter" icon="pi pi-plus" onclick="PF('informations').show()"></p:commandButton>
 	<p:dataTable value = "#{enseignantControl.doFindAll()}" var = "e">
 	   
 	   <p:column>
@@ -43,6 +43,41 @@
 		   
 	</p:dataTable>
 </h:form>
+
+<p:dialog id="informations" widgetVar="informations" header="Entrer les informations">
+   <h:form id="createEnseignant">
+    <p:panel>
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="name" value="Nom:" />
+            <p:inputText id="name" value="#{bean.name}" required="true" label="Nom" />
+            
+            <h:outputLabel for="surname" value="Prénom:" />
+            <p:inputText id="surname" value="#{bean.name}" required="true" label="Prenom" />
+            
+            <h:outputLabel for="mail" value="E-Mail:" />
+            <p:inputText id="mail" value="#{bean.name}" required="true" label="E-Mail">
+            	<f:validateRegex pattern="^\S+@helha\.be$"/>
+            </p:inputText>
+            
+            <h:outputLabel for="remarque" value="Remarque:" />
+            <p:inputText id="remarque" value="#{bean.name}" required="true" label="Remarque:" />
+        </h:panelGrid>
+    </p:panel>
+    <p:commandButton type="button" value="next" onclick="PF('missions').show(); PF('informations').hide()"></p:commandButton>
+	</h:form>
+   
+</p:dialog>
+
+<p:dialog id="missions" widgetVar="missions" header="Sélectionner les missions de l'enseignant">
+   <h:outputText value="This is the content of my dialog." />
+   <p:commandButton type="button" value="next" onclick="PF('aas').show(); PF('missions').hide()"></p:commandButton>
+</p:dialog>
+
+<p:dialog id="aas" widgetVar="aas" header="Sélectionner les AA de l'enseignant">
+   <h:outputText value="This is the content of my dialog." />
+   <p:commandButton type="button" value="Submit" onclick="PF('aas').hide()"></p:commandButton>
+</p:dialog>
+
 	
 </h:body>
 </html>
