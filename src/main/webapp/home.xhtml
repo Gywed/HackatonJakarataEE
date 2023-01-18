@@ -7,20 +7,36 @@
     <h:head>
     </h:head>
     <h:body>
-    
-	<p:menubar>
-		<p:menuitem value="Home"/>
+
+ <h:form>  
+ 
+    <p:menubar>
+        <p:menuitem value="Home"/>
+	   	
+	   	<p:submenu label="Mission">
+	        <p:menuitem value="Liste" url="Mission/listMission.xhtml" />
+	        <p:menuitem value="Ajouter" url="Mission/addMission.xhtml" />
+        </p:submenu>
+        <p:submenu label="AA">
+        	<p:menuitem value="Liste" url="listAA.xhtml"/>
+	        <p:menuitem value="Ajouter" url="addAA.xhtml"/>
+        </p:submenu>
+	   	
 	   	<p:menuitem value="UE"/>
-	   	<p:menuitem value="Mission" url="Mission/listMission.xhtml"/>
-	   	<p:menuitem value="AA" url="AA/listAA.xhtml"/>
+		<p:menuitem value="Attribution"/>
 	   	<p:menuitem value="Departement"/>
-	   	<p:menuitem value="Attribution"/>
 	   	<p:menuitem value="Section"/>
 	   	<p:menuitem value="Enseignant"/>
 	   	<p:menuitem value="Utilisateur"/>
-	</p:menubar>
-    
+	   	
  
+        <f:facet name="options">
+
+            <p:commandButton type="button" value="Se Connecter" icon="pi pi-key" action="#{navigationControl.doLogin()}"/>
+           
+        </f:facet>
+    </p:menubar>
+</h:form>
         
     </h:body>
 </html>
