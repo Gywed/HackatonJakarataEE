@@ -21,7 +21,7 @@ public class EnseignantControl implements Serializable {
 	@EJB
 	private EnseignantEJB bean;
 	
-	private Enseignant enseignant;
+	private Enseignant enseignant = new Enseignant();
 	
 	private String nom;
 	private String prenom;
@@ -35,6 +35,8 @@ public class EnseignantControl implements Serializable {
 	public EnseignantControl() {
 		super();
 		// TODO Auto-generated constructor stub
+//		anneeAcademique.setId(1);
+//		anneeAcademique.setAnneeAcademique("2022-2023");
 	}
 	
 	public void clearData() {
@@ -50,7 +52,14 @@ public class EnseignantControl implements Serializable {
 		return bean.findAll();
 	}
 	public void doAdd() {
-		bean.add(new Enseignant(nom, prenom, mail, remarque, new Attribution(anneeAcademique, aas, missions)));
+		//bean.add(enseignant);
+		bean.add(new Enseignant(nom, prenom, mail, remarque, null));
+	}
+	public void doInforamtions() {
+		enseignant.setMail(mail);
+		enseignant.setNom(nom);
+		enseignant.setPrenom(prenom);
+		enseignant.setRemarque(remarque);
 	}
 
 	public Enseignant getEnseignant() {

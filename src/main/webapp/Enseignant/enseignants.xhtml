@@ -38,12 +38,13 @@
 	   <p:column>
 	   		<p:commandButton type="button" icon="pi pi-pencil" styleClass="rounded-button ui-button-warning"/>
 	   		<span>  </span>
-	   		<p:commandButton type="button" icon="pi pi-trash" styleClass="rounded-button ui-button-warning"/>
+	   		<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" action="#{enseignantControl.doAdd}" ajax="false"/>
 	   </p:column>
 		   
 	</p:dataTable>
 </h:form>
 
+<h:form>
 <p:dialog id="informations" widgetVar="informations" header="Entrer les informations">
    <h:form id="createEnseignant">
     <p:panel>
@@ -63,7 +64,7 @@
             <p:inputText id="remarque" value="#{enseignantControl.remarque}" required="true" label="Remarque:" />
         </h:panelGrid>
     </p:panel>
-    <p:commandButton type="button" value="Suivant" onclick="PF('missions').show(); PF('informations').hide()"></p:commandButton>
+    <p:commandButton value="Suivant" action="#{enseignantControl.doAdd}" ajax="false"></p:commandButton>
 	</h:form>
    
 </p:dialog>
@@ -99,10 +100,10 @@
             </p:column>
             
         </p:selectManyMenu>
-   		<p:commandButton type="button" value="Confirmer" onclick="PF('aas').hide()"></p:commandButton>
+   		<p:commandButton ajax="false" value="Confirmer" onclick="PF('aas').hide()" action="#{enseignantControl.doAdd}"></p:commandButton>
    </h:form>
 </p:dialog>
-
+</h:form>
 	
 </h:body>
 </html>
