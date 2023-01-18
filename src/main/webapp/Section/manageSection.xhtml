@@ -9,7 +9,7 @@
 </h:head>
 <body>
 	<h1>Liste des sections</h1>
-	<p:commandButton value="Ajouter" action="#{sectionControl.goToCreateSection()}" onclick="PF('createDialog').show()" />
+	<p:commandButton value="Ajouter"  onclick="PF('createDialog').show()" />
 	
 	<h:form>
 		<p:dataTable value = "#{sectionControl.doFindAll()}" var = "section">
@@ -35,16 +35,42 @@
 			</p:column>
 		</p:dataTable>
 		
-		</h:form>
-	    
-		
-		
-    
-
-
-
-
-
+	</h:form>
 	
+	<!-- pop up modifier une section -->
+	<p:dialog id="updateDialog" header="Modification" widgetVar="updateDialog" modal="true">
+		<h:form id="updateForm">
+	        <h:panelGrid columns="2" cellpadding="5">
+	            <h:outputLabel for="nom" value="Nom :" />
+	            <p:inputText id="nom" value="#{sectionControl.selectedSection.nom}" />
+	            <p:selectOneMenu id="departement" value="#{sectionControl.newSection.departement}">     
+	                <f:selectItems value="#{departementControl.doFindAll()}" var="departement"
+	                              itemLabel="#{departement.nom}" itemValue="#{departement}" />
+	            </p:selectOneMenu>
+	        </h:panelGrid>
+	        <p:commandButton value="Enregistrer" action="#{sectionControl.doUpdateSection()}" oncomplete="PF('updateDialog').hide()" />
+	    </h:form>
+	    
+	</p:dialog>
+	
+	<!--  pop up ajouter une section -->
+    <p:dialog id="createDialog" header="Ajout" widgetVar="createDialog" modal="true">
+	    <h:form id="createForm">
+	        <h:panelGrid columns="2" cellpadding="5">
+	            <h:outputLabel for="nom" value="Nom :" />
+	            <p:inputText id="nom" value="#{sectionControl.newSection.nom}" />
+	            <h:outputLabel for="departement" value="Departement :" />
+	            <p:selectOneMenu id="departement" value="#{sectionControl.newSection.departement}">
+	                <f:selectItem itemLabel="Veuillez selectionner un département" itemValue="" />
+	                
+	                <f:selectItems value="#{departementControl.doFindAll()}" var="departement"
+	                              itemLabel="#{departement.nom}" itemValue="#{departement}" />
+	                
+	            </p:selectOneMenu>
+	        </h:panelGrid>
+	        <p:commandButton value="Enregistrer" action="#{sectionControl.doAdd()}" oncomplete="PF('createDialog').hide()" />
+	    </h:form>
+	</p:dialog>
+    
 </body>
 </html>
