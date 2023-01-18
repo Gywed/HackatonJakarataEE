@@ -1,12 +1,15 @@
 package be.helha.aemt.groupea5.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Enseignant implements Serializable {
@@ -19,13 +22,15 @@ public class Enseignant implements Serializable {
 	private String prenom;
 	private String mail;
 	private String remarque;
-	private Attribution attribution;
+	
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Attribution.class)
+	private List<Attribution> attribution;
 	
 	public Enseignant() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Enseignant(String nom, String prenom, String mail, String remarque, Attribution attribution) {
+	public Enseignant(String nom, String prenom, String mail, String remarque, List<Attribution> attribution) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -74,11 +79,11 @@ public class Enseignant implements Serializable {
 		this.remarque = remarque;
 	}
 
-	public Attribution getAttribution() {
+	public List<Attribution> getAttribution() {
 		return attribution;
 	}
 
-	public void setAttribution(Attribution attribution) {
+	public void setAttribution(List<Attribution> attribution) {
 		this.attribution = attribution;
 	}
 

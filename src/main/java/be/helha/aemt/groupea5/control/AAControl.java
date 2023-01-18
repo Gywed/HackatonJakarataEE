@@ -1,7 +1,10 @@
 package be.helha.aemt.groupea5.control;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import be.helha.aemt.groupea5.ejb.AAEJB;
 import be.helha.aemt.groupea5.entities.AA;
@@ -32,9 +35,37 @@ public class AAControl implements Serializable {
 	
 	private List<Fraction> fractions;
 	
+	private List<AnneeAcademique> anneeAcademiques;
+	private SimpleDateFormat y;
+	private SimpleDateFormat m;
+
+	private int mois;
+	private int annee;
+	
 	public AAControl() {
 		// TODO Auto-generated constructor stub
 		fractions = Arrays.asList(Fraction.values());
+		anneeAcademiques = new ArrayList<>();
+		
+		y = new SimpleDateFormat("yyyy");
+		m = new SimpleDateFormat("MM");
+		
+		Date date = new Date();
+		
+		annee = Integer.parseInt(y.format(date));
+		mois = Integer.parseInt(m.format(date));
+		if (mois < 03) {
+			anneeAcademiques.add(new AnneeAcademique( annee-1 + " - " + annee));
+			int anneePro = annee + 1;
+			anneeAcademiques.add(new AnneeAcademique( annee + " - " + anneePro));
+		} else {
+			int anneePro = annee + 1;
+			anneeAcademiques.add(new AnneeAcademique( annee + " - " + anneePro));
+			
+			int anneeEncorePro = anneePro + 1;
+			anneeAcademiques.add(new AnneeAcademique( anneePro + " - " + anneeEncorePro));
+		}
+		
 	}
 	
 	public void clearData() {
@@ -53,10 +84,12 @@ public class AAControl implements Serializable {
 	public List<AA> doFindAll()
 	{
 		return beanGestion.findAll();
+		
 	}
 			
 	public void doAddAa() {
-		beanGestion.add(new AA(anneeAcademique,code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
+		System.out.println("test");
+//		beanGestion.add(new AA(anneeAcademique,code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
 		
 	}
 	public void doDeleteAa(AA aa) {
@@ -75,7 +108,7 @@ public class AAControl implements Serializable {
 		setIntitule(aa.getIntitule());
 		setNombreEtudiant(aa.getNombreEtudiant());
 		setNombreGroupe(aa.getNombreGroupe());
-		return "updateAA??faces-redirect=true";
+		return "updateAA?faces-redirect=true";
 	}
 	
 	public String doUpdateAa() {
@@ -186,5 +219,13 @@ public class AAControl implements Serializable {
 
 	public void setFractions(List<Fraction> fractions) {
 		this.fractions = fractions;
+	}
+
+	public List<AnneeAcademique> getAnneeAcademiques() {
+		return anneeAcademiques;
+	}
+
+	public void setAnneeAcademiques(List<AnneeAcademique> anneeAcademiques) {
+		this.anneeAcademiques = anneeAcademiques;
 	}
 }

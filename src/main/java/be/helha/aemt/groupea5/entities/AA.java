@@ -1,11 +1,14 @@
 package be.helha.aemt.groupea5.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 
@@ -14,13 +17,15 @@ import jakarta.persistence.NamedQuery;
 	@NamedQuery(name = "findAAByCode", query ="select a from AA a where a.code = ?1"),
 	@NamedQuery(name = "findAAById", query ="select a from AA a where a.id = ?1")
 })
-public class AA {
+public class AA implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@ManyToOne(cascade = CascadeType.PERSIST, targetEntity = AnneeAcademique.class)
 	private AnneeAcademique anneeAcademique;
+	
 	private String code;
 	private String intitule;
 	private Integer credit;

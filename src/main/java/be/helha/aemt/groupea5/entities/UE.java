@@ -3,11 +3,13 @@ package be.helha.aemt.groupea5.entities;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class UE {
@@ -16,13 +18,20 @@ public class UE {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@ManyToOne(cascade = CascadeType.PERSIST, targetEntity = AnneeAcademique.class)
 	private AnneeAcademique anneeAcademique;
+	
+	@OneToOne(targetEntity = Departement.class)
 	private Departement departement;
+	
+	@OneToOne(targetEntity = Section.class)
 	private Section section;
+	
 	private Integer bloc;
 	private String code;
 	private String intitule;
 	private Integer credit;
+	
 	@ManyToOne(targetEntity = AA.class)
 	private List<AA> aas;
 	

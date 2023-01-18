@@ -5,15 +5,15 @@ xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 xmlns:f = "http://java.sun.com/jsf/core">
 <h:head>
 
-<title>Start Page</title>
-<meta http-equiv="  Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Ajouter AA</title>
+	<meta http-equiv="  Content-Type" content="text/html; charset=UTF-8"/>
 </h:head>
-	<h:body>
-		<h1>Add an AA</h1>
-		
+	<h:body>		
 		<h:form>
 			<p:outputLabel>Annee Academique</p:outputLabel>
-			<p:inputText value = "#{aAControl.anneeAcademique}" type="text"/> 
+			<p:selectOneMenu value="#{aAControl.anneeAcademique}">
+        		<f:selectItems value="#{aAControl.anneeAcademiques}"/>
+    		</p:selectOneMenu>
 			<br/>
 			<p:outputLabel>Code</p:outputLabel>
 			<p:inputText value = "#{aAControl.code}" type="text"/> 
@@ -22,29 +22,29 @@ xmlns:f = "http://java.sun.com/jsf/core">
 			<p:inputText value = "#{aAControl.intitule}" type="text"/> 
 			<br/>
 			<p:outputLabel>credit</p:outputLabel>
-			<p:inputText value = "#{aAControl.credit}" type="text"/> 
+			<p:inputText value = "#{aAControl.credit}" type="number"/> 
 			<br/>
 			<p:outputLabel>heure</p:outputLabel>
-			<p:inputText value = "#{aAControl.heure}" type="text"/> 
+			<p:inputText value = "#{aAControl.heure}" type="number"/> 
 			<br/>
 			<p:outputLabel>heureQ1</p:outputLabel>
-			<p:inputText value = "#{aAControl.heureQ1}" type="text"/> 
+			<p:inputText value = "#{aAControl.heureQ1}" type="number"/> 
 			<br/>
 			<p:outputLabel>heureQ2</p:outputLabel>
-			<p:inputText value = "#{aAControl.heureQ2}" type="text"/> 
+			<p:inputText value = "#{aAControl.heureQ2}" type="number"/> 
 			<br/>
 			<p:outputLabel>nombreGroupe</p:outputLabel>
-			<p:inputText value = "#{aAControl.nombreGroupe}" type="text"/> 
+			<p:inputText value = "#{aAControl.nombreGroupe}" type="number"/> 
 			<br/>
 			<p:outputLabel>nombreEtudiant</p:outputLabel>
-			<p:inputText value = "#{aAControl.nombreEtudiant}" type="text"/> 
+			<p:inputText value = "#{aAControl.nombreEtudiant}" type="number"/> 
 			<br/>
 			<p:outputLabel>fraction</p:outputLabel>
 			<p:selectOneMenu value="#{aAControl.fraction}" converter="#{fractionConverter}">
         		<f:selectItems value="#{aAControl.fractions}"/>
     		</p:selectOneMenu>
-			
-			<p:commandButton value = "Submit" action="#{aAControl.doAddAa}"/>
+			<br/>
+			<p:commandButton value = "Submit" action="#{aAControl.doAddAa()}"/>
 		</h:form>
 	</h:body>
 </html>

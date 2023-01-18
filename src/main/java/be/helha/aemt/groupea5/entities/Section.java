@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Section implements Serializable{
@@ -16,8 +18,11 @@ public class Section implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@OneToMany(targetEntity = Departement.class)
 	private Departement departement;
 	private String nom;
+	
+	@OneToMany(targetEntity = Mission.class)
 	private List<Mission> missions;
 	
 	

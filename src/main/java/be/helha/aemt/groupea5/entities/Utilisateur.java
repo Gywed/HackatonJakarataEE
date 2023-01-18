@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Utilisateur implements Serializable{
@@ -19,6 +21,8 @@ public class Utilisateur implements Serializable{
 	private String prenom;
 	private String email;
 	private String password;
+	
+	@ManyToMany(targetEntity = Departement.class)
 	private Departement departement;
 	private Role role;
 		
