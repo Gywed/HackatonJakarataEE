@@ -1,27 +1,33 @@
 package be.helha.aemt.groupea5.entities;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Departement implements Serializable{
+@NamedQueries({
+	@NamedQuery(name = "findDepartementByName", query ="select d from Departement d where d.nom = ?1")
+})
+public class Departement 
+{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	private String nom;
-	@OneToMany(targetEntity = Section.class)
+	@OneToMany(targetEntity = Section.class,fetch=FetchType.EAGER)
 	private List<Section> sections;
-	@ManyToMany(targetEntity = Mission.class)
+	@ManyToMany(targetEntity = Mission.class,fetch=FetchType.EAGER)
 	private List<Mission> missions;
 	
 	

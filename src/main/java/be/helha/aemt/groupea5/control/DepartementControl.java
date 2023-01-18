@@ -38,17 +38,11 @@ public class DepartementControl implements Serializable
 	}
 	
 	
-	public void showMissions(Departement departement) 
+	public void actualiseDepartement(Departement departement) 
 	{
 	    selectedDepartement = departement;
 	}
 	
-	public void showSections(Departement departement) 
-	{
-	    selectedDepartement = departement;
-	}
-	
-
 	public String getNom() 
 	{
 		return nom;
