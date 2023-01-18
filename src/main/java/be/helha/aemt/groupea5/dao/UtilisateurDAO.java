@@ -3,7 +3,9 @@ package be.helha.aemt.groupea5.dao;
 import java.util.List;
 
 import be.helha.aemt.groupea5.entities.AA;
+import be.helha.aemt.groupea5.entities.Departement;
 import be.helha.aemt.groupea5.entities.Utilisateur;
+import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -13,9 +15,11 @@ import jakarta.persistence.TypedQuery;
 @Stateless
 @LocalBean
 public class UtilisateurDAO {
-
 	@PersistenceContext(unitName = "groupeA5-JTA")
 	private EntityManager em;
+	
+	@EJB
+	private DepartementDAO depDao;
 	
 	public UtilisateurDAO() {
 		// TODO Auto-generated constructor stub
@@ -49,6 +53,10 @@ public class UtilisateurDAO {
 	public Utilisateur add(Utilisateur e) {
 		if (e == null) return null;
 		if (e == find(e)) return null;
+		Departement dep = depDao.find(e.getDepartement());
+		
+		if (dep != null)
+			e.setDepartement(dep);
 		
 		return em.merge(e);
 	}
