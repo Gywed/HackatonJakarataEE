@@ -1,5 +1,6 @@
 package be.helha.aemt.groupea5.control;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import jakarta.inject.Named;
 
 @Named
 @SessionScoped
-public class EnseignantControl {
+public class EnseignantControl implements Serializable {
 	
 	@EJB
 	private EnseignantEJB bean;
