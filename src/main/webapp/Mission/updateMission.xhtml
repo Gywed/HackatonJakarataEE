@@ -1,27 +1,34 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html">
-<head>
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:f = "http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
 
 <title>Start Page</title>
-</head>
-	<body>
-		<h1>Hello World!</h1>
-				
-		<h:form class="form">
+</h:head>
+	<h:body>
+
+		<h:form>
 			<h2>Modifier une mission</h2>
 			
-			<span>Année académique : </span>
-			<h:inputText value="#{missionControl.mission.anneeAcademique}"/>
+			
+			<p:outputLabel>Annee Academique</p:outputLabel>
+			<p:selectOneMenu id="annee" value="#{missionControl.anneeAcademique}">
+        		<f:selectItems value="#{missionControl.anneeAcademiques}"/>
+    		</p:selectOneMenu>
+    		
+    		
 			<br/>
 			<span>Intitulé : </span>
-			<h:inputText value="#{missionControl.mission.intitule}"/>
+			<p:inputText id="intitule" value="#{missionControl.mission.intitule}"/>
 			<br/>
 			<span>Heures : </span>
-			<h:inputText value="#{missionControl.mission.heures}"/>
+			<p:inputText id="heures" value="#{missionControl.mission.heures}"/>
 			<br/>
-			<h:commandButton value="Modifier" action="#{missionControl.doUpdate()}"/>
-			<br/>
+			<p:commandButton value="Modifier" action="#{missionControl.doUpdate}" ajax="false" ></p:commandButton>
 		</h:form>
 		
-		
-	</body>
+	</h:body>
 </html>

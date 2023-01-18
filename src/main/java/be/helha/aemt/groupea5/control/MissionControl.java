@@ -72,17 +72,22 @@ anneeAcademiques = new ArrayList<>();
 		System.out.println(intitule);
 	}
 	
-	public void doDelete(Mission mission) {
+	public String doDelete(Mission mission) {
 		bean.delete(mission);
 		clearData();
+		return "listMission?faces-redirect=true";
 	}
 
 	public String doGoToUpdate(Mission mission) {
 		setMission(mission);
+		setAnneeAcademique(anneeAcademique);
+		setIntitule(intitule);
+		setHeures(heures);
 		return "updateMission.xhtml?faces-redirect=true";
 	}
 	
 	public String doUpdate() {
+		mission.setAnneeAcademique(new AnneeAcademique(anneeAcademique));
 		bean.update(mission);
 		clearData();
 		return "listMission.xhtml?faces-redirect=true";
