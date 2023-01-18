@@ -23,7 +23,7 @@ public class SectionControl implements Serializable
 	private String nom;
 	private List<Mission> missions;
 	private Section selectedSection = null;
-	private Section newSection = null;
+	private Section newSection = new Section(new Departement(), "", null);
 	
 	public List<Section> doFindAll() 
 	{
@@ -69,7 +69,8 @@ public class SectionControl implements Serializable
 		return missions;
 	}
 
-	public void setMissions(List<Mission> missions) {
+	public void setMissions(List<Mission> missions) 
+	{
 		this.missions = missions;
 	}
 
@@ -83,13 +84,18 @@ public class SectionControl implements Serializable
 		this.selectedSection = selectedSection;
 	}
 
-	public Section getNewSection() {
+	public Section getNewSection() 
+	{
 		return newSection;
 	}
 
-	public void setNewSection(Section newSection) {
+	public void setNewSection(Section newSection) 
+	{
 		this.newSection = newSection;
 	}
+	
+
+	
 	
 	
 	
