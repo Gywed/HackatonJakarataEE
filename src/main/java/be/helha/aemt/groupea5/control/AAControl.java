@@ -17,12 +17,13 @@ import jakarta.inject.Named;
 @Named
 @SessionScoped
 public class AAControl implements Serializable {
+	
 	@EJB
 	private AAEJB beanGestion;
 	
 	private AA aa;
 	
-	private AnneeAcademique anneeAcademique;
+	private String anneeAcademique;
 	private String code;
 	private String intitule;
 	private Integer credit;
@@ -35,7 +36,7 @@ public class AAControl implements Serializable {
 	
 	private List<Fraction> fractions;
 	
-	private List<AnneeAcademique> anneeAcademiques;
+	private List<String> anneeAcademiques;
 	private SimpleDateFormat y;
 	private SimpleDateFormat m;
 
@@ -55,15 +56,15 @@ public class AAControl implements Serializable {
 		annee = Integer.parseInt(y.format(date));
 		mois = Integer.parseInt(m.format(date));
 		if (mois < 03) {
-			anneeAcademiques.add(new AnneeAcademique( annee-1 + " - " + annee));
+			anneeAcademiques.add(annee-1 + " - " + annee);
 			int anneePro = annee + 1;
-			anneeAcademiques.add(new AnneeAcademique( annee + " - " + anneePro));
+			anneeAcademiques.add(annee + " - " + anneePro);
 		} else {
 			int anneePro = annee + 1;
-			anneeAcademiques.add(new AnneeAcademique( annee + " - " + anneePro));
+			anneeAcademiques.add(annee + " - " + anneePro);
 			
 			int anneeEncorePro = anneePro + 1;
-			anneeAcademiques.add(new AnneeAcademique( anneePro + " - " + anneeEncorePro));
+			anneeAcademiques.add(anneePro + " - " + anneeEncorePro);
 		}
 		
 	}
@@ -84,21 +85,23 @@ public class AAControl implements Serializable {
 	public List<AA> doFindAll()
 	{
 		return beanGestion.findAll();
-		
 	}
 			
 	public void doAddAa() {
 		System.out.println("test");
-//		beanGestion.add(new AA(anneeAcademique,code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
-		
+		beanGestion.add(new AA(new AnneeAcademique(anneeAcademique),code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
+		clearData();
 	}
-	public void doDeleteAa(AA aa) {
+	
+	public String doDeleteAa(AA aa) {
 		beanGestion.delete(aa);
+		clearData();
+		return "listAA?faces-redirect=true";
 	}
 	
 	public String goToUpdateAa(AA aa) {
 		setAa(aa);
-		setAnneeAcademique(aa.getAnneeAcademique());
+		setAnneeAcademique(aa.getAnneeAcademique().toString());
 		setCode(aa.getCode());
 		setCredit(aa.getCredit());
 		setFraction(aa.getFraction());
@@ -112,6 +115,7 @@ public class AAControl implements Serializable {
 	}
 	
 	public String doUpdateAa() {
+		aa.setAnneeAcademique(new AnneeAcademique(anneeAcademique));
 		beanGestion.update(aa);
 		clearData();
 		return "listAA?faces-redirect=true";
@@ -125,11 +129,11 @@ public class AAControl implements Serializable {
 		this.beanGestion = beanGestion;
 	}
 
-	public AnneeAcademique getAnneeAcademique() {
+	public String getAnneeAcademique() {
 		return anneeAcademique;
 	}
 
-	public void setAnneeAcademique(AnneeAcademique anneeAcademique) {
+	public void setAnneeAcademique(String anneeAcademique) {
 		this.anneeAcademique = anneeAcademique;
 	}
 
@@ -221,11 +225,11 @@ public class AAControl implements Serializable {
 		this.fractions = fractions;
 	}
 
-	public List<AnneeAcademique> getAnneeAcademiques() {
+	public List<String> getAnneeAcademiques() {
 		return anneeAcademiques;
 	}
 
-	public void setAnneeAcademiques(List<AnneeAcademique> anneeAcademiques) {
+	public void setAnneeAcademiques(List<String> anneeAcademiques) {
 		this.anneeAcademiques = anneeAcademiques;
 	}
 }

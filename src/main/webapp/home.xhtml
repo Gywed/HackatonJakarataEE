@@ -18,8 +18,8 @@
 	        <p:menuitem value="Ajouter" url="Mission/addMission.xhtml" />
         </p:submenu>
         <p:submenu label="AA">
-        	<p:menuitem value="Liste" url="listAA.xhtml"/>
-	        <p:menuitem value="Ajouter" url="addAA.xhtml"/>
+        	<p:menuitem value="Liste" url="AA/listAA.xhtml"/>
+	        <p:menuitem value="Ajouter" url="AA/addAA.xhtml"/>
         </p:submenu>
 	   	
 	   	<p:menuitem value="UE"/>
@@ -32,7 +32,7 @@
  
         <f:facet name="options">
 
-            <p:commandButton type="button" value="Se Connecter" icon="pi pi-key" action="#{navigationControl.doLogin()}"/>
+            <p:commandButton process="@this" value="Se Connecter" icon="pi pi-key" action="#{navigationControl.doLogin()}"/>
            
         </f:facet>
     </p:menubar>

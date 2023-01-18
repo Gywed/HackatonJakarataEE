@@ -17,6 +17,7 @@ public class NavigationControl implements Serializable{
 	}
 	
 	public String doLogin() {
+		System.out.println("ALED");
 		return "login?faces-redirect=true";
 	}
 	
