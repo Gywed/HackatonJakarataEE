@@ -1,5 +1,5 @@
-<html xmlns="http://www.w3c.org/1999/xhtml"
-        xmlns:h="http://java.sun.com/jsf/html"
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.org/ui"
         xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
         xmlns:f = "http://java.sun.com/jsf/core"
@@ -35,14 +35,22 @@
 	   <h:column>
 	      <f:facet name = "header">Supprimer</f:facet>
 	      <h:form class="form">
-	      	<h:commandButton value="Delete" action="#{missionControl.doDelete(mission)}"/>
+	      	<p:commandButton value="Supprimer" action="#{missionControl.doDelete(mission)}" >
+	      		<p:confirm header="Confirmation" message="Voulez-vous supprimer cette mission ?" icon="pi pi-info-circle"/>
+	      	</p:commandButton>
+	      	
+	      	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+	            <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+	            <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" />
+	        </p:confirmDialog>
+	        
 	      </h:form>
 	   </h:column>
 	   
 	   <h:column>
 	      <f:facet name = "header">Modifier</f:facet>
 	      <h:form class="form">
-	      	<h:commandButton value="Modifier" action="#{missionControl.doGoToUpdate(mission)}"/>
+	      	<p:commandButton value="Modifier" action="#{missionControl.doGoToUpdate(mission)}"/>
 	      </h:form>
 	   </h:column>
    
