@@ -23,7 +23,7 @@ public class MissionControl implements Serializable{
 	private int heures;
 	
 	
-	public List doFindAll() {
+	public List<Mission> doFindAll() {
 		return bean.fetchAll();
 	}
 	

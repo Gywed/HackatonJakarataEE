@@ -35,9 +35,15 @@ public class EnseignantDAO {
 	}
 	
 	public Enseignant add(Enseignant e) {
+		String pattern = "^\\S+@helha\\.be$";
+		
 		if (e==null) {
 			return null;
 		}
+		
+//		if(!e.getMail().matches(pattern))
+//			return null;
+		
 		
 		if (find(e) != null) {
 			return null;
