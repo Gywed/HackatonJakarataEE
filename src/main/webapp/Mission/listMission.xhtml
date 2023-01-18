@@ -1,48 +1,51 @@
-<!DOCTYPE html>
-<html xmlns:jsf="http://xmlns.jcp.org/jsf"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f = "http://java.sun.com/jsf/core">
+<html xmlns="http://www.w3c.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:f = "http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
-<head>
+<h:head>
 <title>Start Page</title>
 <meta http-equiv="
 	Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
+</h:head>
+<h:body>
+	<ui:include src="menubar.xhtml" />
 	<h1>Liste des Missions</h1>
 	
 	
 	<h:dataTable value = "#{missionControl.doFindAll()}" var = "mission">
    
-   <h:column>    				
-      <f:facet name = "header">Année Académique</f:facet>    				
-      #{mission.anneeAcademique}
-   </h:column>
+	   <h:column>    				
+	      <f:facet name = "header">Année Académique</f:facet>    				
+	      #{mission.anneeAcademique}
+	   </h:column>
+	   
+	   <h:column>
+	      <f:facet name = "header">Intitulé</f:facet>
+	       #{mission.intitule}
+	   </h:column>
+	   
+	   <h:column>
+	      <f:facet name = "header">Heures</f:facet>
+	      #{mission.heures}
+	   </h:column>
+	   
+	   <h:column>
+	      <f:facet name = "header">Supprimer</f:facet>
+	      <h:form class="form">
+	      	<h:commandButton value="Delete" action="#{missionControl.doDelete(mission)}"/>
+	      </h:form>
+	   </h:column>
+	   
+	   <h:column>
+	      <f:facet name = "header">Modifier</f:facet>
+	      <h:form class="form">
+	      	<h:commandButton value="Modifier" action="#{missionControl.doGoToUpdate(mission)}"/>
+	      </h:form>
+	   </h:column>
    
-   <h:column>
-      <f:facet name = "header">Intitulé</f:facet>
-       #{mission.intitule}
-   </h:column>
-   
-   <h:column>
-      <f:facet name = "header">Heures</f:facet>
-      #{mission.heures}
-   </h:column>
-   
-   <h:column>
-      <f:facet name = "header">Supprimer</f:facet>
-      <h:form class="form">
-      	<h:commandButton value="Delete" action="#{missionControl.doDelete(mission)}"/>
-      </h:form>
-   </h:column>
-   
-   <h:column>
-      <f:facet name = "header">Modifier</f:facet>
-      <h:form class="form">
-      	<h:commandButton value="Modifier" action="#{missionControl.doGoToUpdate(mission)}"/>
-      </h:form>
-   </h:column>
-   
-</h:dataTable>
-</body>
+	</h:dataTable>
+</h:body>
 </html>
