@@ -18,12 +18,12 @@ public class SectionDAO
 	
 	public SectionDAO() 
 	{
-		super();
+	
 	}
 	
 	public Section find(Section section) 
 	{
-		TypedQuery<Section> query = em.createNamedQuery("findByName",Section.class);
+		TypedQuery<Section> query = em.createNamedQuery("findDepartementByName",Section.class);
 		query.setParameter(1, section.getNom());
 		List<Section> list = query.getResultList();
 		
