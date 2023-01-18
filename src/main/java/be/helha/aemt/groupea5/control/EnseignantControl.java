@@ -5,6 +5,7 @@ import java.util.List;
 
 import be.helha.aemt.groupea5.ejb.EnseignantEJB;
 import be.helha.aemt.groupea5.entities.AA;
+import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Attribution;
 import be.helha.aemt.groupea5.entities.Enseignant;
 import be.helha.aemt.groupea5.entities.Mission;
@@ -25,8 +26,8 @@ public class EnseignantControl {
 	private String prenom;
 	private String mail;
 	private String remarque;
-	private Attribution attribution;
 	
+	private AnneeAcademique anneeAcademique;
 	private List<AA> aas = new ArrayList<>();
 	private List<Mission> missions = new ArrayList<>();
 	
@@ -42,6 +43,10 @@ public class EnseignantControl {
 		remarque="";
 		aas.clear();
 		missions.clear();
+	}
+	
+	public void doAdd() {
+		bean.add(new Enseignant(nom, prenom, mail, remarque, new Attribution(anneeAcademique, aas, missions)));
 	}
 
 	public Enseignant getEnseignant() {
@@ -84,12 +89,28 @@ public class EnseignantControl {
 		this.remarque = remarque;
 	}
 
-	public Attribution getAttribution() {
-		return attribution;
+	public AnneeAcademique getAnneeAcademique() {
+		return anneeAcademique;
 	}
 
-	public void setAttribution(Attribution attribution) {
-		this.attribution = attribution;
+	public void setAnneeAcademique(AnneeAcademique anneeAcademique) {
+		this.anneeAcademique = anneeAcademique;
+	}
+
+	public List<AA> getAas() {
+		return aas;
+	}
+
+	public void setAas(List<AA> aas) {
+		this.aas = aas;
+	}
+
+	public List<Mission> getMissions() {
+		return missions;
+	}
+
+	public void setMissions(List<Mission> missions) {
+		this.missions = missions;
 	}
 	
 
