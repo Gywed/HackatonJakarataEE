@@ -1,5 +1,5 @@
-<html xmlns="http://www.w3c.org/1999/xhtml"
-        xmlns:h="http://java.sun.com/jsf/html"
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.org/ui"
         xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
         xmlns:f = "http://java.sun.com/jsf/core"
@@ -11,20 +11,25 @@
 	<h:body>
 		<ui:include src="menubar.xhtml" />
 				
-		<h:form class="form">
+		<h:form>
 			<h2>Ajouter une mission</h2>
 			
-			<span>Année académique : </span>
-			<p:inputText value="#{missionControl.anneeAcademique}"/>
+			
+			<p:outputLabel>Annee Academique</p:outputLabel>
+			<p:selectOneMenu id="annee" value="#{missionControl.anneeAcademique}">
+        		<f:selectItems value="#{missionControl.anneeAcademiques}"/>
+    		</p:selectOneMenu>
+    		
+    		
 			<br/>
 			<span>Intitulé : </span>
-			<p:inputText value="#{missionControl.intitule}"/>
+			<p:inputText id="intitule" value="#{missionControl.intitule}"/>
 			<br/>
 			<span>Heures : </span>
-			<p:inputText value="#{missionControl.heures}"/>
+			<p:inputText id="heures" value="#{missionControl.heures}"/>
 			<br/>
-			<p:commandButton value="Add	" action="#{missionControl.doAdd()}"/>
-			<br/>
+			<p:commandButton value="Ajouter" action="#{missionControl.doAdd}" ajax="false" ></p:commandButton>
 		</h:form>
+		
 	</h:body>
 </html>

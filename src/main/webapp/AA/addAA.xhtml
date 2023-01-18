@@ -14,7 +14,7 @@
 		
 		<h1>Add an AA</h1>
 		
-		<h:form>
+		<h:form class="form">
 		<p:panelGrid columns="2">
 			<p:outputLabel>Annee Academique</p:outputLabel>
 			<p:selectOneMenu value="#{aAControl.anneeAcademique}">
@@ -28,29 +28,29 @@
 			<p:inputText value = "#{aAControl.intitule}" type="text"/> 
 			
 			<p:outputLabel>credit</p:outputLabel>
-		<p:inputText value = "#{aAControl.credit}" type="text"/> 
+		<p:inputText value = "#{aAControl.credit}" type="number"/> 
 			
 			<p:outputLabel>heure</p:outputLabel>
-			<p:inputText value = "#{aAControl.heure}" type="text"/> 
+			<p:inputText value = "#{aAControl.heure}" type="number"/> 
 			
 			<p:outputLabel>heureQ1</p:outputLabel>
-			<p:inputText value = "#{aAControl.heureQ1}" type="text"/> 
+			<p:inputText value = "#{aAControl.heureQ1}" type="number"/> 
 			
 			<p:outputLabel>heureQ2</p:outputLabel>
-			<p:inputText value = "#{aAControl.heureQ2}" type="text"/> 
+			<p:inputText value = "#{aAControl.heureQ2}" type="number"/> 
 			
 			<p:outputLabel>nombreGroupe</p:outputLabel>
-			<p:inputText value = "#{aAControl.nombreGroupe}" type="text"/> 
+			<p:inputText value = "#{aAControl.nombreGroupe}" type="number"/> 
 			
 			<p:outputLabel>nombreEtudiant</p:outputLabel>
-			<p:inputText value = "#{aAControl.nombreEtudiant}" type="text"/> 
+			<p:inputText value = "#{aAControl.nombreEtudiant}" type="number"/> 
 			
 			<p:outputLabel>fraction</p:outputLabel>
 			<p:selectOneMenu value="#{aAControl.fraction}" converter="#{fractionConverter}">
         		<f:selectItems value="#{aAControl.fractions}"/>
     		</p:selectOneMenu>
 			</p:panelGrid>
-			<p:commandButton value = "Submit" action="#{aAControl.doAddAa}"/>
+			<p:commandButton value="Submit" action="#{aAControl.doAdd()}" process="@this"/>
 		</h:form>
 	
 	</h:body>
