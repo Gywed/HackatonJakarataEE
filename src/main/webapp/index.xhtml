@@ -1,23 +1,27 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
     xmlns:f="http://xmlns.jcp.org/jsf/core">
-<head>
+<link href="resources/css/theme.css" rel="stylesheet"/>
+<h:head>
 
 <title>Start Page</title>
-</head>
-	<body>
+</h:head>
+	<h:body>
 		<h1>Hello World!</h1>
 				
 		<h:form>
-			<h:inputText value = "#{navigationControl.nom}" /> 
-			<h:commandButton value = "Sec" action="#{navigationControl.doSec}"/>
-			<h:commandButton value = "Dep" action="#{navigationControl.doDep}"/>
-			<h:commandButton value = "Dom" action="#{navigationControl.doDom}"/>
-			<h:commandButton value = "AddAA" action="#{navigationControl.doAddAA}"/>
-			<h:commandButton value = "ListAA" action="#{navigationControl.doListAA}"/>
-			<h:commandButton value = "Login" action="#{navigationControl.doLogin}"/>
+			<p:inputText value = "#{navigationControl.nom}" /> 
+			<p:commandButton value = "Sec" action="#{navigationControl.doSec}"/>
+			<p:commandButton value = "Dep" action="#{navigationControl.doDep}"/>
+			<p:commandButton value = "Dom" action="#{navigationControl.doDom}"/>
+			<p:commandButton value = "AddAA" action="#{navigationControl.doAddAA}"/>
+			<p:commandButton value = "ListAA" action="#{navigationControl.doListAA}"/>
+			<p:commandButton value = "Login" action="#{navigationControl.doLogin}"/>
 			
 	</h:form>
-</body>
+</h:body>
 
 </html>

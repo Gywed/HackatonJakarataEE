@@ -1,83 +1,85 @@
 <!DOCTYPE html>
-<html xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:h="http://xmlns.jcp.org/jsf/html"
-xmlns:f = "http://java.sun.com/jsf/core">
-<head>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f = "http://java.sun.com/jsf/core">
+<h:head>
 
 <title>Start Page</title>
 <meta http-equiv="  Content-Type" content="text/html; charset=UTF-8"/>
-</head>
+</h:head>
 <body>
 	<h1>List AA</h1>
 	
 <h:form>
-	<h:dataTable value = "#{aAControl.doFindAll()}" var = "aa">
+	<p:dataTable value = "#{aAControl.doFindAll()}" var = "aa">
 		   
-	   <h:column>    				
+	   <p:column>    				
 	      <f:facet name = "header">Id</f:facet>    				
 	      #{aa.id}
-	   </h:column>
+	   </p:column>
 	   
-	   <h:column>
+	   <p:column>
 	      <f:facet name = "header">Année Academique</f:facet>
 	      #{aa.anneeAcademique}
-	   </h:column>
+	   </p:column>
 	   
-	   <h:column>
+	   <p:column>
 	      <f:facet name = "header">Code</f:facet>
 	      #{aa.code}
-	   </h:column>
+	   </p:column>
 	   
-	   <h:column>
+	   <p:column>
 	      <f:facet name = "header">Intitule</f:facet>
 	      #{aa.intitule}
-	   </h:column>
+	   </p:column>
 	   
-	   <h:column>
+	   <p:column>
 	      <f:facet name = "header">Credit</f:facet>
 	      #{aa.credit}
-	   </h:column>
+	   </p:column>
 	   
-	   <h:column>
+	   <p:column>
 	      <f:facet name = "header">Heure</f:facet>
 	      #{aa.heure}
-	   </h:column>
+	   </p:column>
 	   
-	   <h:column>
+	   <p:column>
 	      <f:facet name = "header">HeureQ1</f:facet>
 	      #{aa.heureQ1}
-	   </h:column>
+	   </p:column>
 	   
-	   <h:column>
+	   <p:column>
 	      <f:facet name = "header">HeureQ2</f:facet>
 	      #{aa.heureQ2}
-	   </h:column>
+	   </p:column>
 	   
-	   <h:column>
+	   <p:column>
 	      <f:facet name = "header">Nombre Groupe</f:facet>
 	      #{aa.nombreGroupe}
-	   </h:column>
+	   </p:column>
 	   
-	   <h:column>
+	   <p:column>
 	      <f:facet name = "header">Nombre Etudiant</f:facet>
 	      #{aa.nombreEtudiant}
-	   </h:column>
+	   </p:column>
 	   
-	   <h:column>
+	   <p:column>
 	      <f:facet name = "header">Fraction</f:facet>
 	      #{aa.fraction}
-	   </h:column>
+	   </p:column>
 	   
-	   <h:column>
+	   <p:column>
 	      <f:facet name = "header">Modifier AA</f:facet>
-	      <h:commandButton value = "Modifier" action = "#{aAControl.goToUpdateAa(aa)}" />
-	   </h:column>
+	      <p:commandButton value = "Modifier" action = "#{aAControl.goToUpdateAa(aa)}" />
+	   </p:column>
 	   
-	   <h:column>
+	   <p:column>
 	      <f:facet name = "header">Supprimer AA</f:facet>
-	      <h:commandButton value = "Supprimer" action = "#{aAControl.doDeleteAa(aa)}" />
-	   </h:column>
+	      <p:commandButton value = "Supprimer" action = "#{aAControl.doDeleteAa(aa)}" />
+	   </p:column>
 		   
-	</h:dataTable>
+	</p:dataTable>
 </h:form>
 	
 </body>
