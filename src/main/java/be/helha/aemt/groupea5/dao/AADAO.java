@@ -54,7 +54,7 @@ public class AADAO {
 	public AA delete(AA e) {
 		if (e == null) return null;
 		
-		AA dbE = find(e);
+		AA dbE = findById(e);
 		if (dbE == null) return null;
 		
 		em.remove(em.merge(dbE));

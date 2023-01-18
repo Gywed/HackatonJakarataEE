@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html
-        xmlns:h="http://java.sun.com/jsf/html"
+<html   xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.org/ui"
         xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
         xmlns:f = "http://java.sun.com/jsf/core"
@@ -15,7 +14,7 @@
 		
 		<h1>Add an AA</h1>
 		
-		<h:form id="form1">
+		<h:form>
 		<p:panelGrid columns="2">
 			<p:outputLabel>Annee Academique</p:outputLabel>
 			<p:selectOneMenu value="#{aAControl.anneeAcademique}">
@@ -25,28 +24,28 @@
 			<p:outputLabel>Code</p:outputLabel>
 			<p:inputText value = "#{aAControl.code}" type="text"/> 
 			
-			<p:outputLabel>intitule</p:outputLabel>
+			<p:outputLabel>Intitule</p:outputLabel>
 			<p:inputText value = "#{aAControl.intitule}" type="text"/> 
 			
-			<p:outputLabel>credit</p:outputLabel>
+			<p:outputLabel>Credit</p:outputLabel>
 			<p:inputText value = "#{aAControl.credit}" type="text"/> 
 			
-			<p:outputLabel>heure</p:outputLabel>
+			<p:outputLabel>Heure</p:outputLabel>
 			<p:inputText value = "#{aAControl.heure}" type="text"/> 
 			
-			<p:outputLabel>heureQ1</p:outputLabel>
+			<p:outputLabel>HeureQ1</p:outputLabel>
 			<p:inputText value = "#{aAControl.heureQ1}" type="text"/> 
 			
-			<p:outputLabel>heureQ2</p:outputLabel>
+			<p:outputLabel>HeureQ2</p:outputLabel>
 			<p:inputText value = "#{aAControl.heureQ2}" type="text"/> 
 			
-			<p:outputLabel>nombreGroupe</p:outputLabel>
+			<p:outputLabel>Nombre Groupe</p:outputLabel>
 			<p:inputText value = "#{aAControl.nombreGroupe}" type="text"/> 
 			
-			<p:outputLabel>nombreEtudiant</p:outputLabel>
+			<p:outputLabel>Nombre Etudiant</p:outputLabel>
 			<p:inputText value = "#{aAControl.nombreEtudiant}" type="text"/> 
 			
-			<p:outputLabel>fraction</p:outputLabel>
+			<p:outputLabel>Fraction</p:outputLabel>
 			<p:selectOneMenu value="#{aAControl.fraction}" converter="#{fractionConverter}">
         		<f:selectItems value="#{aAControl.fractions}"/>
     		</p:selectOneMenu>
