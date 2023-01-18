@@ -45,6 +45,9 @@ public class EnseignantControl {
 		missions.clear();
 	}
 	
+	public List<Enseignant> doFindAll() {
+		return bean.findAll();
+	}
 	public void doAdd() {
 		bean.add(new Enseignant(nom, prenom, mail, remarque, new Attribution(anneeAcademique, aas, missions)));
 	}
