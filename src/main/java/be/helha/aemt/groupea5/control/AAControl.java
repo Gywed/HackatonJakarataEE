@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import org.h2.index.Index;
+
 import be.helha.aemt.groupea5.ejb.AAEJB;
 import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
@@ -87,11 +90,12 @@ public class AAControl implements Serializable {
 		return beanGestion.findAll();
 	}
 			
-	public void doAddAa() {
-		System.out.println("test");
+	public void doAdd() {
 		beanGestion.add(new AA(anneeAcademique,code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
-		
 	}
+	
+	
+	
 	public void doDeleteAa(AA aa) {
 		beanGestion.delete(aa);
 	}
