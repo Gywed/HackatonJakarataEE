@@ -79,7 +79,14 @@
 	   
 	   <p:column>
 	      <f:facet name = "header">Supprimer AA</f:facet>
-	      <p:commandButton value = "Supprimer" action = "#{aAControl.doDeleteAa(aa)}"/>
+	      <p:commandButton value = "Supprimer" action = "#{aAControl.doDeleteAa(aa)}">
+	      	<p:confirm header="Confirmation" message="Voulez-vous supprimer cette mission ?" icon="pi pi-info-circle"/>
+	      </p:commandButton>
+	      
+	      <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+	            <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+	            <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" />
+	        </p:confirmDialog>
 	   </p:column>
 		   
 	</p:dataTable>
