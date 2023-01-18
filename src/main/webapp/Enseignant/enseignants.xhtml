@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f = "http://java.sun.com/jsf/core">
+<h:head>
+
+<title>Enseignants</title>
+<meta http-equiv="  Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+<h:body>
+	<h1>Liste des enseignants</h1>
+	
+<h:form>
+	<p:commandButton type="button" value="Ajouter" icon="pi pi-plus" onclick="PF('informations').show()"></p:commandButton>
+	<p:dataTable value = "#{enseignantControl.doFindAll()}" var = "e">
+	   
+	   <p:column>
+	      <f:facet name = "header">Nom</f:facet>
+	      #{e.nom}
+	   </p:column>
+	   
+	   <p:column>
+	      <f:facet name = "header">Prenom</f:facet>
+	      #{e.prenom}
+	   </p:column>
+	   
+	   <p:column>
+	      <f:facet name = "header">E-mail</f:facet>
+	      #{e.mail}
+	   </p:column>
+	   
+	   <p:column>
+	      <f:facet name = "header">Remarque</f:facet>
+	      #{e.remarque}
+	   </p:column>
+	   
+	   <p:column>
+	   		<p:commandButton type="button" icon="pi pi-pencil" styleClass="rounded-button ui-button-warning"/>
+	   		<span>  </span>
+	   		<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" action="#{enseignantControl.doAdd}" ajax="false"/>
+	   </p:column>
+		   
+	</p:dataTable>
+</h:form>
+
+<h:form>
+<p:dialog id="informations" widgetVar="informations" header="Entrer les informations">
+   <h:form id="createEnseignant">
+    <p:panel>
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="name" value="Nom:" />
+            <p:inputText id="name" value="#{enseignantControl.nom}" required="true" label="Nom" />
+            
+            <h:outputLabel for="surname" value="Prénom:" />
+            <p:inputText id="surname" value="#{enseignantControl.prenom}" required="true" label="Prenom" />
+            
+            <h:outputLabel for="mail" value="E-Mail:" />
+            <p:inputText id="mail" value="#{enseignantControl.mail}" required="true" label="E-Mail">
+            	<!-- <f:validateRegex pattern="^\S+@helha\.be$"/>  -->
+            </p:inputText>
+            
+            <h:outputLabel for="remarque" value="Remarque:" />
+            <p:inputText id="remarque" value="#{enseignantControl.remarque}" required="true" label="Remarque:" />
+        </h:panelGrid>
+    </p:panel>
+    <p:commandButton value="Suivant" action="#{enseignantControl.doAdd}" ajax="false"></p:commandButton>
+	</h:form>
+   
+</p:dialog>
+
+<p:dialog id="missions" widgetVar="missions" header="Sélectionner les missions de l'enseignant">
+   <h:form>
+   		<p:selectManyMenu id="advanced" value="#{enseignantControl.missions}"
+                            var="m" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced">
+            <f:selectItems value="#{missionControl.doFindAll()}" var="mission" itemLabel="#{mission.intitule}"
+                            itemValue="#{mission}"/>
+
+            <p:column>
+                <h:outputText value="#{m.intitule}"/>
+            </p:column>
+            <p:column>
+                <h:outputText value="#{m.heures} H"/>
+            </p:column>
+            
+        </p:selectManyMenu>
+   		<p:commandButton type="button" value="Suivant" onclick="PF('aas').show(); PF('missions').hide()"></p:commandButton>
+   </h:form>
+</p:dialog>
+
+<p:dialog id="aas" widgetVar="aas" header="Sélectionner les AA de l'enseignant">
+	<h:form>
+		<p:selectManyMenu id="advanced" value="#{enseignantControl.aas}"
+                            var="aa" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced">
+            <f:selectItems value="#{aAControl.doFindAll()}" var="aa" itemLabel="#{aa.intitule}"
+                            itemValue="#{aA}"/>
+
+            <p:column>
+                <h:outputText value="#{aa.code} : #{aa.intitule}"/>
+            </p:column>
+            
+        </p:selectManyMenu>
+   		<p:commandButton ajax="false" value="Confirmer" onclick="PF('aas').hide()" action="#{enseignantControl.doAdd}"></p:commandButton>
+   </h:form>
+</p:dialog>
+</h:form>
+	
+</h:body>
+</html>
