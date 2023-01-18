@@ -17,6 +17,7 @@ import jakarta.inject.Named;
 @Named
 @SessionScoped
 public class AAControl implements Serializable {
+	
 	@EJB
 	private AAEJB beanGestion;
 	
@@ -84,7 +85,6 @@ public class AAControl implements Serializable {
 	public List<AA> doFindAll()
 	{
 		return beanGestion.findAll();
-		
 	}
 			
 	public void doAddAa() {
