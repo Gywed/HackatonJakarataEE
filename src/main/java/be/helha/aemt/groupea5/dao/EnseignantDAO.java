@@ -41,8 +41,8 @@ public class EnseignantDAO {
 			return null;
 		}
 		
-		if(!e.getMail().matches(pattern))
-			return null;
+//		if(!e.getMail().matches(pattern))
+//			return null;
 		
 		
 		if (find(e) != null) {

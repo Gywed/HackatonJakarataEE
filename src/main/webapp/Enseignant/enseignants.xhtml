@@ -56,14 +56,14 @@
             
             <h:outputLabel for="mail" value="E-Mail:" />
             <p:inputText id="mail" value="#{enseignantControl.mail}" required="true" label="E-Mail">
-            	<f:validateRegex pattern="^\S+@helha\.be$"/>
+            	<!-- <f:validateRegex pattern="^\S+@helha\.be$"/>  -->
             </p:inputText>
             
             <h:outputLabel for="remarque" value="Remarque:" />
             <p:inputText id="remarque" value="#{enseignantControl.remarque}" required="true" label="Remarque:" />
         </h:panelGrid>
     </p:panel>
-    <p:commandButton type="button" value="next" onclick="PF('missions').show(); PF('informations').hide()"></p:commandButton>
+    <p:commandButton type="button" value="Suivant" onclick="PF('missions').show(); PF('informations').hide()"></p:commandButton>
 	</h:form>
    
 </p:dialog>
@@ -83,13 +83,24 @@
             </p:column>
             
         </p:selectManyMenu>
-   		<p:commandButton type="button" value="next" onclick="PF('aas').show(); PF('missions').hide()"></p:commandButton>
+   		<p:commandButton type="button" value="Suivant" onclick="PF('aas').show(); PF('missions').hide()"></p:commandButton>
    </h:form>
 </p:dialog>
 
 <p:dialog id="aas" widgetVar="aas" header="Sélectionner les AA de l'enseignant">
-   <h:outputText value="This is the content of my dialog." />
-   <p:commandButton type="button" value="Submit" onclick="PF('aas').hide()"></p:commandButton>
+	<h:form>
+		<p:selectManyMenu id="advanced" value="#{enseignantControl.aas}"
+                            var="aa" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced">
+            <f:selectItems value="#{aAControl.doFindAll()}" var="aa" itemLabel="#{aa.intitule}"
+                            itemValue="#{aA}"/>
+
+            <p:column>
+                <h:outputText value="#{aa.code} : #{aa.intitule}"/>
+            </p:column>
+            
+        </p:selectManyMenu>
+   		<p:commandButton type="button" value="Confirmer" onclick="PF('aas').hide()"></p:commandButton>
+   </h:form>
 </p:dialog>
 
 	
