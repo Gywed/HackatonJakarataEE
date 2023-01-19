@@ -68,10 +68,6 @@ public class MissionControl implements Serializable{
 		bean.add(new Mission(new AnneeAcademique(anneeAcademique),intitule,heures));
 		clearData();
 	}
-<<<<<<< Updated upstream
-=======
-	
->>>>>>> Stashed changes
 	
 	public String doDelete(Mission mission) {
 		bean.delete(mission);
@@ -79,11 +75,9 @@ public class MissionControl implements Serializable{
 		return "Mission?faces-redirect=true";
 	}
 
-<<<<<<< Updated upstream
+
 	public void doSetInformation(Mission mission) {
-=======
-	public void doGetInformation(Mission mission) {
->>>>>>> Stashed changes
+
 		setMission(mission);
 		setAnneeAcademique(mission.getAnneeAcademique().getAnneeAcademique());
 		setIntitule(mission.getIntitule());
