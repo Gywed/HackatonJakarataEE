@@ -8,15 +8,20 @@
 <meta http-equiv="  Content-Type" content="text/html; charset=UTF-8"/>
 </h:head>
 <body>
-	
+	<style>
+    .ui-filter-column .ui-column-customfilter .custom-filter {
+        width: 100%;
+        box-sizing: border-box;
+    }
+</style>
 	<div class="card">
 	 	<h1>Liste des sections</h1>
 	 	<p:commandButton value="Ajouter"  onclick="PF('createDialog').show()" />
 	    <h:form>
-	        <p:dataTable var="section" value="#{sectionControl.doFindAll()}" widgetVar="sections"
+	        <p:dataTable var="section" value="#{sectionControl.doFindAllSorted()}" widgetVar="sections"
 	                     emptyMessage="Aucune section n'a pu être trouvée avec les critères donnés"
 	                     filteredValue="#{dtFilterView.sections}"
-	                     globalFilterFunction="#{dtFilterView.globalFilterFunction}">
+	                     globalFilterFunction="#{dtFilterView.globalFilterFunction}" paginator="true" rows="5">
 	
 	            <f:facet name="header">
 	                <div class="flex justify-content-end">
@@ -24,14 +29,13 @@
 	                                 placeholder="mots-clés..." />
 	                </div>
 	            </f:facet>
+	            
 	
-	            <p:column field="nom" headerText="Nom" sortBy="#{section.nom}" filterable="false" >
+	            <p:column field="nom" headerText="Nom"  sortBy="#{section.nom}" filterable="false" >
 	                <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{section.nom}" />
 	            </p:column>
 	            
-	            <p:column field="departement.nom" headerText="Département" filterable="false" sortBy="#{departementNameComparator}">
-					<h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{section.departement}" />
-				</p:column>
+	           
 	            
 	            <p:column>
 				    <f:facet name="header">Modifier</f:facet>
