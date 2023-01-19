@@ -21,7 +21,7 @@
 	
 	<h:form>
 		<!--  tableau liste des départements -->
-		<p:dataTable id="departementsTable" value = "#{departementControl.doFindAll()}" var = "departement" paginator="true" rows="8" >
+		<p:dataTable id="departementsTable" value = "#{departementControl.doFindAll()}" var = "departement" >
 		   <p:column>    				
 		      <f:facet name = "header">Id</f:facet>    				
 		      #{departement.id}
@@ -87,7 +87,30 @@
 		    </p:scrollPanel>
 		</p:dialog>
 	</h:form>
+
 	</ui:define>
 </ui:composition>
 </h:body>
+<div class="card">
+    <h:form>
+        <p:dataTable var="departement" value="#{departementControl.doFindAll()}" widgetVar="DepartementsTable"
+            emptyMessage="Aucun departement n'a pu être trouvé avec les critères donnés"
+            filteredValue="#{dtFilterView.filteredCustomers2}" filterBy="#{dtFilterView.filterBy}">
+
+            <f:facet name="header">
+                <span>Liste des départements</span>
+            </f:facet>
+
+            <p:column headerText="nom" sortBy="#{departement.nom}" filterBy="#{departement.nom}">
+                <h:outputText value="#{departement.nom}" />
+            </p:column>
+
+            
+
+
+            
+        </p:dataTable>
+    </h:form>
+</div>
+</body>
 </html>
