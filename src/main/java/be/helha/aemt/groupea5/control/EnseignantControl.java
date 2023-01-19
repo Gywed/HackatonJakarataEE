@@ -70,6 +70,10 @@ public class EnseignantControl implements Serializable {
 		
 	}
 	
+	public void doDelete(Enseignant e) {
+		bean.delete(e);
+	}
+	
 	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(severity, summary, detail));
