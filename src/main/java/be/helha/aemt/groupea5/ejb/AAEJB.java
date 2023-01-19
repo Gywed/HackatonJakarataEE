@@ -4,6 +4,7 @@ import java.util.List;
 
 import be.helha.aemt.groupea5.dao.AADAO;
 import be.helha.aemt.groupea5.entities.AA;
+import be.helha.aemt.groupea5.exception.WrongArgumentException;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 
@@ -23,9 +24,9 @@ public class AAEJB {
 		return dao.findAll();
 	}
 
-	public AA add(AA e) {
+	public void add(AA e) throws WrongArgumentException {
 		// TODO Auto-generated method stub
-		return dao.add(e);
+		dao.add(e);
 	}
 
 	public AA delete(AA e) {

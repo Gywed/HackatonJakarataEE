@@ -160,6 +160,7 @@ public class AA implements Serializable{
 		return Objects.equals(code, other.code);
 	}
 
-	
-	
+	public AA clone() {
+		return new AA(anneeAcademique,code, code, credit, credit, credit, credit, credit, credit, fraction);
+	}
 }

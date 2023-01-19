@@ -4,6 +4,8 @@ import java.util.List;
 
 import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
+import be.helha.aemt.groupea5.exception.WrongArgumentException;
+import be.helha.aemt.groupea5.exception.WrongMailException;
 import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
@@ -50,16 +52,37 @@ public class AADAO {
 		return query.getResultList();
 	}
 	
-	public AA add(AA e) {
-		if (e == null) return null;
-		if (e == find(e)) return null;
+	public void add(AA e) throws WrongArgumentException {
+		if (e == null) return;
+		if (e == find(e)) return;
+		
+		if(e.getHeure()<1)
+			throw new WrongArgumentException("Il faut au moins 1 heure par AA");
+		
+		if(e.getHeureQ1()+e.getHeureQ2() != e.getHeure())
+			throw new WrongArgumentException("Les heures au Q1 et Q2 doivent égaler les heures totals");
+		
+		if(e.getCredit()<1)
+			throw new WrongArgumentException("Il faut au moins 1 crédit par AA");
+		
+		if(e.getNombreGroupe()<1)
+			throw new WrongArgumentException("Il faut au moins 1 groupe par AA");
+		
+		if(e.getNombreEtudiant()<1)
+			throw new WrongArgumentException("Il faut au moins 1 étudiant par AA");
 		
 		AnneeAcademique dbAnnee = anneeDAO.find(e.getAnneeAcademique());
 		if (dbAnnee != null)
 			e.setAnneeAcademique(dbAnnee);
 		
-		
-		return em.merge(e);
+		if (e.getNombreGroupe() > 1)
+			for (int i = 1; i <= e.getNombreGroupe() ; i++) {
+				AA newAa = e.clone();
+				newAa.setCode(e.getCode()+"-"+(char)(i + 96));
+				em.merge(newAa);
+			}
+		else
+			em.merge(e);
 	}
 	
 	public AA delete(AA e) {

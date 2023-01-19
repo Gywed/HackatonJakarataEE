@@ -11,8 +11,11 @@ import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Fraction;
 import be.helha.aemt.groupea5.entities.Utilisateur;
+import be.helha.aemt.groupea5.exception.WrongArgumentException;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
 @Named
@@ -63,9 +66,28 @@ public class AAControl implements Serializable {
 	}
 			
 	public void doAdd() {
-		beanGestion.add(new AA(new AnneeAcademique(anneeAcademique),code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
-		clearData();
+		try {
+			beanGestion.add(new AA(new AnneeAcademique(anneeAcademique),code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
+			clearData();
+			showInfo("Ajout réussi");
+		} catch (WrongArgumentException e) {
+			// TODO Auto-generated catch block
+			showError(e.getMessage());
+		}
 	}
+	
+	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
+        FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(severity, summary, detail));
+    }
+	
+	public void showError(String message) {
+        addMessage(FacesMessage.SEVERITY_ERROR, "Erreur", message);
+    }
+	
+	public void showInfo(String message) {
+        addMessage(FacesMessage.SEVERITY_INFO, "Info", message);
+    }
 	
 	public String doDelete(AA aa) {
 		beanGestion.delete(aa);
