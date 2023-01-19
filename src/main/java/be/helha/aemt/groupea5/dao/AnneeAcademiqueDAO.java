@@ -1,5 +1,8 @@
 package be.helha.aemt.groupea5.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
@@ -32,6 +35,37 @@ public class AnneeAcademiqueDAO {
 		query.setParameter(1, a.getAnneeAcademique());
 		List<AnneeAcademique> result = query.getResultList();
 		return result.isEmpty() ? null : result.get(0);
+	}
+	
+	public List<AnneeAcademique> findCurrentAndNextAcademicYear(){
+		List<AnneeAcademique> anneeAcademiques = new ArrayList<>();
+		
+		SimpleDateFormat y = new SimpleDateFormat("yyyy");
+		SimpleDateFormat m = new SimpleDateFormat("MM");
+		
+		Date date = new Date();
+		
+		int annee = Integer.parseInt(y.format(date));
+		int mois = Integer.parseInt(m.format(date));
+		if (mois < 03) {
+			anneeAcademiques.add(new AnneeAcademique( annee-1 + " - " + annee));
+			int anneePro = annee + 1;
+			anneeAcademiques.add(new AnneeAcademique( annee + " - " + anneePro));
+		} else {
+			int anneePro = annee + 1;
+			anneeAcademiques.add(new AnneeAcademique( annee + " - " + anneePro));
+			
+			int anneeEncorePro = anneePro + 1;
+			anneeAcademiques.add(new AnneeAcademique( anneePro + " - " + anneeEncorePro));
+		}
+		
+		for (AnneeAcademique anneeAcademique : anneeAcademiques) {
+			if (find(anneeAcademique) == null) {
+				add(anneeAcademique);
+			}
+		}
+		
+		return anneeAcademiques;
 	}
 	
 	public AnneeAcademique add(AnneeAcademique a) {
