@@ -27,7 +27,10 @@
 	   	<p:menuitem value="Departement"/>
 	   	<p:menuitem value="Section"/>
 	   	<p:menuitem value="Enseignant"/>
-	   	<p:menuitem value="Utilisateur"/>
+	   	<p:submenu label="Utilisateur">
+	   		<p:menuitem value="Liste" url="Utilisateur/listUser.xhtml"/>
+	   		<p:menuitem value="Ajouter" url="Utilisateur/addUser.xhtml"/>
+	   	</p:submenu>
 	   	
  
         <f:facet name="options">
