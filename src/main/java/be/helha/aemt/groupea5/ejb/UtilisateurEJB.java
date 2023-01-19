@@ -7,9 +7,10 @@ import be.helha.aemt.groupea5.dao.UtilisateurDAO;
 import be.helha.aemt.groupea5.entities.Enseignant;
 import be.helha.aemt.groupea5.entities.Utilisateur;
 import jakarta.ejb.EJB;
+import jakarta.ejb.Stateful;
 import jakarta.ejb.Stateless;
 
-@Stateless
+@Stateful
 public class UtilisateurEJB {
 
 	@EJB
