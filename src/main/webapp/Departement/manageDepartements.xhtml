@@ -14,7 +14,7 @@
 	
 	<h:form>
 		<!--  tableau liste des départements -->
-		<p:dataTable id="departementsTable" value = "#{departementControl.doFindAll()}" var = "departement"  >
+		<p:dataTable id="departementsTable" value = "#{departementControl.doFindAll()}" var = "departement" paginator="true" rows="8" >
 		   <p:column>    				
 		      <f:facet name = "header">Id</f:facet>    				
 		      #{departement.id}
