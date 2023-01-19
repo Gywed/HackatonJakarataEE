@@ -56,6 +56,7 @@ public class EnseignantControl implements Serializable {
 		List<Attribution> attrs = new ArrayList<>();
 		attrs.add(attr);
 		bean.add(new Enseignant(nom, prenom, mail, remarque, attrs));
+		clearData();
 	}
 	public void doInforamtions() {
 		enseignant.setMail(mail);

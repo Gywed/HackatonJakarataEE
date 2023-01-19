@@ -39,6 +39,7 @@ public class AnneeAcademiqueDAO {
 	
 	public List<AnneeAcademique> findCurrentAndNextAcademicYear(){
 		List<AnneeAcademique> anneeAcademiques = new ArrayList<>();
+		List<AnneeAcademique> anneeAcademiquesDB = new ArrayList<>();
 		
 		SimpleDateFormat y = new SimpleDateFormat("yyyy");
 		SimpleDateFormat m = new SimpleDateFormat("MM");
@@ -63,9 +64,9 @@ public class AnneeAcademiqueDAO {
 			if (find(anneeAcademique) == null) {
 				add(anneeAcademique);
 			}
+			anneeAcademiquesDB.add(find(anneeAcademique));
 		}
-		
-		return anneeAcademiques;
+		return anneeAcademiquesDB;
 	}
 	
 	public AnneeAcademique add(AnneeAcademique a) {

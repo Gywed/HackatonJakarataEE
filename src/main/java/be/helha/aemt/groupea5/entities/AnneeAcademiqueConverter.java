@@ -12,13 +12,15 @@ public class AnneeAcademiqueConverter implements Converter<AnneeAcademique>{
 
 	@Override
 	  public AnneeAcademique getAsObject(FacesContext fc, UIComponent comp, String value) {
-		AnneeAcademique a = new AnneeAcademique(value);
+		String[] splittedString = value.split("\\+");
+		AnneeAcademique a = new AnneeAcademique(splittedString[1]);
+		a.setId(Integer.parseInt(splittedString[0]));
 		return a;
 	  }
 
 	  @Override
 	  public String getAsString(FacesContext fc, UIComponent comp, AnneeAcademique value) {
-	      return value.getAnneeAcademique();
+	      return value.getId() +"+"+ value.getAnneeAcademique();
 	      
 	  }
 

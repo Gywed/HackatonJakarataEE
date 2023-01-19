@@ -91,7 +91,7 @@
 </p:dialog>
 
 <p:dialog id="aas" widgetVar="aas" header="Sélectionner les AA de l'enseignant">
-		<p:selectManyMenu value="#{enseignantControl.aas}"
+		<p:selectManyMenu value="#{enseignantControl.aas}" converter="converterAA"
                             var="aa" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced" modal="true">
             <f:selectItems value="#{aAControl.doFindAll()}" var="aa" itemLabel="#{aa.intitule}"
                             itemValue="#{aA}"/>
