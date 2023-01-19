@@ -66,6 +66,7 @@ public class SectionDAO
 		if (e == null) return null;
 		
 		Section dbE = find(e);
+		
 		if (dbE == null) return null;
 		
 		em.remove(em.merge(dbE));

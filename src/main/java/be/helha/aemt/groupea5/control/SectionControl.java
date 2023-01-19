@@ -2,15 +2,14 @@ package be.helha.aemt.groupea5.control;
 
 import java.io.Serializable;
 import java.util.List;
-import jakarta.ejb.EJB;
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Named;
 
 import be.helha.aemt.groupea5.ejb.SectionEJB;
+import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.Departement;
-import be.helha.aemt.groupea5.entities.Mission;
 import be.helha.aemt.groupea5.entities.Section;
+import jakarta.ejb.EJB;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 
 @Named
@@ -19,12 +18,9 @@ public class SectionControl implements Serializable
 {
 	@EJB
 	private SectionEJB beanGestion;
-	
-	private Departement departement;
-
+	private String departement;
+	private String nom;
 	private Section selectedSection = new Section(new Departement(), "", null);
-	private Section newSection = new Section(new Departement(), "", null);
-	private boolean disableSelectItem;
 	
 	public List<Section> doFindAll() 
 	{
@@ -33,8 +29,8 @@ public class SectionControl implements Serializable
 	
 	public Section doAdd() 
 	{
-	
-		return beanGestion.add(newSection);
+		Section SectiontoAdd = new Section(new Departement(departement,null,null), nom, null);
+		return beanGestion.add(SectiontoAdd);
 	}
 	
 	public void goToUpdateSection(Section section) 
@@ -42,8 +38,18 @@ public class SectionControl implements Serializable
 		selectedSection =null;
 	    selectedSection = section;
 	}
+	
+	public String doDelete(Section e) 
+	{
+		beanGestion.delete(e);
+		
+		return "Section/manageV2?faces-redirect=true"; 
+	}
+	
+	
 
-	public SectionEJB getBeanGestion() {
+	public SectionEJB getBeanGestion() 
+	{
 		return beanGestion;
 	}
 
@@ -52,14 +58,14 @@ public class SectionControl implements Serializable
 		this.beanGestion = beanGestion;
 	}
 
-	public Departement getDepartement() 
+	public String getDepartement() 
 	{
 		return departement;
 	}
 
-	public void setDepartement(Departement departement) 
-	{
+	public void setDepartement(String departement) {
 		this.departement = departement;
+		
 	}
 
 	public Section getSelectedSection() 
@@ -72,28 +78,15 @@ public class SectionControl implements Serializable
 		this.selectedSection = selectedSection;
 	}
 
-	public Section getNewSection() 
+	public String getNom() 
 	{
-		return newSection;
+		return nom;
 	}
 
-	public void setNewSection(Section newSection) 
+	public void setNom(String nom) 
 	{
-		this.newSection = newSection;
+		this.nom = nom;
 	}
-
-	public boolean isDisableSelectItem() 
-	{
-		return disableSelectItem;
-	}
-
-	public void setDisableSelectItem(boolean disableSelectItem) 
-	{
-		this.disableSelectItem = disableSelectItem;
-	}
-	
-	
-	
 
 	
 }
