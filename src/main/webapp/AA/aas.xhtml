@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f = "http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">>
+<h:head>
+
+<title>AA</title>
+<meta http-equiv="  Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+<h:body>
+		<ui:composition template="../menubar.xhtml">
+	    	<ui:define name="content">
+				<h1>Liste des AAs</h1>
+		
+	<h:form class="form">
+		<p:commandButton type="button" value="Ajouter" icon="pi pi-plus" onclick="PF('informations').show()"></p:commandButton>
+		<p:dataTable value = "#{aAControl.doFindAll()}" var = "e" widgetVar="customersTable">
+		   
+		   <p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
+                sortBy="#{e.anneeAcademique.anneeAcademique}" sortable="false">
+                 <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('customersTable').filter()" styleClass="ui-custom-filter">
+                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
+                    </p:selectOneMenu>
+                </f:facet>
+      		</p:column>
+		   <p:column field="code" headerText="Code" sortable="false" filterMatchMode="contains"/>
+		   <p:column field="intitule" headerText="Intitulé" sortable="false" filterMatchMode="contains"/>
+		   
+		   <p:column field="credit" headerText="Crédit" sortable="false" filterMatchMode="exact"/>
+		   <p:column field="heure" headerText="Heure" sortable="false" filterMatchMode="exact"/>
+		   <p:column field="heureQ1" headerText="Heure Q1" sortable="false" filterMatchMode="exact"/>
+		   <p:column field="heureQ2" headerText="Heure Q2" sortable="false" filterMatchMode="exact"/>
+		   <p:column field="nombreGroupe" headerText="Nombre Groupe" sortable="false" filterMatchMode="exact"/>
+		   <p:column field="nombreEtudiant" headerText="Nombre Etudiant" sortable="false" filterMatchMode="exact"/>
+  
+		   <p:column field="fraction" headerText="Fraction" filterMatchMode="exact"
+                sortBy="#{e.fraction}" sortable="false">
+                 <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('customersTable').filter()" styleClass="ui-custom-filter">
+                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItems value="#{aAControl.fractions}" />
+                    </p:selectOneMenu>
+                </f:facet>
+      		</p:column>
+		   
+		   <p:column>
+		   		<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" 
+					action="#{aAControl.doSetInformation(e)}" update="modifier" 
+					oncomplete="PF('modifier').show()"/>
+				
+		      <span></span>
+		      
+		   
+		      	<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" 
+		      		action="#{aAControl.doDelete(e)}" >
+		      		<p:confirm header="Confirmation" message="Voulez-vous supprimer cette aa ?" icon="pi pi-info-circle"/>
+		      	</p:commandButton>
+		   </p:column>
+			   
+		</p:dataTable>
+	</h:form>
+	
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+	            <p:commandButton value="Non" styleClass="ui-confirmdialog-no ui-button-flat" ajax="false" />
+	            <p:commandButton value="Oui" styleClass="ui-confirmdialog-yes" ajax="false"/>
+	        </p:confirmDialog>
+	
+		<p:dialog id="informations" widgetVar="informations" header="Entrer les informations" modal="true">
+		   <h:form id="createAa">
+		        <h:panelGrid columns="2" cellpadding="6">
+					<h:outputLabel for="annee" value="Année Académique:" />
+		            <p:selectOneMenu id="annee" value="#{aAControl.anneeAcademique}">
+						<f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}"/>
+					</p:selectOneMenu>
+					
+					<h:outputLabel for="code" value="Code:" />
+		            <p:inputText id="code" value="#{aAControl.code}" required="true" label="Code" />
+		            
+		            <h:outputLabel for="intitule" value="Intitulé:" />
+		            <p:inputText id="intitule" value="#{aAControl.intitule}" required="true" label="Intitulé" />
+		            
+		            <h:outputLabel for="credit" value="Crédit:" />
+		            <p:inputText id="credit" value="#{aAControl.credit}" required="true" label="Crédit"  type="number">
+		<!--             	<f:validateRegex pattern="^\S+@helha\.be$"/>  -->
+		            </p:inputText>
+		            
+		            <h:outputLabel for="heure" value="Heure:" />
+		            <p:inputText id="heure" value="#{aAControl.heure}" label="Heure" type="number"/>
+		            
+		            <h:outputLabel for="heureQ1" value="Heure Q1:" />
+		            <p:inputText id="heureQ1" value="#{aAControl.heureQ1}" label="Heure Q1" type="number"/>
+		            <h:outputLabel for="heureQ2" value="Heure Q2:" />
+		            <p:inputText id="heureQ2" value="#{aAControl.heureQ2}" label="Heure Q2" type="number"/>
+		            
+		            <h:outputLabel for="nombreGroupe" value="Nombre Groupe:" />
+		            <p:inputText id="nombreGroupe" value="#{aAControl.nombreGroupe}" label="Nombre Groupe" type="number"/>
+		            
+		            <h:outputLabel for="nombreEtudiant" value="Nombre Etudiant:" />
+		            <p:inputText id="nombreEtudiant" value="#{aAControl.nombreEtudiant}" label="Nombre Etudiant" type="number"/>
+		            
+		            <h:outputLabel for="fraction" value="Fraction:" />
+		            <p:selectOneMenu id="fraction" value="#{aAControl.fraction}">
+			        	<f:selectItems value="#{aAControl.fractions}"/>
+			    	</p:selectOneMenu>
+			    	
+		        </h:panelGrid>
+		    <p:commandButton value="Confirmer" action="#{aAControl.doAdd}" ajax="false"/>
+			</h:form>
+		   
+		</p:dialog>
+		
+		<p:dialog id="modifier" widgetVar="modifier" header="Modifier une aa">
+				<h:form>
+					<h:panelGrid columns="2" cellpadding="6">
+						<h:outputLabel for="annee" value="Année Académique:" />
+			            <p:selectOneMenu id="annee" value="#{aAControl.anneeAcademique}">
+							<f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}"/>
+						</p:selectOneMenu>
+						
+						<h:outputLabel for="code" value="Code:" />
+			            <p:inputText id="code" value="#{aAControl.code}" required="true" label="Code" />
+			            
+			            <h:outputLabel for="intitule" value="Intitulé:" />
+			            <p:inputText id="intitule" value="#{aAControl.intitule}" required="true" label="Intitulé" />
+			            
+			            <h:outputLabel for="credit" value="Crédit:" />
+			            <p:inputText id="credit" value="#{aAControl.credit}" required="true" label="Crédit"  type="number">
+			<!--             	<f:validateRegex pattern="^\S+@helha\.be$"/>  -->
+			            </p:inputText>
+			            
+			            <h:outputLabel for="heure" value="Heure:" />
+			            <p:inputText id="heure" value="#{aAControl.heure}" label="Heure" type="number"/>
+			            
+			            <h:outputLabel for="heureQ1" value="Heure Q1:" />
+			            <p:inputText id="heureQ1" value="#{aAControl.heureQ1}" label="Heure Q1" type="number"/>
+			            <h:outputLabel for="heureQ2" value="Heure Q2:" />
+			            <p:inputText id="heureQ2" value="#{aAControl.heureQ2}" label="Heure Q2" type="number"/>
+			            
+			            <h:outputLabel for="nombreGroupe" value="Nombre Groupe:" />
+		            	<p:inputText id="nombreGroupe" value="#{aAControl.nombreGroupe}" label="Nombre Groupe" type="number"/>
+		            
+		            	<h:outputLabel for="nombreEtudiant" value="Nombre Etudiant:" />
+		            	<p:inputText id="nombreEtudiant" value="#{aAControl.nombreEtudiant}" label="Nombre Etudiant" type="number"/>
+		            
+			                
+			            <h:outputLabel for="fraction" value="Fraction:" />
+			            <p:selectOneMenu id="fraction" value="#{aAControl.fraction}">
+				        	<f:selectItems value="#{aAControl.fractions}"/>
+				    	</p:selectOneMenu>
+				    	
+				    	<br/>
+					<p:commandButton value="Modifier" action="#{aAControl.doUpdate()}" ajax="false" />
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
