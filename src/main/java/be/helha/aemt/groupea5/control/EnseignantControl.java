@@ -12,8 +12,11 @@ import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Attribution;
 import be.helha.aemt.groupea5.entities.Enseignant;
 import be.helha.aemt.groupea5.entities.Mission;
+import be.helha.aemt.groupea5.exception.AlreadyExistsException;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
 @Named
@@ -55,15 +58,23 @@ public class EnseignantControl implements Serializable {
 		Attribution attr = new Attribution(anneeAcademique, aas, missions);
 		List<Attribution> attrs = new ArrayList<>();
 		attrs.add(attr);
-		bean.add(new Enseignant(nom, prenom, mail, remarque, attrs));
+		try {
+			bean.add(new Enseignant(nom, prenom, mail, remarque, attrs));
+		} catch (AlreadyExistsException e) {
+			// TODO Auto-generated catch block
+			showError(e.getMessage());
+		}
 		clearData();
 	}
-	public void doInforamtions() {
-		enseignant.setMail(mail);
-		enseignant.setNom(nom);
-		enseignant.setPrenom(prenom);
-		enseignant.setRemarque(remarque);
-	}
+	
+	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
+        FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(severity, summary, detail));
+    }
+	
+	public void showError(String message) {
+        addMessage(FacesMessage.SEVERITY_ERROR, "Erreur", message);
+    }
 
 	public Enseignant getEnseignant() {
 		return enseignant;

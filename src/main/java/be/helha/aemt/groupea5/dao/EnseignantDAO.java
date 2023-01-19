@@ -3,6 +3,7 @@ package be.helha.aemt.groupea5.dao;
 import java.util.List;
 
 import be.helha.aemt.groupea5.entities.Enseignant;
+import be.helha.aemt.groupea5.exception.AlreadyExistsException;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -34,7 +35,7 @@ public class EnseignantDAO {
 		return result.isEmpty() ? null : result.get(0);
 	}
 	
-	public Enseignant add(Enseignant e) {
+	public Enseignant add(Enseignant e) throws AlreadyExistsException {
 		String pattern = "^\\S+@helha\\.be$";
 		
 		if (e==null) {
@@ -46,7 +47,7 @@ public class EnseignantDAO {
 		
 		
 		if (find(e) != null) {
-			return null;
+			 throw new AlreadyExistsException("Cet enseignant existe déjà");
 		}
 		return em.merge(e);
 
