@@ -36,7 +36,7 @@ public class MissionControl implements Serializable{
 	
 	public MissionControl() {
 		// TODO Auto-generated constructor stub
-anneeAcademiques = new ArrayList<>();
+		anneeAcademiques = new ArrayList<>();
 		
 		y = new SimpleDateFormat("yyyy");
 		m = new SimpleDateFormat("MM");
@@ -68,30 +68,25 @@ anneeAcademiques = new ArrayList<>();
 		bean.add(new Mission(new AnneeAcademique(anneeAcademique),intitule,heures));
 		clearData();
 	}
-	public void doTest() {
-		System.out.println(intitule);
-	}
 	
 	public String doDelete(Mission mission) {
 		bean.delete(mission);
 		clearData();
-		return "listMission?faces-redirect=true";
+		return "Mission?faces-redirect=true";
 	}
 
-	public void doGetInformation(Mission mission) {
-		System.out.println("ALEEEEEED");
+	public void doSetInformation(Mission mission) {
 		setMission(mission);
-		setAnneeAcademique(anneeAcademique);
-		setIntitule(intitule);
-		setHeures(heures);
-		
+		setAnneeAcademique(mission.getAnneeAcademique().getAnneeAcademique());
+		setIntitule(mission.getIntitule());
+		setHeures(mission.getHeures());
 	}
 	
 	public String doUpdate() {
 		mission.setAnneeAcademique(new AnneeAcademique(anneeAcademique));
 		bean.update(mission);
 		clearData();
-		return "listMission.xhtml?faces-redirect=true";
+		return "Mission.xhtml?faces-redirect=true";
 	}
 	
 	public void clearData() {

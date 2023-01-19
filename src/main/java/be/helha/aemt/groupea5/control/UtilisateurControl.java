@@ -1,28 +1,14 @@
 package be.helha.aemt.groupea5.control;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import be.helha.aemt.groupea5.dao.DepartementDAO;
-import be.helha.aemt.groupea5.ejb.DepartementEJB;
-import be.helha.aemt.groupea5.ejb.EnseignantEJB;
 import be.helha.aemt.groupea5.ejb.UtilisateurEJB;
-import be.helha.aemt.groupea5.entities.AA;
-import be.helha.aemt.groupea5.entities.AnneeAcademique;
-import be.helha.aemt.groupea5.entities.Attribution;
 import be.helha.aemt.groupea5.entities.Departement;
-import be.helha.aemt.groupea5.entities.Enseignant;
-import be.helha.aemt.groupea5.entities.Fraction;
-import be.helha.aemt.groupea5.entities.Mission;
 import be.helha.aemt.groupea5.entities.Role;
 import be.helha.aemt.groupea5.entities.Utilisateur;
-import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named
@@ -32,15 +18,13 @@ public class UtilisateurControl implements Serializable {
 	@EJB
 	private UtilisateurEJB beanUser;
 	
-	@EJB
-	private DepartementEJB beanDep;
-	
 	private Utilisateur utilisateur = new Utilisateur();
 	
 	private String nom;
 	private String prenom;
 	private String email;
-	private String password;	
+	private String password;
+	private String oldPassword;
 	private String departement;
 	private Role role;
 	
@@ -48,19 +32,10 @@ public class UtilisateurControl implements Serializable {
 	
 	private List<Departement> deps;
 	
-	private List<String> depsNom;
-	
-	
 	public UtilisateurControl() {
 		super();
 		// TODO Auto-generated constructor stub
 		roles = Arrays.asList(Role.values());
-		
-	}
-	
-	@PostConstruct
-	public void init() {
-		deps = beanDep.findAll();
 	}
 	
 	public void clearData() {
@@ -68,22 +43,49 @@ public class UtilisateurControl implements Serializable {
 		prenom="";
 		email="";
 		password="";
+		oldPassword = "";
 		departement = "";
+		role = null;
+	}
+	
+	public String doDelete(Utilisateur utilisateur) {
+		beanUser.delete(utilisateur);
+		clearData();
+		return "utilisateurs?faces-redirect=true";
+	}
+	
+	public String doUpdate() {
+		utilisateur.setDepartement(new Departement(departement,null,null));
+		utilisateur.setEmail(email);
+		utilisateur.setPrenom(prenom);
+		utilisateur.setNom(nom);
+		utilisateur.setRole(role);
+		if (password == null)
+			utilisateur.setPassword(oldPassword);
+		else
+			utilisateur.setPassword(password);
+		beanUser.update(utilisateur);
+		clearData();
+		return "utilisateurs?faces-redirect=true";
 	}
 	
 	public List<Utilisateur> doFindAll() {
 		return beanUser.findAll();
 	}
+	
 	public void doAdd() {
 		beanUser.add(new Utilisateur(nom, prenom, email, password,new Departement(departement, null, null), role));
 	}
-	public void doInformations() {
-		utilisateur.setEmail(email);
-		utilisateur.setNom(nom);
-		utilisateur.setPrenom(prenom);
-		utilisateur.setPassword(password);
-		utilisateur.setRole(role);
-		utilisateur.setDepartement(new Departement(departement, null, null));
+	
+	public void doSetInformation(Utilisateur utilisateur) {
+		setutilisateur(utilisateur);
+		setEmail(utilisateur.getEmail());
+		setNom(utilisateur.getNom());
+		setPrenom(utilisateur.getPrenom());
+		setOldPassword(utilisateur.getPassword());
+		setPassword("");
+		setRole(utilisateur.getRole());
+		setDepartement(utilisateur.getDepartement().getNom());
 	}
 
 	public Utilisateur getutilisateur() {
@@ -134,6 +136,14 @@ public class UtilisateurControl implements Serializable {
 		this.password = password;
 	}
 
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
 	public String getDepartement() {
 		return departement;
 	}
@@ -164,13 +174,5 @@ public class UtilisateurControl implements Serializable {
 
 	public void setDeps(List<Departement> deps) {
 		this.deps = deps;
-	}
-
-	public List<String> getDepsNom() {
-		return depsNom;
-	}
-
-	public void setDepsNom(List<String> depsNom) {
-		this.depsNom = depsNom;
 	}
 }

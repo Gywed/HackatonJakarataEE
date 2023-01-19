@@ -1,5 +1,9 @@
 package be.helha.aemt.groupea5.dao;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import be.helha.aemt.groupea5.entities.Departement;
 import be.helha.aemt.groupea5.entities.Utilisateur;
@@ -57,6 +61,19 @@ public class UtilisateurDAO {
 		if (dep != null)
 			e.setDepartement(dep);
 		
+		try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            String text = e.getPassword();
+            md.update(text.getBytes("UTF-8")); // Change this to "UTF-16" if needed
+            byte[] digest = md.digest();
+            BigInteger bigInt = new BigInteger(1, digest);
+            String output = bigInt.toString(16);
+            e.setPassword(output);
+
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            return null;
+        }
+		
 		return em.merge(e);
 	}
 	
@@ -73,6 +90,23 @@ public class UtilisateurDAO {
 	public Utilisateur update(Utilisateur e) {
 		if (e == null) return null;
 		Utilisateur dbE = findById(e);
+		Departement dep = depDao.find(e.getDepartement());
+		
+		if (dep != null)
+			e.setDepartement(dep);
+		
+		try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            String text = e.getPassword();
+            md.update(text.getBytes("UTF-8")); // Change this to "UTF-16" if needed
+            byte[] digest = md.digest();
+            BigInteger bigInt = new BigInteger(1, digest);
+            String output = bigInt.toString(16);
+            e.setPassword(output);
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            return null;
+        }
+		
 		e.setId(dbE.getId());
 		
 		return em.merge(e);
