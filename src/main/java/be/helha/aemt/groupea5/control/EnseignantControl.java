@@ -62,6 +62,7 @@ public class EnseignantControl implements Serializable {
 		try {
 			bean.add(new Enseignant(nom, prenom, mail, remarque, attrs));
 			clearData();
+			showInfo("Ajout réussi");
 		} catch (AlreadyExistsException | WrongMailException e) {
 			// TODO Auto-generated catch block
 			showError(e.getMessage());
@@ -76,6 +77,10 @@ public class EnseignantControl implements Serializable {
 	
 	public void showError(String message) {
         addMessage(FacesMessage.SEVERITY_ERROR, "Erreur", message);
+    }
+	
+	public void showInfo(String message) {
+        addMessage(FacesMessage.SEVERITY_INFO, "Info", message);
     }
 
 	public Enseignant getEnseignant() {
