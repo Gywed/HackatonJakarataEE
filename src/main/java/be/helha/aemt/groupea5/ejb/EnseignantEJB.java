@@ -5,6 +5,7 @@ import java.util.List;
 import be.helha.aemt.groupea5.dao.EnseignantDAO;
 import be.helha.aemt.groupea5.entities.Enseignant;
 import be.helha.aemt.groupea5.exception.AlreadyExistsException;
+import be.helha.aemt.groupea5.exception.WrongMailException;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 
@@ -19,7 +20,7 @@ public class EnseignantEJB {
 		return daoEnseignant.findAll();
 	}
 
-	public Enseignant add(Enseignant e) throws AlreadyExistsException {
+	public Enseignant add(Enseignant e) throws AlreadyExistsException, WrongMailException {
 		// TODO Auto-generated method stub
 		return daoEnseignant.add(e);
 	}

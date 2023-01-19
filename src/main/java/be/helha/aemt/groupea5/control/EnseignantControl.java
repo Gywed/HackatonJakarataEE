@@ -13,6 +13,7 @@ import be.helha.aemt.groupea5.entities.Attribution;
 import be.helha.aemt.groupea5.entities.Enseignant;
 import be.helha.aemt.groupea5.entities.Mission;
 import be.helha.aemt.groupea5.exception.AlreadyExistsException;
+import be.helha.aemt.groupea5.exception.WrongMailException;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -60,11 +61,12 @@ public class EnseignantControl implements Serializable {
 		attrs.add(attr);
 		try {
 			bean.add(new Enseignant(nom, prenom, mail, remarque, attrs));
-		} catch (AlreadyExistsException e) {
+			clearData();
+		} catch (AlreadyExistsException | WrongMailException e) {
 			// TODO Auto-generated catch block
 			showError(e.getMessage());
 		}
-		clearData();
+		
 	}
 	
 	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import be.helha.aemt.groupea5.entities.Enseignant;
 import be.helha.aemt.groupea5.exception.AlreadyExistsException;
+import be.helha.aemt.groupea5.exception.WrongMailException;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -35,15 +36,15 @@ public class EnseignantDAO {
 		return result.isEmpty() ? null : result.get(0);
 	}
 	
-	public Enseignant add(Enseignant e) throws AlreadyExistsException {
+	public Enseignant add(Enseignant e) throws AlreadyExistsException, WrongMailException {
 		String pattern = "^\\S+@helha\\.be$";
 		
 		if (e==null) {
 			return null;
 		}
 		
-//		if(!e.getMail().matches(pattern))
-//			return null;
+		if(!e.getMail().matches(pattern))
+			throw new WrongMailException("L'adresse e-mail doit respecter le format : ******@helha.be");
 		
 		
 		if (find(e) != null) {
