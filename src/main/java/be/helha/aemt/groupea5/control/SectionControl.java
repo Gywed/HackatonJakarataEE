@@ -20,9 +20,8 @@ public class SectionControl implements Serializable
 	private SectionEJB beanGestion;
 	
 	private Departement departement;
-	private String nom;
-	private List<Mission> missions;
-	private Section selectedSection = null;
+
+	private Section selectedSection = new Section(new Departement(), "", null);
 	private Section newSection = new Section(new Departement(), "", null);
 	
 	public List<Section> doFindAll() 
@@ -32,8 +31,8 @@ public class SectionControl implements Serializable
 	
 	public Section doAdd() 
 	{
-		Section e = new Section(this.departement, this.nom, this.missions);
-		return beanGestion.add(e);
+	
+		return beanGestion.add(newSection);
 	}
 	
 	public void goToUpdateSection(Section section) 
@@ -57,22 +56,6 @@ public class SectionControl implements Serializable
 		this.departement = departement;
 	}
 
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public List<Mission> getMissions() {
-		return missions;
-	}
-
-	public void setMissions(List<Mission> missions) 
-	{
-		this.missions = missions;
-	}
 
 	public Section getSelectedSection() {
 		return selectedSection;

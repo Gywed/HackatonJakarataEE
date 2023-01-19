@@ -9,10 +9,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "findSectionByName", query ="select s from Section s where s.nom = ?1")
+})
 public class Section implements Serializable{
 
 	@Id
