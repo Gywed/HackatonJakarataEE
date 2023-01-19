@@ -9,10 +9,12 @@ import be.helha.aemt.groupea5.entities.Mission;
 import be.helha.aemt.groupea5.entities.Section;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.bean.ManagedBean;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class DepartementControl implements Serializable
 {
 	@EJB
