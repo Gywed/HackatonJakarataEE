@@ -78,12 +78,13 @@ anneeAcademiques = new ArrayList<>();
 		return "listMission?faces-redirect=true";
 	}
 
-	public String doGoToUpdate(Mission mission) {
+	public void doGetInformation(Mission mission) {
+		System.out.println("ALEEEEEED");
 		setMission(mission);
 		setAnneeAcademique(anneeAcademique);
 		setIntitule(intitule);
 		setHeures(heures);
-		return "updateMission.xhtml?faces-redirect=true";
+		
 	}
 	
 	public String doUpdate() {

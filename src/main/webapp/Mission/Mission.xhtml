@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:f = "http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+<h:head>
+<title>Mission</title>
+<meta http-equiv="
+	Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+	
+	<ui:composition template="../menubar.xhtml">
+    <ui:define name="content">
+        <h1>Liste des Missions</h1>
+	
+	<h:form class="form">
+	<p:commandButton type="button" value="Ajouter" icon="pi pi-plus" onclick="PF('ajouter').show()"></p:commandButton>
+	<p:dataTable value = "#{missionControl.doFindAll()}" var = "mission">
+   
+	   <p:column>    				
+	      <f:facet name = "header">Année Académique</f:facet>    				
+	      #{mission.anneeAcademique}
+	   </p:column>
+	   
+	   <p:column>
+	      <f:facet name = "header">Intitulé</f:facet>
+	       #{mission.intitule}
+	   </p:column>
+	   
+	   <p:column>
+	      <f:facet name = "header">Heures</f:facet>
+	      #{mission.heures}
+	   </p:column>
+	   
+	   <p:column>		
+			<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" 
+			action="#{missionControl.doGetInformation(mission)}" update="modifier" 
+			oncomplete="PF('modifier').show()"/>
+			
+	      <span></span>
+	      
+	   
+	      	<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" 
+	      	action="#{missionControl.doDelete(mission)}" >
+	      		<p:confirm header="Confirmation" message="Voulez-vous supprimer cette mission ?" icon="pi pi-info-circle"/>
+	      	</p:commandButton>
+	      	
+	      	
+	      	
+	        
+	   </p:column>
+	   
+	</p:dataTable>
+	</h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="Non" styleClass="ui-confirmdialog-no ui-button-flat" ajax="false" />
+            <p:commandButton value="Oui" styleClass="ui-confirmdialog-yes" ajax="false"/>
+        </p:confirmDialog>
+        
+        
+		
+			<p:dialog id="ajouter" widgetVar="ajouter" header="Ajouter une mission">
+				<h:form>
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel>Annee Academique</p:outputLabel>
+						<p:selectOneMenu id="annee" value="#{missionControl.anneeAcademique}">
+			        		<f:selectItems value="#{missionControl.anneeAcademiques}"/>
+			    		</p:selectOneMenu>
+			    		
+			    		
+						
+						<span>Intitulé : </span>
+						<p:inputText id="intitule" value="#{missionControl.intitule}"/>
+						
+						<span>Heures : </span>
+						<p:inputText type="number" id="heures" value="#{missionControl.heures}"/>
+						<br/>
+						<p:commandButton value="Ajouter" action="#{missionControl.doAdd}" ajax="false" ></p:commandButton>
+					</h:panelGrid>
+					
+					
+					
+				</h:form>
+			</p:dialog>
+		
+			<p:dialog id="modifier" widgetVar="modifier" header="Modifier une mission">
+				<h:form>
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel>Annee Academique</p:outputLabel>
+					<p:selectOneMenu id="annee" value="#{missionControl.anneeAcademique}">
+		        		<f:selectItems value="#{missionControl.anneeAcademiques}"/>
+		    		</p:selectOneMenu>
+		    		
+		    		
+					
+					<p:outputLabel>Intitulé : </p:outputLabel>
+					<p:inputText id="intitule" value="#{missionControl.mission.intitule}"/>
+					
+					<p:outputLabel>Heures : </p:outputLabel>
+					<p:inputText id="heures" value="#{missionControl.mission.heures}"/>
+					<br/>
+					<p:commandButton value="Modifier" action="#{missionControl.doUpdate}" ajax="false" ></p:commandButton>
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+		
+    </ui:define>
+</ui:composition>
+	
+</h:body>
+</html>
