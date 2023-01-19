@@ -20,7 +20,7 @@ public class SectionControl implements Serializable
 	@EJB
 	private SectionEJB beanGestion;
 	
-	/*private Departement departement;*/
+	private Departement departement;
 
 	private Section selectedSection = new Section(new Departement(), "", null);
 	private Section newSection = new Section(new Departement(), "", null);
@@ -52,7 +52,7 @@ public class SectionControl implements Serializable
 		this.beanGestion = beanGestion;
 	}
 
-	/*public Departement getDepartement() 
+	public Departement getDepartement() 
 	{
 		return departement;
 	}
@@ -60,8 +60,7 @@ public class SectionControl implements Serializable
 	public void setDepartement(Departement departement) 
 	{
 		this.departement = departement;
-	}*/
-
+	}
 
 	public Section getSelectedSection() 
 	{
@@ -92,6 +91,8 @@ public class SectionControl implements Serializable
 	{
 		this.disableSelectItem = disableSelectItem;
 	}
+	
+	
 	
 
 	
