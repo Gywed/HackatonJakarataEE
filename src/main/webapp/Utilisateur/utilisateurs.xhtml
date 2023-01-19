@@ -16,32 +16,31 @@
 		
 	<h:form class="form">
 		<p:commandButton type="button" value="Ajouter" icon="pi pi-plus" onclick="PF('informations').show()"></p:commandButton>
-		<p:dataTable value = "#{utilisateurControl.doFindAll()}" var = "e">
+		<p:dataTable value = "#{utilisateurControl.doFindAll()}" var = "e" widgetVar="customersTable">
 		   
-		   <p:column>
-		      <f:facet name = "header">Nom</f:facet>
-		      #{e.nom}
-		   </p:column>
+		   <p:column field="nom" headerText="Nom" sortable="false" filterMatchMode="contains"/>
+		   <p:column field="prenom" headerText="Prénom" sortable="false" filterMatchMode="contains"/>
+		   <p:column field="email" headerText="E-mail" sortable="false" filterMatchMode="contains"/>
+
+		   <p:column field="departement" headerText="Département" filterMatchMode="exact"
+                sortBy="#{e.departement.nom}" sortable="false" style="width : 25%">
+                 <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('customersTable').filter()" styleClass="ui-custom-filter" style="overflow-x:hidden">
+                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{departementControl.doFindAll()}"/>
+                    </p:selectOneMenu>
+                </f:facet>
+      		</p:column>
 		   
-		   <p:column>
-		      <f:facet name = "header">Prenom</f:facet>
-		      #{e.prenom}
-		   </p:column>
-		   
-		   <p:column>
-		      <f:facet name = "header">E-mail</f:facet>
-		      #{e.email}
-		   </p:column>
-		   
-		   <p:column>
-		      <f:facet name = "header">Departement</f:facet>
-		      #{e.departement}
-		   </p:column>
-		   
-		   <p:column>
-		      <f:facet name = "header">Role</f:facet>
-		      #{e.role}
-		   </p:column>
+		   <p:column field="role" headerText="Role" filterMatchMode="exact"
+                sortBy="#{e.role}" sortable="false">
+                 <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('customersTable').filter()" styleClass="ui-custom-filter">
+                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItems value="#{utilisateurControl.roles}" />
+                    </p:selectOneMenu>
+                </f:facet>
+      		</p:column>
 		   
 		   <p:column>
 		   		<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" 
