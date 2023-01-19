@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 
 import be.helha.aemt.groupea5.ejb.SectionEJB;
@@ -13,16 +14,17 @@ import be.helha.aemt.groupea5.entities.Section;
 
 
 @Named
-@SessionScoped
+@ViewScoped
 public class SectionControl implements Serializable
 {
 	@EJB
 	private SectionEJB beanGestion;
 	
-	private Departement departement;
+	/*private Departement departement;*/
 
 	private Section selectedSection = new Section(new Departement(), "", null);
 	private Section newSection = new Section(new Departement(), "", null);
+	private boolean disableSelectItem;
 	
 	public List<Section> doFindAll() 
 	{
@@ -37,6 +39,7 @@ public class SectionControl implements Serializable
 	
 	public void goToUpdateSection(Section section) 
 	{
+		selectedSection =null;
 	    selectedSection = section;
 	}
 
@@ -44,26 +47,29 @@ public class SectionControl implements Serializable
 		return beanGestion;
 	}
 
-	public void setBeanGestion(SectionEJB beanGestion) {
+	public void setBeanGestion(SectionEJB beanGestion) 
+	{
 		this.beanGestion = beanGestion;
 	}
 
-	public Departement getDepartement() {
+	/*public Departement getDepartement() 
+	{
 		return departement;
 	}
 
-	public void setDepartement(Departement departement) {
+	public void setDepartement(Departement departement) 
+	{
 		this.departement = departement;
-	}
+	}*/
 
 
-	public Section getSelectedSection() {
+	public Section getSelectedSection() 
+	{
 		return selectedSection;
 	}
 
 	public void setSelectedSection(Section selectedSection) 
 	{
-		this.selectedSection =null;
 		this.selectedSection = selectedSection;
 	}
 
@@ -76,14 +82,17 @@ public class SectionControl implements Serializable
 	{
 		this.newSection = newSection;
 	}
+
+	public boolean isDisableSelectItem() 
+	{
+		return disableSelectItem;
+	}
+
+	public void setDisableSelectItem(boolean disableSelectItem) 
+	{
+		this.disableSelectItem = disableSelectItem;
+	}
 	
 
-	
-	
-	
-	
-	
-
-	
 	
 }

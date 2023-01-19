@@ -1,5 +1,6 @@
 package be.helha.aemt.groupea5.entities;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ import jakarta.persistence.OneToMany;
 @NamedQueries({
 	@NamedQuery(name = "findDepartementByName", query ="select d from Departement d where d.nom = ?1")
 })
-public class Departement 
+public class Departement implements Serializable
 {
 
 	@Id
@@ -101,6 +102,10 @@ public class Departement
 		return Objects.equals(id, other.id) && Objects.equals(missions, other.missions)
 				&& Objects.equals(nom, other.nom) && Objects.equals(sections, other.sections);
 	}
-	
-	
+
+
+	@Override
+	public String toString() {
+		return nom;
+	}
 }

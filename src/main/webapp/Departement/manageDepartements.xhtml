@@ -25,11 +25,11 @@
 		   </p:column>
 		    <p:column>
 			    <f:facet name="header">Sections</f:facet>
-			    <p:commandButton value="Sections" action="#{departementControl.actualiseDepartement()}" oncomplete="PF('sectionsDialog').show()" />
+			    <p:commandButton value="Sections" action="#{departementControl.actualiseDepartement(departement)}" oncomplete="PF('sectionsDialog').show()" />
 			</p:column>
 		    <p:column>
 			    <f:facet name="header">Missions</f:facet>
-			    <p:commandButton value="Missions" action="#{departementControl.actualiseDepartement()}" oncomplete="PF('missionsDialog').show()" />
+			    <p:commandButton value="Missions" action="#{departementControl.actualiseDepartement(departement)}" oncomplete="PF('missionsDialog').show()" />
 			</p:column>
 		</p:dataTable>
 		
@@ -40,7 +40,7 @@
 					<h:outputLabel for="nom" value="Nom :" />
 					<p:inputText id="nom" value="#{departementControl.newDepartement.nom}" />
 				</h:panelGrid>
-				<p:commandButton value="Ajouter" action="#{departementControl.doAdd()}"  oncomplete="PF('createDialog').hide()"  />
+				<p:commandButton value="Confirmer l'ajout" action="#{departementControl.doAdd()}"  oncomplete="PF('createDialog').hide()"  />
 			</h:form>
 		</p:dialog>
 		
