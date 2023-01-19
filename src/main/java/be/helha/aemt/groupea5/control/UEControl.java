@@ -48,7 +48,8 @@ public class UEControl implements Serializable{
 		return bean.findAll();
 	}
 	
-	public void doAdd() {
+	public void doAdd() 
+	{
 		System.out.println("ALED");
 		System.out.println(anneeAcademique);
 		System.out.println(departement);
@@ -58,7 +59,7 @@ public class UEControl implements Serializable{
 		System.out.println(intitule);
 		System.out.println(credit);
 		System.out.println(aas);
-		bean.add(new UE( new AnneeAcademique(anneeAcademique), new Departement(departement,null,null), new Section(null ,section,null), bloc, code, intitule, credit, aas));
+		bean.add(new UE( new AnneeAcademique(anneeAcademique), new Departement(departement,null,null), new Section(null ,section,null), bloc, code, intitule, credit, null));
 //		bean.add(new UE(null, null, null, 0, null, null, 0, null));
 		clearData();
 		

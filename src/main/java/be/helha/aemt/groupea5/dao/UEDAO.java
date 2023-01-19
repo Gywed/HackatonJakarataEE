@@ -47,20 +47,65 @@ public class UEDAO {
 		return result.isEmpty() ? null : result.get(0);
 	} 
 	
-	public UE add(UE ue) {
+	public UE add(UE ue) 
+	{
+		/*System.out.println("JE COMMENCE LE ADD");
+		
 		if (ue==null) return null;
 		if (find(ue) != null) return null;
 		if (ue == find(ue)) return null;
+		
+		System.out.println("TOUT LES IF NULL SONT PASSES");
+		
 		AnneeAcademique annee = anneeDAO.find(ue.getAnneeAcademique());
 		Departement dep = depDao.find(ue.getDepartement());
 		Section sec = secDAO.find(ue.getSection());
 		
+		
+		System.out.println("TOUS LES FINDS SONT PASSES");
+		
+		
 		if(annee!=null)ue.setAnneeAcademique(annee);
 		if(dep!=null)ue.setDepartement(dep);
 		if(sec!=null)ue.setSection(sec);
+		
+		System.out.println("TOUT LES IF NULL V2 SONT PASSES");
 
 		
+		System.out.println("JE TENTE L'AJOUT");
 		
+		return em.merge(ue);*/
+		
+		if (ue==null) 
+		{
+			return null;
+		}
+		
+		// Vérification que l'UE n'existe pas déjà en utilisant son code
+		if (find(ue) != null) 
+		{
+			return null; 
+		}
+		
+		AnneeAcademique annee = anneeDAO.find(ue.getAnneeAcademique());
+		Departement dep = depDao.find(ue.getDepartement());
+		Section sec = secDAO.find(ue.getSection());
+		
+		if(annee!=null) 
+		{
+			ue.setAnneeAcademique(annee);
+		}
+		
+		if(dep!=null) 
+		{
+			ue.setDepartement(dep);
+		}
+		
+		if(sec!=null) 
+		{
+			ue.setSection(sec);
+		}
+	
 		return em.merge(ue);
 	}
 	
