@@ -40,12 +40,13 @@
 	   </p:column>
 	   
 	   <p:column>
-	   		<p:commandButton type="button" icon="pi pi-pencil" styleClass="rounded-button ui-button-warning"/>
+	   		<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" ajax="false" onclick="PF('modification').show();"/>
 	   		<span>  </span>
 	   		<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" ajax="false" action="#{enseignantControl.doDelete(e)}"/>
 	   </p:column>
-		   
 	</p:dataTable>
+	
+	
 </h:form>
 
 <h:form>
@@ -109,6 +110,30 @@
    		<p:commandButton ajax="false" value="Confirmer" onclick="PF('aas').hide()" actionListener="#{enseignantControl.doAdd()}" update="growl"></p:commandButton>
 </p:dialog>
 </h:form>
+
+<p:dialog id="modification" widgetVar="modification" header="Entrer les informations" modal="true">
+<h:form>
+    <p:panel>
+        <h:panelGrid columns="2" cellpadding="5">
+        	
+            <h:outputLabel for="name" value="Nom:" />
+            <p:inputText id="name" value="#{enseignantControl.enseignant.nom}" required="true" label="Nom" />
+            
+            <h:outputLabel for="surname" value="Prénom:" />
+            <p:inputText id="surname" value="#{enseignantControl.enseignant.prenom}" required="true" label="Prenom" />
+            
+            <h:outputLabel for="mail" value="E-Mail:" />
+            <p:inputText id="mail" value="#{enseignantControl.enseignant.mail}" required="true" label="E-Mail">
+            	<!-- <f:validateRegex pattern="^\S+@helha\.be$"/>  -->
+            </p:inputText>
+            
+            <h:outputLabel for="remarque" value="Remarque:" />
+            <p:inputText id="remarque" value="#{enseignantControl.enseignant.remarque}" required="true" label="Remarque:" />
+        </h:panelGrid>
+    </p:panel>
+    <p:commandButton value="Confirmer" onclick=" PF('modification').hide()"></p:commandButton>
+   </h:form>
+</p:dialog>
 </ui:define>
 </ui:composition>
 </h:body>
