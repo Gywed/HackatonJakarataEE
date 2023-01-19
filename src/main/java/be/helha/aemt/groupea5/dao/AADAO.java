@@ -3,6 +3,8 @@ package be.helha.aemt.groupea5.dao;
 import java.util.List;
 
 import be.helha.aemt.groupea5.entities.AA;
+import be.helha.aemt.groupea5.entities.AnneeAcademique;
+import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -15,6 +17,9 @@ public class AADAO {
 
 	@PersistenceContext(unitName = "groupeA5-JTA")
 	private EntityManager em;
+	
+	@EJB
+	private AnneeAcademiqueDAO anneeDAO;
 	
 	public AADAO() {
 		// TODO Auto-generated constructor stub
@@ -48,6 +53,12 @@ public class AADAO {
 	public AA add(AA e) {
 		if (e == null) return null;
 		if (e == find(e)) return null;
+		
+		AnneeAcademique dbAnnee = anneeDAO.find(e.getAnneeAcademique());
+		if (dbAnnee != null)
+			e.setAnneeAcademique(dbAnnee);
+		
+		
 		return em.merge(e);
 	}
 	
