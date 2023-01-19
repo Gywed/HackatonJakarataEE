@@ -102,6 +102,10 @@ public class Departement implements Serializable
 		return Objects.equals(id, other.id) && Objects.equals(missions, other.missions)
 				&& Objects.equals(nom, other.nom) && Objects.equals(sections, other.sections);
 	}
-	
-	
+
+
+	@Override
+	public String toString() {
+		return nom;
+	}
 }
