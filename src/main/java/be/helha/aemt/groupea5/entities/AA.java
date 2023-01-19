@@ -160,6 +160,11 @@ public class AA implements Serializable{
 		return Objects.equals(code, other.code);
 	}
 
+	@Override
+	public String toString() {
+		return "AA [id="+id+", code=" + code + ", intitule=" + intitule + "]";
+	}
+
 	
 	
 }

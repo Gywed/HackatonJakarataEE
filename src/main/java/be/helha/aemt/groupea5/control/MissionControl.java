@@ -34,29 +34,7 @@ public class MissionControl implements Serializable{
 	
 	
 	
-	public MissionControl() {
-		// TODO Auto-generated constructor stub
-		anneeAcademiques = new ArrayList<>();
-		
-		y = new SimpleDateFormat("yyyy");
-		m = new SimpleDateFormat("MM");
-		
-		Date date = new Date();
-		
-		annee = Integer.parseInt(y.format(date));
-		mois = Integer.parseInt(m.format(date));
-		if (mois < 03) {
-			anneeAcademiques.add(annee-1 + " - " + annee);
-			int anneePro = annee + 1;
-			anneeAcademiques.add(annee + " - " + anneePro);
-		} else {
-			int anneePro = annee + 1;
-			anneeAcademiques.add(annee + " - " + anneePro);
-			
-			int anneeEncorePro = anneePro + 1;
-			anneeAcademiques.add(anneePro + " - " + anneeEncorePro);
-		}
-	}
+	
 	
 	
 	

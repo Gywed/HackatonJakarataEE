@@ -49,8 +49,17 @@ public class UEControl implements Serializable{
 	}
 	
 	public void doAdd() {
-		Departement departe = new Departement(departement,null,null);
-		bean.add(new UE( new AnneeAcademique(anneeAcademique), departe, new Section(departe ,section,null), bloc, code, intitule, credit, aas));
+		System.out.println("ALED");
+		System.out.println(anneeAcademique);
+		System.out.println(departement);
+		System.out.println(section);
+		System.out.println(bloc);
+		System.out.println(code);
+		System.out.println(intitule);
+		System.out.println(credit);
+		System.out.println(aas);
+		bean.add(new UE( new AnneeAcademique(anneeAcademique), new Departement(departement,null,null), new Section(null ,section,null), bloc, code, intitule, credit, aas));
+//		bean.add(new UE(null, null, null, 0, null, null, 0, null));
 		clearData();
 		
 	}

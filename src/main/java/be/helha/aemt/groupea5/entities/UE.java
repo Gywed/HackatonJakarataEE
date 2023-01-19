@@ -167,6 +167,13 @@ public class UE implements Serializable{
 				&& Objects.equals(id, other.id) && Objects.equals(intitule, other.intitule)
 				&& Objects.equals(section, other.section);
 	}
+
+	@Override
+	public String toString() {
+		return "UE [id=" + id + ", anneeAcademique=" + anneeAcademique + ", departement=" + departement + ", section="
+				+ section + ", bloc=" + bloc + ", code=" + code + ", intitule=" + intitule + ", credit=" + credit
+				+ ", aas=" + aas + "]";
+	}
 	
 	
 }

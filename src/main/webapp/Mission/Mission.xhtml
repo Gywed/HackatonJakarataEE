@@ -25,7 +25,7 @@
                  <f:facet name="filter">
                     <p:selectOneMenu onchange="PF('customersTable').filter()" styleClass="ui-custom-filter">
                         <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
-                        <f:selectItems value="#{missionControl.anneeAcademiques}" />
+                        <f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
                     </p:selectOneMenu>
                 </f:facet>
       </p:column>
@@ -60,7 +60,7 @@
 					<h:panelGrid columns="2" cellpadding="5">
 						<p:outputLabel>Annee Academique</p:outputLabel>
 						<p:selectOneMenu id="annee" value="#{missionControl.anneeAcademique}">
-			        		<f:selectItems value="#{missionControl.anneeAcademiques}"/>
+			        		<f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
 			    		</p:selectOneMenu>
 			    		
 			    		

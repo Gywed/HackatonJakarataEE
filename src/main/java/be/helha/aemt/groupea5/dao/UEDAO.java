@@ -2,8 +2,12 @@ package be.helha.aemt.groupea5.dao;
 
 import java.util.List;
 
+import be.helha.aemt.groupea5.entities.AnneeAcademique;
+import be.helha.aemt.groupea5.entities.Departement;
 import be.helha.aemt.groupea5.entities.Enseignant;
+import be.helha.aemt.groupea5.entities.Section;
 import be.helha.aemt.groupea5.entities.UE;
+import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -16,7 +20,16 @@ public class UEDAO {
 	
 	@PersistenceContext(unitName = "groupeA5-JTA")
 	private EntityManager em;
-
+	
+	@EJB
+	private DepartementDAO depDao;
+	
+	@EJB
+	private SectionDAO secDAO;
+	
+	@EJB
+	private AnneeAcademiqueDAO anneeDAO;
+	
 	public UEDAO() {
 		super();
 	}
@@ -35,13 +48,19 @@ public class UEDAO {
 	} 
 	
 	public UE add(UE ue) {
-		if (ue==null) {
-			return null;
-		}
+		if (ue==null) return null;
+		if (find(ue) != null) return null;
+		if (ue == find(ue)) return null;
+		AnneeAcademique annee = anneeDAO.find(ue.getAnneeAcademique());
+		Departement dep = depDao.find(ue.getDepartement());
+		Section sec = secDAO.find(ue.getSection());
 		
-		if (find(ue) != null) {
-			return null;
-		}
+		if(annee!=null)ue.setAnneeAcademique(annee);
+		if(dep!=null)ue.setDepartement(dep);
+		if(sec!=null)ue.setSection(sec);
+
+		
+		
 		return em.merge(ue);
 	}
 	

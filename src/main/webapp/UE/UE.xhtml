@@ -21,14 +21,14 @@
 	        	<p:dataTable value = "#{uEControl.doFindAll()}" var = "ue" widgetVar="customersTable">
 	        	
 	        		<p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
-				                sortBy="#{ue.anneeAcademique.anneeAcademique}" sortable="false">
+		                sortBy="#{mission.anneeAcademique.anneeAcademique}" sortable="false">
 		                 <f:facet name="filter">
 		                    <p:selectOneMenu onchange="PF('customersTable').filter()" styleClass="ui-custom-filter">
 		                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
-		                        <f:selectItems value="#{uEcontrol.anneeAcademiques}" />
+		                        <f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
 		                    </p:selectOneMenu>
 		                </f:facet>
-				    </p:column>
+      				</p:column>
 	        		<p:column field="departement" headerText="Département" sortable="false"/>
 	        		<p:column field="section" headerText="Section" sortable="false"/>
 	        		<p:column field="bloc" headerText="Bloc" sortable="false"/>
@@ -44,10 +44,10 @@
 				<h:form>
 					<h:panelGrid columns="2" cellpadding="5">
 						<p:outputLabel>Année Académique : </p:outputLabel>
-						<p:selectOneMenu id="annee" value="#{missionControl.anneeAcademique}">
-			        		<f:selectItems value="#{missionControl.anneeAcademiques}"/>
+						<p:selectOneMenu id="annee" value="#{uEControl.anneeAcademique}">
+			        		<f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
 			    		</p:selectOneMenu>
-			    		
+		
 			    		<p:outputLabel>Département : </p:outputLabel>
 						<p:selectOneMenu id="departement" value="#{uEControl.departement}">
 			        		<f:selectItems value="#{departementControl.doFindAll()}"/>
@@ -59,7 +59,7 @@
 			    		</p:selectOneMenu>
 						
 						<p:outputLabel>Bloc : </p:outputLabel>
-						<p:inputText id="bloc" value="#{uEControl.bloc}"/>
+						<p:inputText id="bloc" type="number" value="#{uEControl.bloc}"/>
 						
 						<p:outputLabel>Code : </p:outputLabel>
 						<p:inputText id="code" value="#{uEControl.code}"/>
@@ -68,7 +68,7 @@
 						<p:inputText id="intitule" value="#{uEControl.intitule}"/>
 						
 						<p:outputLabel>Crédits : </p:outputLabel>
-						<p:inputText id="credit" value="#{uEControl.credit}"/>
+						<p:inputText id="credit" type="number" value="#{uEControl.credit}"/>
 						
 						<p:outputLabel>AA</p:outputLabel>
 			    		<p:selectManyMenu id="advanced" value="#{uEControl.aas}"
@@ -86,7 +86,9 @@
 				            
 				        </p:selectManyMenu>
 						<br/>
-						<p:commandButton value="Ajouter" action="#{missionControl.doAdd}" ajax="false" ></p:commandButton>
+						<p:commandButton value="Ajouter" 
+						action="#{uEControl.doAdd}" ajax="false" >
+						</p:commandButton>
 					</h:panelGrid>
 					
 					
