@@ -87,9 +87,11 @@ public class AAControl implements Serializable {
 		return beanGestion.findAll();
 	}
 			
-	public void doAddAa() {
+	public void doAddAa() 
+	{
 		System.out.println("test");
-		beanGestion.add(new AA(new AnneeAcademique(anneeAcademique),code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
+		//NE PAS OUBLIER DE GERER L'UE ( pour l'instant à null)
+		beanGestion.add(new AA(annee, new AnneeAcademique(anneeAcademique),null, code,intitule,credit,heure,heureQ1,heureQ2,nombreGroupe,nombreEtudiant,fraction));
 		clearData();
 	}
 	
