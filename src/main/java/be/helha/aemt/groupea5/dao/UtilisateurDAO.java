@@ -1,18 +1,17 @@
 package be.helha.aemt.groupea5.dao;
 
 import java.util.List;
-
-import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.Departement;
 import be.helha.aemt.groupea5.entities.Utilisateur;
 import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
+import jakarta.ejb.Stateful;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
-@Stateless
+@Stateful
 @LocalBean
 public class UtilisateurDAO {
 	@PersistenceContext(unitName = "groupeA5-JTA")
