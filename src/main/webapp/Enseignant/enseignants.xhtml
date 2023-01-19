@@ -45,6 +45,7 @@
 </h:form>
 
 <h:form>
+<p:growl id="growl" showDetail="true" />
 <p:dialog id="informations" widgetVar="informations" header="Entrer les informations" modal="true">
     <p:panel>
     	<p:outputLabel>Annee Academique pour les missionss et les AAs : </p:outputLabel>
@@ -101,7 +102,7 @@
             </p:column>
             
         </p:selectManyMenu>
-   		<p:commandButton ajax="false" value="Confirmer" onclick="PF('aas').hide()" actionListener="#{enseignantControl.doAdd()}"></p:commandButton>
+   		<p:commandButton ajax="false" value="Confirmer" onclick="PF('aas').hide()" actionListener="#{enseignantControl.doAdd()}" update="growl"></p:commandButton>
 </p:dialog>
 </h:form>
 	
