@@ -21,22 +21,41 @@
 			        <p:menuitem value="Ajouter" outcome="/AA/addAA.xhtml"/>
 		        </p:submenu>
 			   	
-			   	<p:menuitem value="UE"/>
+			   	<p:menuitem value="UE" outcome="/UE/UE.xhtml"/>
 				<p:menuitem value="Attribution"/>
 			   	<p:menuitem value="Departement"/>
 			   	<p:menuitem value="Section"/>
-			   	<p:menuitem value="Enseignant"/>
 			   	<p:menuitem value="Utilisateur" outcome="/Utilisateur/utilisateurs.xhtml"/>
+			   	<p:menuitem value="Enseignant" outcome="/Enseignant/enseignants.xhtml"/>
 			   	
 		 
 		        <f:facet name="options">
-		
-		            <p:commandButton process="@this" value="Se Connecter" icon="pi pi-key" action="#{navigationControl.doLogin()}"/>
-		           
+		           <p:commandButton type="button" value="Se Connecter" icon="pi pi-key" onclick="PF('login').show()"></p:commandButton>
 		        </f:facet>
 		    </p:menubar>
 		</h:form>
-
+		
+		<p:dialog id="login" widgetVar="login" header="Se Connecter" modal="true" closeOnEscape="true" resizable="false">
+				<h:form method="POST" action="j_security_check">
+	        <h:panelGrid header="Se Connecter" columns="2" cellpadding="5">
+	            
+	               
+	                <p:outputLabel>Login : </p:outputLabel>
+					<p:inputText id="login" name="j_username"/>
+					
+	                <p:outputLabel>Password : </p:outputLabel>
+					<p:inputText type="password" id="password" name="j_password"/>
+					
+					<p:commandButton type="submit" value="Login">
+					</p:commandButton>
+	                <p:commandButton type="reset" value="Reset">
+					</p:commandButton>
+	               
+	            
+        	</h:panelGrid>
+        	</h:form>
+			</p:dialog>
+		
         <ui:insert name="content"/>
     </h:body>
 </html>

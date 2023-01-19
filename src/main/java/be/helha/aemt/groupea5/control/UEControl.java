@@ -23,9 +23,9 @@ public class UEControl implements Serializable{
 	private UEEJB bean;
 	
 	private UE ue;
-	private AnneeAcademique anneeAcademique;
-	private Departement departement;
-	private Section section;
+	private String anneeAcademique;
+	private String departement;
+	private String section;
 	private Integer bloc;
 	private String code;
 	private String intitule;
@@ -49,7 +49,8 @@ public class UEControl implements Serializable{
 	}
 	
 	public void doAdd() {
-		bean.add(new UE( anneeAcademique, departement, section, bloc, code, intitule, credit, aas));
+		Departement departe = new Departement(departement,null,null);
+		bean.add(new UE( new AnneeAcademique(anneeAcademique), departe, new Section(departe ,section,null), bloc, code, intitule, credit, aas));
 		clearData();
 		
 	}
@@ -66,27 +67,27 @@ public class UEControl implements Serializable{
 		this.ue = ue;
 	}
 
-	public AnneeAcademique getAnneeAcademique() {
+	public String getAnneeAcademique() {
 		return anneeAcademique;
 	}
 
-	public void setAnneeAcademique(AnneeAcademique anneeAcademique) {
+	public void setAnneeAcademique(String anneeAcademique) {
 		this.anneeAcademique = anneeAcademique;
 	}
 
-	public Departement getDepartement() {
+	public String getDepartement() {
 		return departement;
 	}
 
-	public void setDepartement(Departement departement) {
+	public void setDepartement(String departement) {
 		this.departement = departement;
 	}
 
-	public Section getSection() {
+	public String getSection() {
 		return section;
 	}
 
-	public void setSection(Section section) {
+	public void setSection(String section) {
 		this.section = section;
 	}
 

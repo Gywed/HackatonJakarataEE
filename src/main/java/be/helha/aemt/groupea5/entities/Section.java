@@ -101,6 +101,12 @@ public class Section implements Serializable{
 		return Objects.equals(departement, other.departement) && Objects.equals(id, other.id)
 				&& Objects.equals(missions, other.missions) && Objects.equals(nom, other.nom);
 	}
+
+
+	@Override
+	public String toString() {
+		return nom;
+	}
 	
 	
 }

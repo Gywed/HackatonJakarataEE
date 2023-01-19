@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:f = "http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+<h:head>
+<title>Start Page</title>
+<meta http-equiv="
+	Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+	
+	<ui:composition template="../menubar.xhtml">
+	    <ui:define name="content">
+	    	<h1>Liste des UE</h1>
+	    
+	        <h:form>
+	        	<p:commandButton type="button" value="Ajouter" icon="pi pi-plus" onclick="PF('ajouter').show()"></p:commandButton>
+	        	<p:dataTable value = "#{uEControl.doFindAll()}" var = "ue" widgetVar="customersTable">
+	        	
+	        		<p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
+				                sortBy="#{ue.anneeAcademique.anneeAcademique}" sortable="false">
+		                 <f:facet name="filter">
+		                    <p:selectOneMenu onchange="PF('customersTable').filter()" styleClass="ui-custom-filter">
+		                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+		                        <f:selectItems value="#{uEcontrol.anneeAcademiques}" />
+		                    </p:selectOneMenu>
+		                </f:facet>
+				    </p:column>
+	        		<p:column field="departement" headerText="Département" sortable="false"/>
+	        		<p:column field="section" headerText="Section" sortable="false"/>
+	        		<p:column field="bloc" headerText="Bloc" sortable="false"/>
+	        		<p:column field="code" headerText="Code UE" sortable="false"/>
+	        		<p:column field="intitule" headerText="Intitulé" sortable="false"/>
+	        		<p:column field="credit" headerText="Crédit" sortable="false" filterable="false"/>
+	        		
+	        	</p:dataTable>	
+	        </h:form>
+	        
+	        
+	        <p:dialog id="ajouter" widgetVar="ajouter" header="Ajouter une UE" modal="true" closeOnEscape="true" resizable="false">
+				<h:form>
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel>Année Académique : </p:outputLabel>
+						<p:selectOneMenu id="annee" value="#{missionControl.anneeAcademique}">
+			        		<f:selectItems value="#{missionControl.anneeAcademiques}"/>
+			    		</p:selectOneMenu>
+			    		
+			    		<p:outputLabel>Département : </p:outputLabel>
+						<p:selectOneMenu id="departement" value="#{uEControl.departement}">
+			        		<f:selectItems value="#{departementControl.doFindAll()}"/>
+			    		</p:selectOneMenu>
+			    		
+			    		<p:outputLabel>Section : </p:outputLabel>
+						<p:selectOneMenu id="section" value="#{uEControl.section}">
+			        		<f:selectItems value="#{sectionControl.doFindAll()}"/>
+			    		</p:selectOneMenu>
+						
+						<p:outputLabel>Bloc : </p:outputLabel>
+						<p:inputText id="bloc" value="#{uEControl.bloc}"/>
+						
+						<p:outputLabel>Code : </p:outputLabel>
+						<p:inputText id="code" value="#{uEControl.code}"/>
+						
+						<p:outputLabel>Intitulé : </p:outputLabel>
+						<p:inputText id="intitule" value="#{uEControl.intitule}"/>
+						
+						<p:outputLabel>Crédits : </p:outputLabel>
+						<p:inputText id="credit" value="#{uEControl.credit}"/>
+						
+						<p:outputLabel>AA</p:outputLabel>
+			    		<p:selectManyMenu id="advanced" value="#{uEControl.aas}"
+                            var="a" filter="true" filterMatchMode="contains"
+                            scrollHeight="200" showCheckbox="true" styleClass="manymenu-advanced">
+				            <f:selectItems value="#{aAControl.doFindAll()}" var="aa" itemLabel="#{aa.intitule}"
+				                            itemValue="#{aa}"/>
+				
+				            <p:column>
+				                <h:outputText value="#{a.code}"/>
+				            </p:column>
+				            <p:column>
+				                <h:outputText value="#{a.intitule} "/>
+				            </p:column>
+				            
+				        </p:selectManyMenu>
+						<br/>
+						<p:commandButton value="Ajouter" action="#{missionControl.doAdd}" ajax="false" ></p:commandButton>
+					</h:panelGrid>
+					
+					
+					
+				</h:form>
+			</p:dialog>
+			
+			
+			
+	    </ui:define>
+	</ui:composition>
+	annee bloc code 
+</h:body>
+</html>
