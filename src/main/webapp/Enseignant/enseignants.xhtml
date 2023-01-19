@@ -85,7 +85,7 @@
 </p:dialog>
 
 <p:dialog id="aas" widgetVar="aas" header="Sélectionner les AA de l'enseignant">
-		<p:selectManyMenu value="#{enseignantControl.aas}"
+		<!-- <p:selectManyMenu value="#{enseignantControl.aasString}"
                             var="aa" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced" modal="true">
             <f:selectItems value="#{aAControl.doFindAll()}" var="aa" itemLabel="#{aa.intitule}"
                             itemValue="#{aA}"/>
@@ -94,8 +94,8 @@
                 <h:outputText value="#{aa.code} : #{aa.intitule}"/>
             </p:column>
             
-        </p:selectManyMenu>
-   		<p:commandButton ajax="false" value="Confirmer" onclick="PF('aas').hide()" action="#{enseignantControl.doAdd}"></p:commandButton>
+        </p:selectManyMenu>-->
+   		<p:commandButton ajax="false" value="Confirmer" onclick="PF('aas').hide()" actionListener="#{enseignantControl.doAdd()}"></p:commandButton>
 </p:dialog>
 </h:form>
 	

@@ -31,6 +31,8 @@ public class EnseignantControl implements Serializable {
 	private AnneeAcademique anneeAcademique;
 	private List<AA> aas = new ArrayList<>();
 	private List<Mission> missions = new ArrayList<>();
+	private List<String> missionsString = new ArrayList<>();
+	private List<String> aasString = new ArrayList<>();
 	
 	public EnseignantControl() {
 		super();
@@ -52,8 +54,10 @@ public class EnseignantControl implements Serializable {
 		return bean.findAll();
 	}
 	public void doAdd() {
-		//bean.add(enseignant);
-		bean.add(new Enseignant(nom, prenom, mail, remarque, null));
+		Attribution attr = new Attribution(annee, aas, missions);
+		List<Attribution> attrs = new ArrayList<>();
+		attrs.add(attr);
+		bean.add(new Enseignant(nom, prenom, mail, remarque, attrs));
 	}
 	public void doInforamtions() {
 		enseignant.setMail(mail);
@@ -124,6 +128,22 @@ public class EnseignantControl implements Serializable {
 
 	public void setMissions(List<Mission> missions) {
 		this.missions = missions;
+	}
+
+	public List<String> getMissionsString() {
+		return missionsString;
+	}
+
+	public void setMissionsString(List<String> missionsString) {
+		this.missionsString = missionsString;
+	}
+
+	public List<String> getAasString() {
+		return aasString;
+	}
+
+	public void setAasString(List<String> aasString) {
+		this.aasString = aasString;
 	}
 	
 
