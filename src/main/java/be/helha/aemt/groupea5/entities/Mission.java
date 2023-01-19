@@ -90,9 +90,16 @@ public class Mission implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Mission other = (Mission) obj;
-		return anneeAcademique == other.anneeAcademique && heures == other.heures && Objects.equals(id, other.id)
-				&& Objects.equals(intitule, other.intitule);
+		return intitule.equals(other.getIntitule());
 	}
+
+
+	@Override
+	public String toString() {
+		return "Mission [id=" + id + ", anneeAcademique=" + anneeAcademique + ", intitule=" + intitule + ", heures="
+				+ heures + "]";
+	}
+	
 	
 	
 

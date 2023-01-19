@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.helha.aemt.groupea5.dao.AnneeAcademiqueDAO;
+import be.helha.aemt.groupea5.ejb.AnneeAcademiqueEJB;
 import be.helha.aemt.groupea5.ejb.EnseignantEJB;
 import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
@@ -35,8 +37,6 @@ public class EnseignantControl implements Serializable {
 	public EnseignantControl() {
 		super();
 		// TODO Auto-generated constructor stub
-//		anneeAcademique.setId(1);
-//		anneeAcademique.setAnneeAcademique("2022-2023");
 	}
 	
 	public void clearData() {
@@ -52,8 +52,11 @@ public class EnseignantControl implements Serializable {
 		return bean.findAll();
 	}
 	public void doAdd() {
-		//bean.add(enseignant);
-		bean.add(new Enseignant(nom, prenom, mail, remarque, null));
+		Attribution attr = new Attribution(anneeAcademique, aas, missions);
+		List<Attribution> attrs = new ArrayList<>();
+		attrs.add(attr);
+		bean.add(new Enseignant(nom, prenom, mail, remarque, attrs));
+		clearData();
 	}
 	public void doInforamtions() {
 		enseignant.setMail(mail);
@@ -125,6 +128,5 @@ public class EnseignantControl implements Serializable {
 	public void setMissions(List<Mission> missions) {
 		this.missions = missions;
 	}
-	
 
 }
