@@ -37,6 +37,13 @@ public class NavigationControl implements Serializable{
 		return "AA/listAA?faces-redirect=true";
 	}
 	
+	public String doListSections()
+	{
+		return "Section/manageSections?faces-redirect=true;";
+	}
+	
+
+	
 	
 
 	public String getNom() {

@@ -1,4 +1,4 @@
-package be.helha.aemt.groupea.services;
+package be.helha.aemt.groupea5.util;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,11 +19,9 @@ import jakarta.inject.Named;
 public class FilterView implements Serializable 
 {
 
-    
+    private List<Section> sections;
 
-    private List<Section> departements;
-
-    private List<Section> filteredDepartements;
+    private List<Section> filteredSections;
     
     private List<Section> filterBy;
     
@@ -72,11 +70,6 @@ public class FilterView implements Serializable
     }
 
 
-    /*public List<FilterMeta> getFilterBy() 
-    {
-        return filterBy;
-    }*/
-
     public boolean isGlobalFilterOnly() {
         return globalFilterOnly;
     }
@@ -86,23 +79,29 @@ public class FilterView implements Serializable
         this.globalFilterOnly = globalFilterOnly;
     }
 
-	public List<Section> getDepartements() {
-		return departements;
+
+	public List<Section> getSections() {
+		return sections;
 	}
 
-	public void setDepartements(List<Section> departements) 
-	{
-		this.departements = departements;
+	public void setSections(List<Section> sections) {
+		this.sections = sections;
 	}
 
-	public List<Section> getFilteredDepartements() 
-	{
-		return filteredDepartements;
+	public List<Section> getFilterBy() {
+		return filterBy;
 	}
 
-	public void setFilteredDepartements(List<Section> filteredDepartements) 
+	
+
+	public List<Section> getFilteredSections() 
 	{
-		this.filteredDepartements = filteredDepartements;
+		return filteredSections;
+	}
+
+	public void setFilteredSections(List<Section> filteredSections) 
+	{
+		this.filteredSections = filteredSections;
 	}
 
 	public void setFilterBy(List<Section> filterBy) 

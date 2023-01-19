@@ -1,7 +1,10 @@
 package be.helha.aemt.groupea5.dao;
 
 import java.util.List;
+
+import be.helha.aemt.groupea5.entities.Departement;
 import be.helha.aemt.groupea5.entities.Section;
+import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -14,6 +17,9 @@ public class SectionDAO
 {
 	@PersistenceContext(unitName = "groupeA5-JTA")
 	private EntityManager em;
+	
+	@EJB
+	private DepartementDAO depDao;
 
 	
 	public SectionDAO() 
@@ -45,6 +51,13 @@ public class SectionDAO
 		
 		if (e == find(e)) return null;
 		
+		Departement dep = depDao.find(e.getDepartement());
+		
+		if(dep!=null)
+		{
+			e.setDepartement(dep);
+		}
+		
 		return em.merge(e);
 	}
 	
@@ -53,6 +66,7 @@ public class SectionDAO
 		if (e == null) return null;
 		
 		Section dbE = find(e);
+		
 		if (dbE == null) return null;
 		
 		em.remove(em.merge(dbE));

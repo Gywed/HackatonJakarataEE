@@ -145,8 +145,7 @@ public class AA implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(anneeAcademique, code, credit, fraction, heure, heureQ1, heureQ2, id, intitule,
-				nombreEtudiant, nombreGroupe);
+		return Objects.hash(code);
 	}
 
 	@Override
@@ -158,12 +157,9 @@ public class AA implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		AA other = (AA) obj;
-		return Objects.equals(anneeAcademique, other.anneeAcademique) && Objects.equals(code, other.code)
-				&& Objects.equals(credit, other.credit) && fraction == other.fraction
-				&& Objects.equals(heure, other.heure) && Objects.equals(heureQ1, other.heureQ1)
-				&& Objects.equals(heureQ2, other.heureQ2) && Objects.equals(id, other.id)
-				&& Objects.equals(intitule, other.intitule) && Objects.equals(nombreEtudiant, other.nombreEtudiant)
-				&& Objects.equals(nombreGroupe, other.nombreGroupe);
+		return Objects.equals(code, other.code);
 	}
+
+	
 	
 }

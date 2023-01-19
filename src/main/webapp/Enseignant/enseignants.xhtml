@@ -38,17 +38,22 @@
 	   <p:column>
 	   		<p:commandButton type="button" icon="pi pi-pencil" styleClass="rounded-button ui-button-warning"/>
 	   		<span>  </span>
-	   		<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" action="#{enseignantControl.doAdd}" ajax="false"/>
+	   		<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" ajax="false"/>
 	   </p:column>
 		   
 	</p:dataTable>
 </h:form>
 
 <h:form>
-<p:dialog id="informations" widgetVar="informations" header="Entrer les informations">
-   <h:form id="createEnseignant">
+<p:dialog id="informations" widgetVar="informations" header="Entrer les informations" modal="true">
     <p:panel>
+    	<p:outputLabel>Annee Academique pour les missionss et les AAs : </p:outputLabel>
+			<p:selectOneMenu value="#{enseignantControl.anneeAcademique}" converter="converterAnnee">
+        		<f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}"/>
+    		</p:selectOneMenu>
         <h:panelGrid columns="2" cellpadding="5">
+        	
+    		
             <h:outputLabel for="name" value="Nom:" />
             <p:inputText id="name" value="#{enseignantControl.nom}" required="true" label="Nom" />
             
@@ -64,17 +69,15 @@
             <p:inputText id="remarque" value="#{enseignantControl.remarque}" required="true" label="Remarque:" />
         </h:panelGrid>
     </p:panel>
-    <p:commandButton value="Suivant" action="#{enseignantControl.doAdd}" ajax="false"></p:commandButton>
-	</h:form>
+    <p:commandButton value="Suivant" onclick="PF('missions').show(); PF('informations').hide()"></p:commandButton>
    
 </p:dialog>
 
-<p:dialog id="missions" widgetVar="missions" header="Sélectionner les missions de l'enseignant">
-   <h:form>
-   		<p:selectManyMenu id="advanced" value="#{enseignantControl.missions}"
+<p:dialog id="missions" widgetVar="missions" header="Sélectionner les missions de l'enseignant" modal="true">
+   		<p:selectManyMenu value="#{enseignantControl.missions}" converter="converterMission"
                             var="m" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced">
-            <f:selectItems value="#{missionControl.doFindAll()}" var="mission" itemLabel="#{mission.intitule}"
-                            itemValue="#{mission}"/>
+            <f:selectItems value="#{missionControl.doFindAll()}" var="miss" itemLabel="#{miss.intitule}"
+                            itemValue="#{miss}"/>
 
             <p:column>
                 <h:outputText value="#{m.intitule}"/>
@@ -85,13 +88,11 @@
             
         </p:selectManyMenu>
    		<p:commandButton type="button" value="Suivant" onclick="PF('aas').show(); PF('missions').hide()"></p:commandButton>
-   </h:form>
 </p:dialog>
 
 <p:dialog id="aas" widgetVar="aas" header="Sélectionner les AA de l'enseignant">
-	<h:form>
-		<p:selectManyMenu id="advanced" value="#{enseignantControl.aas}"
-                            var="aa" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced">
+		<p:selectManyMenu value="#{enseignantControl.aas}" converter="converterAA"
+                            var="aa" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced" modal="true">
             <f:selectItems value="#{aAControl.doFindAll()}" var="aa" itemLabel="#{aa.intitule}"
                             itemValue="#{aA}"/>
 
@@ -100,8 +101,7 @@
             </p:column>
             
         </p:selectManyMenu>
-   		<p:commandButton ajax="false" value="Confirmer" onclick="PF('aas').hide()" action="#{enseignantControl.doAdd}"></p:commandButton>
-   </h:form>
+   		<p:commandButton ajax="false" value="Confirmer" onclick="PF('aas').hide()" actionListener="#{enseignantControl.doAdd()}"></p:commandButton>
 </p:dialog>
 </h:form>
 	

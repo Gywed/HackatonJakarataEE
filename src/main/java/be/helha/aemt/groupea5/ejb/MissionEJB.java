@@ -21,6 +21,10 @@ public class MissionEJB {
 		return daoMission.find(m);
 	}
 	
+	public Mission findById(Mission m) {
+		return daoMission.findById(m);
+	}
+	
 	public Mission add(Mission m) {
 		return daoMission.add(m);
 	}

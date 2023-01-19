@@ -82,11 +82,11 @@ public class Departement implements Serializable
 	public void setMissions(List<Mission> missions) {
 		this.missions = missions;
 	}
-
+	
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, missions, nom, sections);
+		return Objects.hash(nom);
 	}
 
 
@@ -99,13 +99,13 @@ public class Departement implements Serializable
 		if (getClass() != obj.getClass())
 			return false;
 		Departement other = (Departement) obj;
-		return Objects.equals(id, other.id) && Objects.equals(missions, other.missions)
-				&& Objects.equals(nom, other.nom) && Objects.equals(sections, other.sections);
+		return Objects.equals(nom, other.nom);
 	}
 
 
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return nom;
 	}
 }

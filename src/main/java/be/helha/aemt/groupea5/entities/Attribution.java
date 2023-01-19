@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
@@ -22,10 +23,11 @@ public class Attribution implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@ManyToOne
 	private AnneeAcademique anneeAcademique;
-	@ManyToOne(targetEntity = AA.class)
+	@ManyToMany(targetEntity = AA.class)
 	private List<AA> aas;
-	@ManyToOne(targetEntity = Mission.class)
+	@ManyToMany(targetEntity = Mission.class)
 	private List<Mission> missions;
 	
 	public Attribution() {
