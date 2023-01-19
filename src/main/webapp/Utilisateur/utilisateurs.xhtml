@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f = "http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">>
+<h:head>
+
+<title>Utilisateurs</title>
+<meta http-equiv="  Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+<h:body>
+		<ui:composition template="../menubar.xhtml">
+	    	<ui:define name="content">
+				<h1>Liste des utilisateurs</h1>
+		
+	<h:form class="form">
+		<p:commandButton type="button" value="Ajouter" icon="pi pi-plus" onclick="PF('informations').show()"></p:commandButton>
+		<p:dataTable value = "#{utilisateurControl.doFindAll()}" var = "e">
+		   
+		   <p:column>
+		      <f:facet name = "header">Nom</f:facet>
+		      #{e.nom}
+		   </p:column>
+		   
+		   <p:column>
+		      <f:facet name = "header">Prenom</f:facet>
+		      #{e.prenom}
+		   </p:column>
+		   
+		   <p:column>
+		      <f:facet name = "header">E-mail</f:facet>
+		      #{e.email}
+		   </p:column>
+		   
+		   <p:column>
+		      <f:facet name = "header">Departement</f:facet>
+		      #{e.departement}
+		   </p:column>
+		   
+		   <p:column>
+		      <f:facet name = "header">Role</f:facet>
+		      #{e.role}
+		   </p:column>
+		   
+		   <p:column>
+		   		<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" 
+					action="#{utilisateurControl.doSetInformation(e)}" update="modifier" 
+					oncomplete="PF('modifier').show()"/>
+				
+		      <span></span>
+		      
+		   
+		      	<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" 
+		      		action="#{utilisateurControl.doDelete(e)}" >
+		      		<p:confirm header="Confirmation" message="Voulez-vous supprimer cette utilisateur ?" icon="pi pi-info-circle"/>
+		      	</p:commandButton>
+		   </p:column>
+			   
+		</p:dataTable>
+	</h:form>
+	
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+	            <p:commandButton value="Non" styleClass="ui-confirmdialog-no ui-button-flat" ajax="false" />
+	            <p:commandButton value="Oui" styleClass="ui-confirmdialog-yes" ajax="false"/>
+	        </p:confirmDialog>
+	
+		<p:dialog id="informations" widgetVar="informations" header="Entrer les informations" modal="true">
+		   <h:form id="createUtilisateur">
+		    <p:panel>
+		        <h:panelGrid columns="2" cellpadding="6">
+		            <h:outputLabel for="name" value="Nom:" />
+		            <p:inputText id="name" value="#{utilisateurControl.nom}" required="true" label="Nom" />
+		            
+		            <h:outputLabel for="surname" value="Prénom:" />
+		            <p:inputText id="surname" value="#{utilisateurControl.prenom}" required="true" label="Prenom" />
+		            
+		            <h:outputLabel for="email" value="E-Mail:" />
+		            <p:inputText id="email" value="#{utilisateurControl.email}" required="true" label="E-Mail">
+		<!--             	<f:validateRegex pattern="^\S+@helha\.be$"/>  -->
+		            </p:inputText>
+		            
+		            <h:outputLabel for="password" value="Mot de passe:" />
+		            <p:inputText id="password" value="#{utilisateurControl.password}" required="true" label="Mdp" type="password">
+		            </p:inputText>
+		            
+		            <h:outputLabel for="departement" value="Département:" />
+		            <p:selectOneMenu id="departement" value="#{utilisateurControl.departement}">
+						<f:selectItems value="#{departementControl.doFindAll()}" var="departement"/>
+					</p:selectOneMenu>
+		                
+		            <h:outputLabel for="role" value="Role:" />
+		            <p:selectOneMenu id="role" value="#{utilisateurControl.role}">
+			        	<f:selectItems value="#{utilisateurControl.roles}"/>
+			    	</p:selectOneMenu>
+		        </h:panelGrid>
+		    </p:panel>
+		    <p:commandButton value="Confirmer" action="#{utilisateurControl.doAdd}" ajax="false"/>
+			</h:form>
+		   
+		</p:dialog>
+		
+		<p:dialog id="modifier" widgetVar="modifier" header="Modifier un utilisateur">
+				<h:form>
+					<h:panelGrid columns="2" cellpadding="6">
+						<h:outputLabel for="name" value="Nom:" />
+			            <p:inputText id="name" value="#{utilisateurControl.nom}" required="true" label="Nom" />
+			            
+			            <h:outputLabel for="surname" value="Prénom:" />
+			            <p:inputText id="surname" value="#{utilisateurControl.prenom}" required="true" label="Prenom" />
+			            
+			            <h:outputLabel for="email" value="E-Mail:" />
+			            <p:inputText id="email" value="#{utilisateurControl.email}" required="true" label="E-Mail">
+			<!--             	<f:validateRegex pattern="^\S+@helha\.be$"/>  -->
+			            </p:inputText>
+			            
+			            <h:outputLabel for="password" value="Mot de passe ( Laisser vide si pas de modification ):" />
+			            <p:inputText id="password" value="#{utilisateurControl.password}" label="Mdp" type="password"/>
+			            
+			            <h:outputLabel for="departement" value="Département:" />
+			            <p:selectOneMenu id="departement" value="#{utilisateurControl.departement}">
+							<f:selectItems value="#{departementControl.doFindAll()}" var="departement"/>
+						</p:selectOneMenu>
+			                
+			            <h:outputLabel for="role" value="Role:" />
+			            <p:selectOneMenu id="role" value="#{utilisateurControl.role}">
+				        	<f:selectItems value="#{utilisateurControl.roles}"/>
+				    	</p:selectOneMenu>
+				    	
+				    	<br/>
+					<p:commandButton value="Modifier" action="#{utilisateurControl.doUpdate()}" ajax="false" />
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
