@@ -21,6 +21,10 @@ public class AnneeAcademiqueEJB {
 		return dao.find(a);
 	}
 	
+	public List<AnneeAcademique> findCurrentAndNextAcademicYear() {
+		return dao.findCurrentAndNextAcademicYear();
+	}
+	
 	public AnneeAcademique add(AnneeAcademique a) {
 		return dao.add(a);
 	}

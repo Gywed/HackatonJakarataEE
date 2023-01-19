@@ -47,7 +47,13 @@
 <h:form>
 <p:dialog id="informations" widgetVar="informations" header="Entrer les informations" modal="true">
     <p:panel>
+    	<p:outputLabel>Annee Academique pour les missionss et les AAs : </p:outputLabel>
+			<p:selectOneMenu value="#{enseignantControl.anneeAcademique}">
+        		<f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}"/>
+    		</p:selectOneMenu>
         <h:panelGrid columns="2" cellpadding="5">
+        	
+    		
             <h:outputLabel for="name" value="Nom:" />
             <p:inputText id="name" value="#{enseignantControl.nom}" required="true" label="Nom" />
             
@@ -85,7 +91,7 @@
 </p:dialog>
 
 <p:dialog id="aas" widgetVar="aas" header="Sélectionner les AA de l'enseignant">
-		<!-- <p:selectManyMenu value="#{enseignantControl.aasString}"
+		<!-- <p:selectManyMenu value="#{enseignantControl.aas}"
                             var="aa" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced" modal="true">
             <f:selectItems value="#{aAControl.doFindAll()}" var="aa" itemLabel="#{aa.intitule}"
                             itemValue="#{aA}"/>
