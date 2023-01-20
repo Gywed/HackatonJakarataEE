@@ -36,6 +36,13 @@ public class EnseignantDAO {
 		return result.isEmpty() ? null : result.get(0);
 	}
 	
+	public Enseignant findById(Enseignant e) {
+		TypedQuery<Enseignant> query = em.createQuery("Select e from Enseignant e where e.id = ?1", Enseignant.class);
+		query.setParameter(1, e.getId());
+		List<Enseignant> result = query.getResultList();
+		return result.isEmpty() ? null : result.get(0);
+	}
+	
 	public Enseignant add(Enseignant e) throws AlreadyExistsException, WrongMailException {
 		String pattern = "^\\S+@helha\\.be$";
 		
