@@ -35,7 +35,7 @@ public class EnseignantEJB {
 		return daoEnseignant.find(e);
 	}
 
-	public Enseignant update(Enseignant e) {
+	public Enseignant update(Enseignant e) throws WrongMailException, AlreadyExistsException {
 		// TODO Auto-generated method stub
 		return daoEnseignant.update(e);
 	}

@@ -86,7 +86,14 @@ public class EnseignantControl implements Serializable {
 	public void doUpdate() {
 		Enseignant e = new Enseignant(nom, prenom, mail, remarque, enseignant.getAttribution());
 		e.setId(enseignant.getId());
-		bean.update(e);
+		try {
+			bean.update(e);
+			clearData();
+			showInfo("Modification réussie");
+		} catch (WrongMailException | AlreadyExistsException e1) {
+			// TODO Auto-generated catch block
+			showError(e1.getMessage());
+		}
 	}
 	
 	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {

@@ -55,7 +55,7 @@ public class EnseignantDAO {
 		
 		
 		if (find(e) != null) {
-			 throw new AlreadyExistsException("Cet enseignant existe déjà");
+			 throw new AlreadyExistsException("Cet e-mail est déjà utilisé");
 		}
 		return em.merge(e);
 
@@ -72,12 +72,18 @@ public class EnseignantDAO {
 		return e;
 	}
 	
-	public Enseignant update(Enseignant e) {
+	public Enseignant update(Enseignant e) throws WrongMailException, AlreadyExistsException {
+		String pattern = "^\\S+@helha\\.be$";
 		if (e==null) return null;
 		
-		Enseignant dbE = find(e);
-		if(dbE==null) return null;
-		e.setId(dbE.getId());
+		if(findById(e)==null) return null;
+		
+		if(!e.getMail().matches(pattern))
+			throw new WrongMailException("L'adresse e-mail doit respecter le format : ******@helha.be");
+		
+		if (find(e) != null) {
+			 throw new AlreadyExistsException("Cet e-mail est déjà utilisé");
+		}
 		
 		return em.merge(e);
 	
