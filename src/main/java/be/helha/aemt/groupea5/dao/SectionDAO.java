@@ -45,6 +45,13 @@ public class SectionDAO
 		return query.getResultList();
 	}
 	
+	public List<Section> findAllSorted() 
+	{
+		String strQuery="Select s from Section s ORDER BY s.nom";
+		TypedQuery<Section> query = em.createQuery(strQuery,Section.class);
+		return query.getResultList();
+	}
+	
 	public Section add(Section e) 
 	{
 		if (e == null) return null;
