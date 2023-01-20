@@ -8,6 +8,7 @@ import be.helha.aemt.groupea5.ejb.UEEJB;
 import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Departement;
+import be.helha.aemt.groupea5.entities.Mission;
 import be.helha.aemt.groupea5.entities.Section;
 import be.helha.aemt.groupea5.entities.UE;
 import jakarta.ejb.EJB;
@@ -50,24 +51,43 @@ public class UEControl implements Serializable{
 	
 	public void doAdd() 
 	{
-		System.out.println("ALED");
-		System.out.println(anneeAcademique);
-		System.out.println(departement);
-		System.out.println(section);
-		System.out.println(bloc);
-		System.out.println(code);
-		System.out.println(intitule);
-		System.out.println(credit);
-		System.out.println(aas);
 		bean.add(new UE( new AnneeAcademique(anneeAcademique), new Departement(departement,null,null), new Section(null ,section,null), bloc, code, intitule, credit, aas));
-//		bean.add(new UE(null, null, null, 0, null, null, 0, null));
 		clearData();
 		
 	}
 
-
+	public void doSetInformation(UE ue) {
+		setUe(ue);
+		setAnneeAcademique(ue.getAnneeAcademique().getAnneeAcademique());
+		setDepartement(ue.getDepartement().getNom());
+		setSection(ue.getSection().getNom());
+		setBloc(ue.getBloc());
+		setCode(ue.getCode());
+		setIntitule(ue.getIntitule());
+		setCredit(ue.getCredit());
+		setAas(ue.getAas());
+	}
+	public void doUpdate() 
+	{
+		ue.setAnneeAcademique(new AnneeAcademique(anneeAcademique));
+		ue.setDepartement(new Departement(departement,null,null));
+		ue.setSection(new Section(null,section,null));
+		ue.setIntitule(intitule);
+		ue.setBloc(bloc);
+		ue.setCode(code);
+		ue.setCredit(credit);
+		ue.setAas(aas);
+		
+		
+		bean.update(ue);
+		clearData();
+	}
 	
-	
+	public String doDelete(UE ue) {
+		bean.delete(ue);
+		clearData();
+		return "UE?faces-redirect=true";
+	}
 	
 	public UE getUe() {
 		return ue;

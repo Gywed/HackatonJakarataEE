@@ -36,9 +36,25 @@
 	        		<p:column field="intitule" headerText="Intitulé" sortable="false"/>
 	        		<p:column field="credit" headerText="Crédit" sortable="false" filterable="false"/>
 	        		
+	        		
+	        		<p:column  filterable="false">		
+						<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" 
+						action="#{uEControl.doSetInformation(ue)}" update="modifier" 
+						oncomplete="PF('modifier').show()"/>
+				     
+				      	<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" 
+				      	action="#{uEControl.doDelete(ue)}" >
+				      		<p:confirm header="Confirmation" message="Voulez-vous supprimer cette UE ?" icon="pi pi-info-circle"/>
+				      	</p:commandButton>
+			
+				   </p:column>
+	        		
 	        	</p:dataTable>	
 	        </h:form>
-	        
+	        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+	            <p:commandButton value="Non" styleClass="ui-confirmdialog-no ui-button-flat" ajax="false" />
+	            <p:commandButton value="Oui" styleClass="ui-confirmdialog-yes" ajax="false"/>
+        	</p:confirmDialog>
 	        
 	        <p:dialog id="ajouter" widgetVar="ajouter" header="Ajouter une UE" modal="true" closeOnEscape="true" resizable="false">
 				<h:form>
@@ -91,12 +107,62 @@
 						</p:commandButton>
 					</h:panelGrid>
 					
-					
-					
 				</h:form>
 			</p:dialog>
 			
-			
+			<p:dialog id="modifier" widgetVar="modifier" header="Modifier une UE" modal="true" closeOnEscape="true" resizable="false">
+				<h:form>
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel>Année Académique : </p:outputLabel>
+						<p:selectOneMenu id="annee" value="#{uEControl.anneeAcademique}">
+			        		<f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
+			    		</p:selectOneMenu>
+		
+			    		<p:outputLabel>Département : </p:outputLabel>
+						<p:selectOneMenu id="departement" value="#{uEControl.departement}">
+			        		<f:selectItems value="#{departementControl.doFindAll()}"/>
+			    		</p:selectOneMenu>
+			    		
+			    		<p:outputLabel>Section : </p:outputLabel>
+						<p:selectOneMenu id="section" value="#{uEControl.section}">
+			        		<f:selectItems value="#{sectionControl.doFindAll()}"/>
+			    		</p:selectOneMenu>
+						
+						<p:outputLabel>Bloc : </p:outputLabel>
+						<p:inputText id="bloc" type="number" value="#{uEControl.bloc}"/>
+						
+						<p:outputLabel>Code : </p:outputLabel>
+						<p:inputText id="code" value="#{uEControl.code}"/>
+						
+						<p:outputLabel>Intitulé : </p:outputLabel>
+						<p:inputText id="intitule" value="#{uEControl.intitule}"/>
+						
+						<p:outputLabel>Crédits : </p:outputLabel>
+						<p:inputText id="credit" type="number" value="#{uEControl.credit}"/>
+						
+						<p:outputLabel>AA</p:outputLabel>
+			    		<p:selectManyMenu id="advanced" value="#{uEControl.aas}"
+                            var="a" filter="true" filterMatchMode="contains"
+                            scrollHeight="200" showCheckbox="true" styleClass="manymenu-advanced">
+				            <f:selectItems value="#{aAControl.doFindAll()}" var="aa" itemLabel="#{aa.intitule}"
+				                            itemValue="#{aa}"/>
+				
+				            <p:column>
+				                <h:outputText value="#{a.code}"/>
+				            </p:column>
+				            <p:column>
+				                <h:outputText value="#{a.intitule} "/>
+				            </p:column>
+				            
+				        </p:selectManyMenu>
+						<br/>
+						<p:commandButton value="Modifier" 
+						action="#{uEControl.doUpdate}"  ajax="false" >
+						</p:commandButton>
+					</h:panelGrid>
+					
+				</h:form>
+			</p:dialog>
 			
 	    </ui:define>
 	</ui:composition>

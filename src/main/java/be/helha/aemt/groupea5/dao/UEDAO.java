@@ -46,35 +46,14 @@ public class UEDAO {
 		List<UE> result = query.getResultList();
 		return result.isEmpty() ? null : result.get(0);
 	} 
-	
+	public UE findbyId(UE ue) {
+		TypedQuery<UE> query = em.createQuery("Select ue from UE ue where ue.id = ?1", UE.class);
+		query.setParameter(1, ue.getId());
+		List<UE> result = query.getResultList();
+		return result.isEmpty() ? null : result.get(0);
+	} 
 	public UE add(UE ue) 
 	{
-		/*System.out.println("JE COMMENCE LE ADD");
-		
-		if (ue==null) return null;
-		if (find(ue) != null) return null;
-		if (ue == find(ue)) return null;
-		
-		System.out.println("TOUT LES IF NULL SONT PASSES");
-		
-		AnneeAcademique annee = anneeDAO.find(ue.getAnneeAcademique());
-		Departement dep = depDao.find(ue.getDepartement());
-		Section sec = secDAO.find(ue.getSection());
-		
-		
-		System.out.println("TOUS LES FINDS SONT PASSES");
-		
-		
-		if(annee!=null)ue.setAnneeAcademique(annee);
-		if(dep!=null)ue.setDepartement(dep);
-		if(sec!=null)ue.setSection(sec);
-		
-		System.out.println("TOUT LES IF NULL V2 SONT PASSES");
-
-		
-		System.out.println("JE TENTE L'AJOUT");
-		
-		return em.merge(ue);*/
 		
 		if (ue==null) 
 		{
@@ -122,8 +101,28 @@ public class UEDAO {
 	public UE update(UE ue) {
 		if (ue==null) return null;
 		
-		UE dbE = find(ue);
+		UE dbE = findbyId(ue);
 		if(dbE==null) return null;
+		
+		AnneeAcademique annee = anneeDAO.find(ue.getAnneeAcademique());
+		Departement dep = depDao.find(ue.getDepartement());
+		Section sec = secDAO.find(ue.getSection());
+		
+		if(annee!=null) 
+		{
+			ue.setAnneeAcademique(annee);
+		}
+		
+		if(dep!=null) 
+		{
+			ue.setDepartement(dep);
+		}
+		
+		if(sec!=null) 
+		{
+			ue.setSection(sec);
+		}
+		
 		ue.setId(dbE.getId());
 		
 		return em.merge(ue);
