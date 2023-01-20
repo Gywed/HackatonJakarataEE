@@ -16,7 +16,8 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name = "findDepartementByName", query ="select d from Departement d where d.nom = ?1")
+	@NamedQuery(name = "findDepartementByName", query ="select d from Departement d where d.nom = ?1"),
+	@NamedQuery(name = "findDepartementById", query ="select d from Departement d where d.id = ?1")
 })
 public class Departement implements Serializable, Comparable<Departement>
 {

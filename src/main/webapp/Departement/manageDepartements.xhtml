@@ -117,7 +117,7 @@
 	   
                 
 	  <p:column field="id" headerText="Identifiant" sortable="false" filterMatchMode="contains"/>
-	  <p:column field="nom" headerText="nom" sortable="false"/>
+	  <p:column field="nom" headerText="nom" sortable="false" filterMatchMode="contains"/>
 	  
 	  <p:column >
 	      <f:facet name="header">Sections</f:facet>
@@ -166,8 +166,9 @@
 			<p:dialog id="modifier" widgetVar="modifier" header="Modifier une un departement" modal="true" closeOnEscape="true" resizable="false">
 				<h:form>
 				<h:panelGrid columns="2" cellpadding="5">
-					
-					<p:commandButton value="Modifier" action="#{missionControl.doUpdate}" ajax="false" ></p:commandButton>
+					            <h:outputLabel for="nom" value="Nom :" />
+	            <p:inputText id="nom" value="#{departementControl.selectedDepartement.nom}" />
+					<p:commandButton value="Modifier" action="#{departementControl.doUpdate}" ajax="false" ></p:commandButton>
 					</h:panelGrid>
 				</h:form>
 			</p:dialog>

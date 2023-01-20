@@ -10,10 +10,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
-public class UE implements Serializable{
+public class UE implements Serializable
+{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,11 +35,12 @@ public class UE implements Serializable{
 	private String intitule;
 	private Integer credit;
 	
-	@ManyToOne(targetEntity = AA.class)
+	@OneToMany(mappedBy = "ue", cascade = CascadeType.ALL,targetEntity = AA.class)
 	private List<AA> aas;
 	
-	public UE() {
-		// TODO Auto-generated constructor stub
+	public UE() 
+	{
+
 	}
 
 	public UE(AnneeAcademique anneeAcademique, Departement departement, Section section, Integer bloc, String code,
@@ -166,6 +169,13 @@ public class UE implements Serializable{
 				&& Objects.equals(credit, other.credit) && Objects.equals(departement, other.departement)
 				&& Objects.equals(id, other.id) && Objects.equals(intitule, other.intitule)
 				&& Objects.equals(section, other.section);
+	}
+
+	@Override
+	public String toString() {
+		return "UE [id=" + id + ", anneeAcademique=" + anneeAcademique + ", departement=" + departement + ", section="
+				+ section + ", bloc=" + bloc + ", code=" + code + ", intitule=" + intitule + ", credit=" + credit
+				+ ", aas=" + aas + "]";
 	}
 	
 	

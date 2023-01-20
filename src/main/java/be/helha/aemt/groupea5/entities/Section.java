@@ -107,6 +107,8 @@ public class Section implements Serializable{
 	public String toString() {
 		return nom;
 	}
+
+
 	
 	
 }

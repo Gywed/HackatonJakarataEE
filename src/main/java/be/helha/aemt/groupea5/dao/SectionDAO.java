@@ -29,7 +29,7 @@ public class SectionDAO
 	
 	public Section find(Section section) 
 	{
-		TypedQuery<Section> query = em.createNamedQuery("findDepartementByName",Section.class);
+		TypedQuery<Section> query = em.createNamedQuery("findSectionByName",Section.class);
 		query.setParameter(1, section.getNom());
 		List<Section> list = query.getResultList();
 		
