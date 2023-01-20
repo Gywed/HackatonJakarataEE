@@ -20,8 +20,8 @@
 	    <h:form>
 	        <p:dataTable var="section" value="#{sectionControl.doFindAllSorted()}" widgetVar="sections"
 	                     emptyMessage="Aucune section n'a pu être trouvée avec les critères donnés"
-	                     filteredValue="#{dtFilterView.sections}"
-	                     globalFilterFunction="#{dtFilterView.globalFilterFunction}" paginator="true" rows="5">
+	                     filteredValue="#{sFilterView.sections}"
+	                     globalFilterFunction="#{sFilterView.globalFilterFunction}" >
 	
 	            <f:facet name="header">
 	                <div class="flex justify-content-end">
@@ -35,11 +35,15 @@
 	                <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{section.nom}" />
 	            </p:column>
 	            
+	            
+	            <p:column field="departement.nom" headerText="Département" filterable="false" sortBy="#{departementNameComparator}">
+					<h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{section.departement}" />
+				</p:column>
 	           
 	            
 	            <p:column>
 				    <f:facet name="header">Modifier</f:facet>
-				    <p:commandButton value="Modifier" action="#{sectionControl.goToUpdateSection(section)}" onclick="PF('updateDialog').show()" />
+				    <p:commandButton value="Modifier" action="#{sectionControl.goToUpdateSection(section)}" onclick="PF('updateDialog').show()"  />
 				</p:column>
 				
 				<p:column>

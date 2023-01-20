@@ -1,12 +1,9 @@
 package be.helha.aemt.groupea5.util;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.primefaces.model.FilterMeta;
-import org.primefaces.model.MatchMode;
 import org.primefaces.util.LangUtils;
 
 import be.helha.aemt.groupea5.entities.Section;
@@ -14,7 +11,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 
-@Named("dtFilterView")
+@Named("sFilterView")
 @ViewScoped
 public class FilterView implements Serializable 
 {
@@ -23,16 +20,14 @@ public class FilterView implements Serializable
 
     private List<Section> filteredSections;
     
-    private List<Section> filterBy;
     
-
     private boolean globalFilterOnly;
 
     @PostConstruct
     public void init() 
     {
         globalFilterOnly = false;
-        filterBy = new ArrayList<>();
+        
     }
 
     public boolean globalFilterFunction(Object value, Object filter, Locale locale) 
@@ -60,7 +55,8 @@ public class FilterView implements Serializable
 
     private int getInteger(String string) 
     {
-        try {
+        try 
+        {
             return Integer.parseInt(string);
         }
         catch (NumberFormatException ex) 
@@ -70,7 +66,8 @@ public class FilterView implements Serializable
     }
 
 
-    public boolean isGlobalFilterOnly() {
+    public boolean isGlobalFilterOnly() 
+    {
         return globalFilterOnly;
     }
 
@@ -80,19 +77,14 @@ public class FilterView implements Serializable
     }
 
 
-	public List<Section> getSections() {
+	public List<Section> getSections() 
+	{
 		return sections;
 	}
 
 	public void setSections(List<Section> sections) {
 		this.sections = sections;
 	}
-
-	public List<Section> getFilterBy() {
-		return filterBy;
-	}
-
-	
 
 	public List<Section> getFilteredSections() 
 	{
@@ -104,10 +96,5 @@ public class FilterView implements Serializable
 		this.filteredSections = filteredSections;
 	}
 
-	public void setFilterBy(List<Section> filterBy) 
-	{
-		this.filterBy = filterBy;
-	}
-    
     
 }

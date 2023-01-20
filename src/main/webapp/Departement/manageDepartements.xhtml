@@ -18,10 +18,9 @@
 	
 	<p:commandButton value="Ajouter" onclick="PF('createDialog').show()" />
 	
-	
 	<h:form>
 		<!--  tableau liste des départements -->
-		<p:dataTable id="departementsTable" value = "#{departementControl.doFindAll()}" var = "departement" >
+		<p:dataTable lazy="false" id="departementsTable" value = "#{departementControl.doFindAll()}" var = "departement" >
 		   <p:column>    				
 		      <f:facet name = "header">Id</f:facet>    				
 		      #{departement.id}
@@ -30,13 +29,13 @@
 		      <f:facet name = "header">Nom</f:facet>
 		      #{departement.nom}
 		   </p:column>
-		    <p:column>
+		    <p:column >
 			    <f:facet name="header">Sections</f:facet>
-			    <p:commandButton value="Sections" action="#{departementControl.actualiseDepartement(departement)}" oncomplete="PF('sectionsDialog').show()" />
+			    <p:commandButton  value="Sections" action="#{departementControl.actualiseDepartement(departement)}" oncomplete="PF('sectionsDialog').show()"  />
 			</p:column>
-		    <p:column>
+		    <p:column >
 			    <f:facet name="header">Missions</f:facet>
-			    <p:commandButton value="Missions" action="#{departementControl.actualiseDepartement(departement)}" oncomplete="PF('missionsDialog').show()" />
+			    <p:commandButton  value="Missions" action="#{departementControl.actualiseDepartement(departement)}" oncomplete="PF('missionsDialog').show()"  />
 			</p:column>
 			
 			<p:column>
@@ -53,9 +52,7 @@
 		    	
 			</p:column>
 			
-		</p:dataTable>
-		
-		<!-- pop up ajout nouveau département -->
+			<!-- pop up ajout nouveau département -->
 		<p:dialog id="createDialog" widgetVar="createDialog"  header="Ajout d'un nouveau département"  modal="true">
 			<h:form id="createForm">
 				<h:panelGrid columns="2" cellpadding="5">
@@ -81,36 +78,16 @@
 		<!-- pop up sections -->
 		<p:dialog id="sectionsDialog" header="Sections" widgetVar="sectionsDialog" modal="true" height="300">
 		    <p:scrollPanel mode="native">
-		        <p:dataList value="#{departementControl.selectedDepartement.sections}" var="section">
+		        <p:dataList lazy="false" value="#{departementControl.selectedDepartement.sections}" var="section">
 		            <h:outputText value="#{section.nom}" />
 		        </p:dataList>
 		    </p:scrollPanel>
 		</p:dialog>
+			
+		</p:dataTable>	
 	</h:form>
 
 	</ui:define>
 </ui:composition>
 </h:body>
-<div class="card">
-    <h:form>
-        <p:dataTable var="departement" value="#{departementControl.doFindAll()}" widgetVar="DepartementsTable"
-            emptyMessage="Aucun departement n'a pu être trouvé avec les critères donnés"
-            filteredValue="#{dtFilterView.filteredCustomers2}" filterBy="#{dtFilterView.filterBy}">
-
-            <f:facet name="header">
-                <span>Liste des départements</span>
-            </f:facet>
-
-            <p:column headerText="nom" sortBy="#{departement.nom}" filterBy="#{departement.nom}">
-                <h:outputText value="#{departement.nom}" />
-            </p:column>
-
-            
-
-
-            
-        </p:dataTable>
-    </h:form>
-</div>
-</body>
 </html>
