@@ -74,6 +74,15 @@ public class EnseignantControl implements Serializable {
 		bean.delete(e);
 	}
 	
+	public void doSetInformations(Enseignant e) {
+		setMail(e.getMail());
+		setNom(e.getNom());
+		setPrenom(e.getPrenom());
+		setRemarque(e.getMail());
+		setEnseignant(e);
+		System.out.println(mail);
+	}
+	
 	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(severity, summary, detail));

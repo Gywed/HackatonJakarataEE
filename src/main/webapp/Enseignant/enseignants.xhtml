@@ -40,7 +40,8 @@
 	   </p:column>
 	   
 	   <p:column>
-	   		<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" ajax="false" onclick="PF('modification').show();"/>
+	   		<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" oncomplete="PF('modification').show();" action="enseignantControl.doSetInformations(e)"
+	   		update="modification"/>
 	   		<span>  </span>
 	   		<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" ajax="false" action="#{enseignantControl.doDelete(e)}"/>
 	   </p:column>
@@ -117,18 +118,18 @@
         <h:panelGrid columns="2" cellpadding="5">
         	
             <h:outputLabel for="name" value="Nom:" />
-            <p:inputText id="name" value="#{enseignantControl.enseignant.nom}" required="true" label="Nom" />
+            <p:inputText id="name" value="#{enseignantControl.nom}" required="true" label="Nom" />
             
             <h:outputLabel for="surname" value="Prénom:" />
-            <p:inputText id="surname" value="#{enseignantControl.enseignant.prenom}" required="true" label="Prenom" />
+            <p:inputText id="surname" value="#{enseignantControl.prenom}" required="true" label="Prenom" />
             
             <h:outputLabel for="mail" value="E-Mail:" />
-            <p:inputText id="mail" value="#{enseignantControl.enseignant.mail}" required="true" label="E-Mail">
+            <p:inputText id="mail" value="#{enseignantControl.mail}" required="true" label="E-Mail">
             	<!-- <f:validateRegex pattern="^\S+@helha\.be$"/>  -->
             </p:inputText>
             
             <h:outputLabel for="remarque" value="Remarque:" />
-            <p:inputText id="remarque" value="#{enseignantControl.enseignant.remarque}" required="true" label="Remarque:" />
+            <p:inputText id="remarque" value="#{enseignantControl.remarque}" required="true" label="Remarque:" />
         </h:panelGrid>
     </p:panel>
     <p:commandButton value="Confirmer" onclick=" PF('modification').hide()"></p:commandButton>
