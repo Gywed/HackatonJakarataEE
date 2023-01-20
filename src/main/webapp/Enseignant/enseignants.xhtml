@@ -40,12 +40,14 @@
 	   </p:column>
 	   
 	   <p:column>
-	   		<p:commandButton type="button" icon="pi pi-pencil" styleClass="rounded-button ui-button-warning"/>
+	   		<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning"  action="#{enseignantControl.doSetInformations(e)}"
+	   		update="modification" oncomplete="PF('modification').show();"/>
 	   		<span>  </span>
 	   		<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" ajax="false" action="#{enseignantControl.doDelete(e)}"/>
 	   </p:column>
-		   
 	</p:dataTable>
+	
+	
 </h:form>
 
 <h:form>
@@ -109,6 +111,30 @@
    		<p:commandButton ajax="false" value="Confirmer" onclick="PF('aas').hide()" actionListener="#{enseignantControl.doAdd()}" update="growl"></p:commandButton>
 </p:dialog>
 </h:form>
+
+<p:dialog id="modification" widgetVar="modification" header="Entrer les informations" modal="true">
+<h:form>
+    <p:panel>
+        <h:panelGrid columns="2" cellpadding="5">
+        	
+            <h:outputLabel for="nameUpdate" value="Nom:" />
+            <p:inputText id="nameUpdate" value="#{enseignantControl.nom}" required="true" label="Nom" />
+            
+            <h:outputLabel for="surnameUpdate" value="Prénom:" />
+            <p:inputText id="surnameUpdate" value="#{enseignantControl.prenom}" required="true" label="Prenom" />
+            
+            <h:outputLabel for="mailUpdate" value="E-Mail:" />
+            <p:inputText id="mailUpdate" value="#{enseignantControl.mail}" required="true" label="E-Mail">
+            	<!-- <f:validateRegex pattern="^\S+@helha\.be$"/>  -->
+            </p:inputText>
+            
+            <h:outputLabel for="remarqueUpdate" value="Remarque:" />
+            <p:inputText id="remarqueUpdate" value="#{enseignantControl.remarque}" required="true" label="Remarque:" />
+        </h:panelGrid>
+    </p:panel>
+    <p:commandButton value="Confirmer" onclick=" PF('modification').hide()" action="#{enseignantControl.doUpdate()}" ajax="false"></p:commandButton>
+   </h:form>
+</p:dialog>
 </ui:define>
 </ui:composition>
 </h:body>
