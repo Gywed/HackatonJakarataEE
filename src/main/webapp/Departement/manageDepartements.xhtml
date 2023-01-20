@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--  <!DOCTYPE html>
 <html xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
@@ -19,7 +19,7 @@
 	<p:commandButton value="Ajouter" onclick="PF('createDialog').show()" />
 	
 	<h:form>
-		<!--  tableau liste des départements -->
+		  tableau liste des départements  
 		<p:dataTable lazy="false" id="departementsTable" value = "#{departementControl.doFindAll()}" var = "departement" >
 		   <p:column>    				
 		      <f:facet name = "header">Id</f:facet>    				
@@ -52,7 +52,7 @@
 		    	
 			</p:column>
 			
-			<!-- pop up ajout nouveau département -->
+			pop up ajout nouveau département 
 		<p:dialog id="createDialog" widgetVar="createDialog"  header="Ajout d'un nouveau département"  modal="true">
 			<h:form id="createForm">
 				<h:panelGrid columns="2" cellpadding="5">
@@ -64,7 +64,7 @@
 			</h:form>
 		</p:dialog>
 		
-		<!-- pop up missions -->
+		 pop up missions 
 		<p:dialog id="missionsDialog" header="Missions" widgetVar="missionsDialog" modal="true" height="300">
 		    <p:scrollPanel mode="native">
 		        <p:dataList value="#{departementControl.selectedDepartement.missions}" var="mission">
@@ -75,7 +75,7 @@
 		    </p:scrollPanel>
 		</p:dialog>
 	
-		<!-- pop up sections -->
+		 pop up sections 
 		<p:dialog id="sectionsDialog" header="Sections" widgetVar="sectionsDialog" modal="true" height="300">
 		    <p:scrollPanel mode="native">
 		        <p:dataList lazy="false" value="#{departementControl.selectedDepartement.sections}" var="section">
@@ -90,4 +90,114 @@
 	</ui:define>
 </ui:composition>
 </h:body>
+</html>-->
+
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:f = "http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+<h:head>
+<title>Départements</title>
+<meta http-equiv="
+	Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+	
+	<ui:composition template="../menubar.xhtml">
+    <ui:define name="content">
+        <h1>Liste des départements</h1>
+	
+	<h:form class="form">
+	<p:commandButton type="button" value="Ajouter" icon="pi pi-plus" onclick="PF('ajouter').show()"></p:commandButton>
+	<p:dataTable lazy="false" value = "#{departementControl.doFindAll()}" var = "departement" widgetVar="customersTable">
+   
+	   
+                
+	  <p:column field="id" headerText="Identifiant" sortable="false" filterMatchMode="contains"/>
+	  <p:column field="nom" headerText="nom" sortable="false"/>
+	  
+	  <p:column >
+	      <f:facet name="header">Sections</f:facet>
+	      <p:commandButton  value="Sections" action="#{departementControl.actualiseDepartement(departement)}" oncomplete="PF('sectionsDialog').show()" update="sectionsDialog"  />
+	  </p:column>
+      <p:column >
+	  	<f:facet name="header">Missions</f:facet>
+	    <p:commandButton  value="Missions" action="#{departementControl.actualiseDepartement(departement)}" oncomplete="PF('missionsDialog').show()" update="missionsDialog" />
+	  </p:column>
+	    
+
+	   <p:column  filterable="false">		
+			<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" 
+			action="#{departementControl.actualiseDepartement(departement)}" update="modifier" 
+			oncomplete="PF('modifier').show()"/>
+	      <span></span>
+	      	<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" 
+	      	action="#{departementControl.doDelete(departement)}" >
+	      		<p:confirm header="Confirmation" message="Voulez-vous supprimer ce département ?" icon="pi pi-info-circle"/>
+	      	</p:commandButton>
+
+	   </p:column>
+	   
+	</p:dataTable>
+	</h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="Non" styleClass="ui-confirmdialog-no ui-button-flat" ajax="false" />
+            <p:commandButton value="Oui" styleClass="ui-confirmdialog-yes" ajax="false"/>
+        </p:confirmDialog>
+        
+       
+		
+			<p:dialog id="ajouter" widgetVar="ajouter" header="Ajout d'un nouveau département" modal="true" closeOnEscape="true" resizable="false">
+				<h:form>
+					<h:panelGrid columns="2" cellpadding="5">
+
+						<p:outputLabel>Nom: </p:outputLabel>
+						<p:inputText id="nom" value="#{departementControl.newDepartement.nom}" />
+						
+						<p:commandButton value="Confirmer l'ajout du département" action="#{departementControl.doAdd()}" ajax="false" ></p:commandButton>
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+		
+		
+			<p:dialog id="modifier" widgetVar="modifier" header="Modifier une un departement" modal="true" closeOnEscape="true" resizable="false">
+				<h:form>
+				<h:panelGrid columns="2" cellpadding="5">
+					
+					<p:commandButton value="Modifier" action="#{missionControl.doUpdate}" ajax="false" ></p:commandButton>
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+			
+			<!--   pop up missions -->
+		<p:dialog id="missionsDialog" header="Missions" widgetVar="missionsDialog" modal="true" height="300">
+		    <p:scrollPanel mode="native">
+		        <p:dataList value="#{departementControl.selectedDepartement.missions}" var="mission">
+		            Nom: <h:outputText value="#{mission.intitule}" /><br/>
+		            Heures: <h:outputText value="#{mission.heures}" /><br/>
+		            Année: <h:outputText value="#{mission.anneeAcademique}" /><br/><br/>
+		        </p:dataList>
+		    </p:scrollPanel>
+		</p:dialog>
+	
+		 <!--pop up sections -->
+		<p:dialog id="sectionsDialog" header="Sections" widgetVar="sectionsDialog" modal="true" height="300">
+		    <p:scrollPanel mode="native">
+		        <p:dataList lazy="false" value="#{departementControl.selectedDepartement.sections}" var="section">
+		            <h:outputText value="#{section.nom}" />
+		        </p:dataList>
+		    </p:scrollPanel>
+		</p:dialog>
+		
+    </ui:define>
+</ui:composition>
+	
+</h:body>
 </html>
+
+
+
+
