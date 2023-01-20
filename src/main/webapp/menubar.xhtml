@@ -34,23 +34,21 @@
 		    </p:menubar>
 		</h:form>
 		
-		<p:dialog id="login" widgetVar="login" header="Se Connecter" modal="true" closeOnEscape="true" resizable="false">
+		<p:dialog id="login" widgetVar="login" header="Se connecter" modal="true" closeOnEscape="true" resizable="false">
 				<h:form method="POST" action="j_security_check">
 	        <h:panelGrid header="Se Connecter" columns="2" cellpadding="5">
 	            
 	               
-	                <p:outputLabel>Login : </p:outputLabel>
+	                <p:outputLabel>E-Mail : </p:outputLabel>
 					<p:inputText id="login" name="j_username"/>
 					
-	                <p:outputLabel>Password : </p:outputLabel>
+	                <p:outputLabel>Mot de passe : </p:outputLabel>
 					<p:inputText type="password" id="password" name="j_password"/>
 					
 					<p:commandButton type="submit" value="Login">
 					</p:commandButton>
 	                <p:commandButton type="reset" value="Reset">
 					</p:commandButton>
-	               
-	            
         	</h:panelGrid>
         	</h:form>
 			</p:dialog>
