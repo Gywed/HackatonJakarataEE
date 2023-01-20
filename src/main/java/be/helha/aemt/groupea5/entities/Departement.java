@@ -18,7 +18,7 @@ import jakarta.persistence.OneToMany;
 @NamedQueries({
 	@NamedQuery(name = "findDepartementByName", query ="select d from Departement d where d.nom = ?1")
 })
-public class Departement implements Serializable
+public class Departement implements Serializable, Comparable<Departement>
 {
 
 	@Id
@@ -107,5 +107,12 @@ public class Departement implements Serializable
 	public String toString() 
 	{
 		return nom;
+	}
+
+
+	@Override
+	public int compareTo(Departement o) 
+	{
+		 return this.getNom().compareTo(o.getNom());
 	}
 }
