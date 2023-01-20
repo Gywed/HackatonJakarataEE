@@ -33,6 +33,19 @@ public class DepartementDAO
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	public Departement findById(Departement e) 
+	{
+		TypedQuery<Departement> query = em.createNamedQuery("findDepartementById",Departement.class);
+		query.setParameter(1, e.getId());
+		List<Departement> list = query.getResultList();
+		
+		em.clear();
+		
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	
+	
 	public List<Departement> findAll() 
 	{
 		String strQuery="Select d from Departement d";
@@ -65,7 +78,7 @@ public class DepartementDAO
 	{
 		if (e == null) return null;
 		
-		Departement dbE = find(e);
+		Departement dbE = findById(e);
 		
 		e.setId(dbE.getId());
 		

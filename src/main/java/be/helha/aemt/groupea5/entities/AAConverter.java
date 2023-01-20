@@ -9,7 +9,10 @@ import jakarta.faces.convert.FacesConverter;
 @FacesConverter(value = "converterAA")
 public class AAConverter implements Converter<AA>{
 	
-
+	/*
+    	Cette méthode est utilisée pour convertir une valeur 
+    	de chaîne en une instance de la classe AA.
+    */
 	@Override
 	  public AA getAsObject(FacesContext fc, UIComponent comp, String value) {
 		String[] splittedString = value.split("\\+");
@@ -18,12 +21,12 @@ public class AAConverter implements Converter<AA>{
 		return a;
 	  }
 
+	/*
+    	Cette méthode est utilisée pour convertir une instance de la classe AA en chaîne.
+    */
 	  @Override
 	  public String getAsString(FacesContext fc, UIComponent comp, AA value) {
 	      return value.getId() +"+"+ value.getCode();
 	      
 	  }
-
-    
-
 }

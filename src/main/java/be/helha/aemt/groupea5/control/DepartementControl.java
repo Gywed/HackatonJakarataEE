@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import be.helha.aemt.groupea5.ejb.DepartementEJB;
+import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Departement;
 import jakarta.ejb.EJB;
 import jakarta.faces.view.ViewScoped;
@@ -46,7 +47,17 @@ public class DepartementControl implements Serializable
 	{
 		beanGestion.delete(e);
 		
-		return "Departement/manageDepartements.?faces-redirect=true"; 
+		return "Departement/manageDepartements.xhtml?faces-redirect=true"; 
+	}
+	
+	public String doUpdate() 
+	{
+		System.out.println("salut");
+		System.out.println(selectedDepartement.getNom());
+		System.out.println(selectedDepartement.getId());
+		
+		beanGestion.update(selectedDepartement);
+		return "Departement/manageDepartements.xhtml?faces-redirect=true";
 	}
 	
 	public DepartementEJB getBeanGestion() 
