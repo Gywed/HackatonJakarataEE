@@ -40,8 +40,8 @@
 	   </p:column>
 	   
 	   <p:column>
-	   		<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" oncomplete="PF('modification').show();" action="enseignantControl.doSetInformations(e)"
-	   		update="modification"/>
+	   		<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning"  action="#{enseignantControl.doSetInformations(e)}"
+	   		update="modification" oncomplete="PF('modification').show();"/>
 	   		<span>  </span>
 	   		<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" ajax="false" action="#{enseignantControl.doDelete(e)}"/>
 	   </p:column>
@@ -117,22 +117,22 @@
     <p:panel>
         <h:panelGrid columns="2" cellpadding="5">
         	
-            <h:outputLabel for="name" value="Nom:" />
-            <p:inputText id="name" value="#{enseignantControl.nom}" required="true" label="Nom" />
+            <h:outputLabel for="nameUpdate" value="Nom:" />
+            <p:inputText id="nameUpdate" value="#{enseignantControl.nom}" required="true" label="Nom" />
             
-            <h:outputLabel for="surname" value="Prénom:" />
-            <p:inputText id="surname" value="#{enseignantControl.prenom}" required="true" label="Prenom" />
+            <h:outputLabel for="surnameUpdate" value="Prénom:" />
+            <p:inputText id="surnameUpdate" value="#{enseignantControl.prenom}" required="true" label="Prenom" />
             
-            <h:outputLabel for="mail" value="E-Mail:" />
-            <p:inputText id="mail" value="#{enseignantControl.mail}" required="true" label="E-Mail">
+            <h:outputLabel for="mailUpdate" value="E-Mail:" />
+            <p:inputText id="mailUpdate" value="#{enseignantControl.mail}" required="true" label="E-Mail">
             	<!-- <f:validateRegex pattern="^\S+@helha\.be$"/>  -->
             </p:inputText>
             
-            <h:outputLabel for="remarque" value="Remarque:" />
-            <p:inputText id="remarque" value="#{enseignantControl.remarque}" required="true" label="Remarque:" />
+            <h:outputLabel for="remarqueUpdate" value="Remarque:" />
+            <p:inputText id="remarqueUpdate" value="#{enseignantControl.remarque}" required="true" label="Remarque:" />
         </h:panelGrid>
     </p:panel>
-    <p:commandButton value="Confirmer" onclick=" PF('modification').hide()"></p:commandButton>
+    <p:commandButton value="Confirmer" onclick=" PF('modification').hide()" action="#{enseignantControl.doUpdate()}" ajax="false"></p:commandButton>
    </h:form>
 </p:dialog>
 </ui:define>
