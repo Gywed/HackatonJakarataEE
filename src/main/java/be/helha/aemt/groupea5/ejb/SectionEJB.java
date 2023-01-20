@@ -22,6 +22,11 @@ public class SectionEJB
 	{
 		return dao.findAll();
 	}
+	
+	public List<Section> findAllSorted() 
+	{
+		return dao.findAllSorted();
+	}
 
 	public Section add(Section e) 
 	{

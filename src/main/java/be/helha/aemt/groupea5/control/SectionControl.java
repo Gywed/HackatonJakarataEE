@@ -27,6 +27,11 @@ public class SectionControl implements Serializable
 		return beanGestion.findAll();
 	}
 	
+	public List<Section> doFindAllSorted() 
+	{
+		return beanGestion.findAllSorted();
+	}
+	
 	public Section doAdd() 
 	{
 		Section SectiontoAdd = new Section(new Departement(departement,null,null), nom, null);
