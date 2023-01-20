@@ -185,7 +185,7 @@ public class AA implements Serializable{
 	}
 
 	public AA clone() {
-		return new AA(anneeAcademique,code, code, credit, credit, credit, credit, credit, credit, fraction);
+		return new AA(credit, anneeAcademique,ue, code, code, credit, credit, credit, credit, credit, credit, fraction);
 	}
 	@Override
 	public String toString() {
