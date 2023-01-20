@@ -25,9 +25,6 @@ public class MissionControl implements Serializable{
 	private String intitule;
 	private int heures;
 	
-
-	
-	
 	
 	public List<Mission> doFindAll() {
 		return bean.fetchAll();

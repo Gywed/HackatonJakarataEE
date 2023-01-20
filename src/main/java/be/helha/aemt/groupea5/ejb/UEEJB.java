@@ -29,7 +29,7 @@ public class UEEJB {
 		return daoUE.delete(ue);
 	}
 	
-	public UE updtae(UE ue) {
+	public UE update(UE ue) {
 		return daoUE.update(ue);
 	}
 

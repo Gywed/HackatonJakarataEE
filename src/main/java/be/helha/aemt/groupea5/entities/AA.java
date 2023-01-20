@@ -26,6 +26,9 @@ public class AA implements Serializable{
 	@ManyToOne(cascade = CascadeType.PERSIST, targetEntity = AnneeAcademique.class)
 	private AnneeAcademique anneeAcademique;
 	
+	@ManyToOne
+	private UE ue;
+	
 	private String code;
 	private String intitule;
 	private Integer credit;
@@ -36,14 +39,18 @@ public class AA implements Serializable{
 	private Integer nombreEtudiant;
 	private Fraction fraction;
 	
-	public AA() {
+	public AA() 
+	{
 		// TODO Auto-generated constructor stub
 	}
 
-	public AA(AnneeAcademique anneeAcademique, String code, String intitule, Integer credit, Integer heure, Integer heureQ1,
-			Integer heureQ2, Integer nombreGroupe, Integer nombreEtudiant, Fraction fraction) {
+	public AA(Integer id, AnneeAcademique anneeAcademique, UE ue, String code, String intitule, Integer credit,
+			Integer heure, Integer heureQ1, Integer heureQ2, Integer nombreGroupe, Integer nombreEtudiant,
+			Fraction fraction) {
 		super();
+		this.id = id;
 		this.anneeAcademique = anneeAcademique;
+		this.ue = ue;
 		this.code = code;
 		this.intitule = intitule;
 		this.credit = credit;
@@ -55,39 +62,48 @@ public class AA implements Serializable{
 		this.fraction = fraction;
 	}
 
-	public Integer getId() {
+	public Integer getId() 
+	{
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Integer id) 
+	{
 		this.id = id;
 	}
 
-	public AnneeAcademique getAnneeAcademique() {
+	public AnneeAcademique getAnneeAcademique() 
+	{
 		return anneeAcademique;
 	}
 
-	public void setAnneeAcademique(AnneeAcademique anneeAcademique) {
+	public void setAnneeAcademique(AnneeAcademique anneeAcademique) 
+	{
 		this.anneeAcademique = anneeAcademique;
 	}
 
-	public String getCode() {
+	public String getCode() 
+	{
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(String code) 
+	{
 		this.code = code;
 	}
 
-	public String getIntitule() {
+	public String getIntitule() 
+	{
 		return intitule;
 	}
 
-	public void setIntitule(String intitule) {
+	public void setIntitule(String intitule) 
+	{
 		this.intitule = intitule;
 	}
 
-	public Integer getCredit() {
+	public Integer getCredit() 
+	{
 		return credit;
 	}
 
@@ -142,6 +158,14 @@ public class AA implements Serializable{
 	public void setFraction(Fraction fraction) {
 		this.fraction = fraction;
 	}
+	
+	public UE getUe() {
+		return ue;
+	}
+
+	public void setUe(UE ue) {
+		this.ue = ue;
+	}
 
 	@Override
 	public int hashCode() {
@@ -163,4 +187,11 @@ public class AA implements Serializable{
 	public AA clone() {
 		return new AA(anneeAcademique,code, code, credit, credit, credit, credit, credit, credit, fraction);
 	}
+	@Override
+	public String toString() {
+		return "AA [id="+id+", code=" + code + ", intitule=" + intitule + "]";
+	}
+
+	
+	
 }
