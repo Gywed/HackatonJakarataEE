@@ -129,7 +129,7 @@
 	  </p:column>
 	    
 
-	   <p:column  filterable="false">		
+	   <p:column  filterable="false" exportable="false">		
 			<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" 
 			action="#{departementControl.actualiseDepartement(departement)}" update="modifier" 
 			oncomplete="PF('modifier').show()"/>
@@ -142,6 +142,17 @@
 	   </p:column>
 	   
 	</p:dataTable>
+		<p:panel header="Exporter toutes les données" style="margin-right:50px;">
+	            <h:commandLink>
+				    <p:graphicImage value="/images/excel.png" height="50" />
+				    <p:dataExporter type="csv" target="missionID" fileName="missions"/>
+				</h:commandLink>
+				 <h:commandLink>
+				    <p:graphicImage value="/images/PDF.png" height="50" />
+				    <p:dataExporter type="pdf" target="missionID" fileName="missions"/>
+				</h:commandLink>
+		
+	    </p:panel>
 	</h:form>
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
             <p:commandButton value="Non" styleClass="ui-confirmdialog-no ui-button-flat" ajax="false" />
