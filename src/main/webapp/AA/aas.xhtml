@@ -16,7 +16,7 @@
 		
 	<h:form class="form">
 		<p:commandButton type="button" value="Ajouter" icon="pi pi-plus" onclick="PF('informations').show()"></p:commandButton>
-		<p:dataTable value = "#{aAControl.doFindAll()}" var = "e" widgetVar="customersTable">
+		<p:dataTable id="aaID" value = "#{aAControl.doFindAll()}" var = "e" widgetVar="customersTable">
 		   
 		   <p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
                 sortBy="#{e.anneeAcademique.anneeAcademique}" sortable="false">
@@ -65,11 +65,11 @@
 		<p:panel header="Exporter toutes les données" style="margin-right:50px;">
 	            <h:commandLink>
 				    <p:graphicImage value="/images/excel.png" height="50" />
-				    <p:dataExporter type="csv" target="missionID" fileName="missions"/>
+				    <p:dataExporter type="csv" target="aaID" fileName="aas"/>
 				</h:commandLink>
 				 <h:commandLink>
 				    <p:graphicImage value="/images/PDF.png" height="50" />
-				    <p:dataExporter type="pdf" target="missionID" fileName="missions"/>
+				    <p:dataExporter type="pdf" target="aaID" fileName="aas"/>
 				</h:commandLink>
 		
 	    </p:panel>

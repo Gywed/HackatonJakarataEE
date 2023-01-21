@@ -112,7 +112,7 @@
 	
 	<h:form class="form">
 	<p:commandButton type="button" value="Ajouter" icon="pi pi-plus" onclick="PF('ajouter').show()"></p:commandButton>
-	<p:dataTable lazy="false" value = "#{departementControl.doFindAll()}" var = "departement" widgetVar="customersTable">
+	<p:dataTable id="departementID" lazy="false" value = "#{departementControl.doFindAll()}" var = "departement" widgetVar="customersTable">
    
 	   
                 
@@ -145,11 +145,11 @@
 		<p:panel header="Exporter toutes les données" style="margin-right:50px;">
 	            <h:commandLink>
 				    <p:graphicImage value="/images/excel.png" height="50" />
-				    <p:dataExporter type="csv" target="missionID" fileName="missions"/>
+				    <p:dataExporter type="csv" target="departementID" fileName="departements"/>
 				</h:commandLink>
 				 <h:commandLink>
 				    <p:graphicImage value="/images/PDF.png" height="50" />
-				    <p:dataExporter type="pdf" target="missionID" fileName="missions"/>
+				    <p:dataExporter type="pdf" target="departementID" fileName="departements"/>
 				</h:commandLink>
 		
 	    </p:panel>
