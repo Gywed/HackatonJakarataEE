@@ -9,10 +9,11 @@ import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class AttributionControl implements Serializable {
 	
 	@EJB
@@ -20,6 +21,10 @@ public class AttributionControl implements Serializable {
 	
 	private String enseignant;
 	private AA aa;
+	
+	private boolean multiple;
+	
+	private List<AA> selectedAAs;
 
 	private List<String> anneeAcademiques;
 	
@@ -44,17 +49,22 @@ public class AttributionControl implements Serializable {
         addMessage(FacesMessage.SEVERITY_INFO, "Info", message);
     }
 	
-	public void doSetInformation(AA aa) {
+	public void doSetInformation(AA aa, boolean multiple) {
 		setAa(aa);
-		System.out.println(aa);
-		System.out.println(this.aa);
+		setMultiple(multiple);
 	}
 	
 	public String doAttribute() {
 		Enseignant e = new Enseignant();
 		e.setId(Integer.parseInt(enseignant));
 		e.setMail("not Null");
-		beanGestion.attributeAA(e, aa);
+		if (multiple) {
+			for (AA a : selectedAAs) {
+				beanGestion.attributeAA(e, a);
+			}
+		}
+		else
+			beanGestion.attributeAA(e, aa);
 		clearData();
 		return "attributeAAs?faces-redirect=true";
 	}
@@ -90,5 +100,21 @@ public class AttributionControl implements Serializable {
 
 	public void setAnneeAcademiques(List<String> anneeAcademiques) {
 		this.anneeAcademiques = anneeAcademiques;
+	}
+
+	public List<AA> getSelectedAAs() {
+		return selectedAAs;
+	}
+
+	public void setSelectedAAs(List<AA> selectedAAs) {
+		this.selectedAAs = selectedAAs;
+	}
+
+	public boolean isMultiple() {
+		return multiple;
+	}
+
+	public void setMultiple(boolean multiple) {
+		this.multiple = multiple;
 	}
 }
