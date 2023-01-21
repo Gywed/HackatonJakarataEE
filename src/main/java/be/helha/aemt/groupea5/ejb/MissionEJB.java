@@ -3,6 +3,7 @@ package be.helha.aemt.groupea5.ejb;
 import java.util.List;
 
 import be.helha.aemt.groupea5.dao.MissionDAO;
+import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Mission;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
@@ -23,6 +24,10 @@ public class MissionEJB {
 	
 	public Mission findById(Mission m) {
 		return daoMission.findById(m);
+	}
+	
+	public List<Mission> findByYear(AnneeAcademique ac){
+		return daoMission.findByYear(ac);
 	}
 	
 	public Mission add(Mission m) {

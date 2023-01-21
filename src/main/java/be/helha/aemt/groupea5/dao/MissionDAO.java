@@ -2,7 +2,7 @@ package be.helha.aemt.groupea5.dao;
 
 import java.util.List;
 
-
+import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Mission;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
@@ -40,6 +40,15 @@ public class MissionDAO {
 		Mission res = list.get(0);
 		
 		return res;
+	}
+	
+	public List<Mission> findByYear(AnneeAcademique ac){
+		if(ac==null)return null;
+		String strQuery = "select m from Mission m where m.anneeAcademique.id = ?1 ";
+		TypedQuery<Mission> query = em.createQuery(strQuery,Mission.class);
+
+		query.setParameter(1, ac.getId());
+		return query.getResultList();
 	}
 	
 	public Mission add(Mission m) {
