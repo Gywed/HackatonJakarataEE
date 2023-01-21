@@ -1,9 +1,11 @@
 package be.helha.aemt.groupea5.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Mission;
+import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -15,7 +17,10 @@ import jakarta.persistence.TypedQuery;
 public class MissionDAO {
 	@PersistenceContext(unitName = "groupeA5-JTA")
 	private EntityManager em;
-
+	
+	@EJB
+	private AnneeAcademiqueDAO anneeDAO;
+	
 	public MissionDAO() {
 	}
 	public List<Mission> findAll() {
@@ -43,7 +48,8 @@ public class MissionDAO {
 	}
 	
 	public List<Mission> findByYear(AnneeAcademique ac){
-		if(ac==null)return null;
+		if(ac==null)
+			ac = anneeDAO.findCurrentAndNextAcademicYear().get(0);
 		String strQuery = "select m from Mission m where m.anneeAcademique.id = ?1 ";
 		TypedQuery<Mission> query = em.createQuery(strQuery,Mission.class);
 

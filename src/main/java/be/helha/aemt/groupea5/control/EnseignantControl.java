@@ -83,6 +83,10 @@ public class EnseignantControl implements Serializable {
 		System.out.println(mail);
 	}
 	
+	public void doSetAnnee(AnneeAcademique ac) {
+		setAnneeAcademique(ac);
+	}
+	
 	public void doUpdate() {
 		Enseignant e = new Enseignant(nom, prenom, mail, remarque, enseignant.getAttribution());
 		e.setId(enseignant.getId());

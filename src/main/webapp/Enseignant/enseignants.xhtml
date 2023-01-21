@@ -55,8 +55,9 @@
 <p:dialog id="informations" widgetVar="informations" header="Entrer les informations" modal="true">
     <p:panel>
     	<p:outputLabel>Annee Academique pour les missionss et les AAs : </p:outputLabel>
-			<p:selectOneMenu value="#{enseignantControl.anneeAcademique}" converter="converterAnnee">
-        		<f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}"/>
+			<p:selectOneMenu value="#{enseignantControl.anneeAcademique}" converter="converterAnnee" valueChangeListener="#{enseignantControl.doSetAnnee(enseignantControl.anneeAcademique)}">
+        		<f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
+        		<p:ajax update="@this"/>
     		</p:selectOneMenu>
         <h:panelGrid columns="2" cellpadding="5">
         	
@@ -76,14 +77,14 @@
             <p:inputText id="remarque" value="#{enseignantControl.remarque}" required="true" label="Remarque:" />
         </h:panelGrid>
     </p:panel>
-    <p:commandButton value="Suivant" onclick="PF('missions').show(); PF('informations').hide()"></p:commandButton>
+    <p:commandButton value="Suivant" update="missions" oncomplete="PF('missions').show(); PF('informations').hide()"></p:commandButton>
    
 </p:dialog>
 
 <p:dialog id="missions" widgetVar="missions" header="Sélectionner les missions de l'enseignant" modal="true">
    		<p:selectManyMenu value="#{enseignantControl.missions}" converter="converterMission"
                             var="m" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced">
-            <f:selectItems value="#{missionControl.doFindAll()}" var="miss" itemLabel="#{miss.intitule}"
+            <f:selectItems value="#{missionControl.doFindByYear(enseignantControl.anneeAcademique)}" var="miss" itemLabel="#{miss.intitule}"
                             itemValue="#{miss}"/>
 
             <p:column>
