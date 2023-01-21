@@ -43,8 +43,6 @@ public class AnneeAcademique implements Serializable {
 		this.anneeAcademique = anneeAcademique;
 	}
 
-	
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(anneeAcademique);

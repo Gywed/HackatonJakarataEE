@@ -23,6 +23,10 @@ public class AAEJB {
 		// TODO Auto-generated method stub
 		return dao.findAll();
 	}
+	
+	public List<AA> findNotAttribuedAA(){
+		return dao.findNotAttribuedAA();
+	}
 
 	public void add(AA e) throws WrongArgumentException {
 		// TODO Auto-generated method stub

@@ -1,8 +1,14 @@
 package be.helha.aemt.groupea5.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import be.helha.aemt.groupea5.entities.AA;
+import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Attribution;
+import be.helha.aemt.groupea5.entities.Enseignant;
+import be.helha.aemt.groupea5.entities.Mission;
+import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -16,6 +22,9 @@ public class AttributionDAO {
 	@PersistenceContext(unitName = "groupeA5-JTA")
 	private EntityManager em;
 	
+	@EJB
+	private EnseignantDAO enseignantDao;
+	
 	public AttributionDAO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -27,6 +36,12 @@ public class AttributionDAO {
 		
 		em.clear();
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	public List<Attribution> findByDate(AnneeAcademique e) {
+		TypedQuery<Attribution> query = em.createNamedQuery("findAttributionByDate", Attribution.class);
+		query.setParameter(1, e);
+		return query.getResultList();
 	}
 	
 	public List<Attribution> findAll() {
@@ -56,7 +71,25 @@ public class AttributionDAO {
 		Attribution dbE = findById(e);
 		e.setId(dbE.getId());
 		
-		return em.merge(e);
-				
+		return em.merge(e);		
+	}
+	
+	public void attributeAA(Enseignant e, AA a) {
+		if (e == null || a == null) return;
+		
+		Enseignant dbE = enseignantDao.findById(e);
+		if (dbE.getAttribution() != null)
+			for (Attribution attri : dbE.getAttribution()) {
+				if (attri.getAnneeAcademique().getId() == a.getAnneeAcademique().getId()) {
+					attri.addAA(a);
+					em.persist(attri);
+					return;
+				}
+			}
+		Attribution newAttri = new Attribution(a.getAnneeAcademique(), new ArrayList<AA>(), new ArrayList<Mission>());
+		newAttri.addAA(a);
+		
+		dbE.addAttribution(newAttri);
+		em.merge(dbE);
 	}
 }

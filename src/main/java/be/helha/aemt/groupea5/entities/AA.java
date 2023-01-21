@@ -15,7 +15,9 @@ import jakarta.persistence.NamedQuery;
 @Entity
 @NamedQueries({
 	@NamedQuery(name = "findAAByCode", query ="select a from AA a where a.code = ?1"),
-	@NamedQuery(name = "findAAById", query ="select a from AA a where a.id = ?1")
+	@NamedQuery(name = "findAAById", query ="select a from AA a where a.id = ?1"),
+	@NamedQuery(name = "findNotAttribuedAA", 
+	query ="select a from AA a where a not in (Select aa from Attribution attri join attri.aas aa)")
 })
 public class AA implements Serializable{
 

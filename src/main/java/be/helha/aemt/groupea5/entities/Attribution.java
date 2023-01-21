@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,7 +17,9 @@ import jakarta.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name = "findAttributionById", query ="select a from Attribution a where a.id = ?1")
+	@NamedQuery(name = "findAttributionById", query ="select a from Attribution a where a.id = ?1"),
+	@NamedQuery(name = "findAttributionByDate",
+	query ="select a from Attribution a where a.anneeAcademique = ?1")
 })
 public class Attribution implements Serializable {
 	
@@ -25,9 +29,9 @@ public class Attribution implements Serializable {
 	
 	@ManyToOne
 	private AnneeAcademique anneeAcademique;
-	@ManyToMany(targetEntity = AA.class)
+	@ManyToMany(targetEntity = AA.class, fetch = FetchType.EAGER)
 	private List<AA> aas;
-	@ManyToMany(targetEntity = Mission.class)
+	@ManyToMany(targetEntity = Mission.class, fetch = FetchType.EAGER)
 	private List<Mission> missions;
 	
 	public Attribution() {
@@ -90,5 +94,19 @@ public class Attribution implements Serializable {
 		return Objects.equals(aas, other.aas) && Objects.equals(anneeAcademique, other.anneeAcademique)
 				&& Objects.equals(id, other.id) && Objects.equals(missions, other.missions);
 	}
+	
+	public void addAA(AA newAa) {
+		aas.add(newAa);
+	}
+	
+	public void addMission(List<Mission> newMissions) {
+		missions.addAll(newMissions);
+	}
+
+	@Override
+	public String toString() {
+		return anneeAcademique + " | aas=" + aas + " | missions=" + missions;
+	}
+	
 	
 }

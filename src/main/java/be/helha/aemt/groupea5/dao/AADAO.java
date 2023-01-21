@@ -27,6 +27,11 @@ public class AADAO {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public List<AA> findNotAttribuedAA(){
+		TypedQuery<AA> query = em.createNamedQuery("findNotAttribuedAA", AA.class);
+		return query.getResultList();
+	}
+	
 	public AA find(AA e) {
 		TypedQuery<AA> query = em.createNamedQuery("findAAByCode", AA.class);
 		query.setParameter(1, e.getCode());

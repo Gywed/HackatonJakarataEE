@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f = "http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">>
+<h:head>
+
+<title>AA</title>
+<meta http-equiv="  Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+<h:body>
+		<ui:composition template="../menubar.xhtml">
+	    	<ui:define name="content">
+				<h1>Liste des AAs non attribuée</h1>
+		
+	<h:form class="form">
+		<p:dataTable value = "#{aAControl.doFindNotAttribuedAA()}" var = "e" widgetVar="customersTable">
+		   
+		   <p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
+                sortBy="#{e.anneeAcademique.anneeAcademique}" sortable="false">
+                 <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('customersTable').filter()" styleClass="ui-custom-filter">
+                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
+                    </p:selectOneMenu>
+                </f:facet>
+      		</p:column>
+		   <p:column field="code" headerText="Code" sortable="false" filterMatchMode="contains"/>
+		   <p:column field="intitule" headerText="Intitulé" sortable="false" filterMatchMode="contains"/>
+		   
+		   <p:column field="credit" headerText="Crédit" sortable="false" filterMatchMode="exact"/>
+		   <p:column field="heure" headerText="Heure" sortable="false" filterMatchMode="exact"/>
+		   <p:column field="heureQ1" headerText="Heure Q1" sortable="false" filterMatchMode="exact"/>
+		   <p:column field="heureQ2" headerText="Heure Q2" sortable="false" filterMatchMode="exact"/>
+		   <p:column field="nombreGroupe" headerText="Nombre Groupe" sortable="false" filterMatchMode="exact"/>
+		   <p:column field="nombreEtudiant" headerText="Nombre Etudiant" sortable="false" filterMatchMode="exact"/>
+  
+		   <p:column field="fraction" headerText="Fraction" filterMatchMode="exact"
+                sortBy="#{e.fraction}" sortable="false">
+                 <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('customersTable').filter()" styleClass="ui-custom-filter">
+                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItems value="#{aAControl.fractions}" />
+                    </p:selectOneMenu>
+                </f:facet>
+      		</p:column>
+		   
+		   <p:column>
+		   		<p:commandButton value="Attribuer" 
+					action="#{attributionControl.doSetInformation(e)}" update="attribuer" 
+					oncomplete="PF('attribuer').show()"/>
+		      
+		   </p:column>
+			   
+		</p:dataTable>
+	</h:form>
+		
+		<p:dialog id="attribuer" widgetVar="attribuer" header="Attribuer une aa" modal="true">
+				<h:form>
+					<h:panelGrid columns="2" cellpadding="1">
+						<h:outputLabel for="enseignant" value="Enseignant:" />
+			            <p:selectOneMenu id="enseignant" value="#{attributionControl.enseignant}">
+							<f:selectItems value="#{enseignantControl.doFindAll()}" var="e" itemValue="#{e.id}"/>
+						</p:selectOneMenu>
+						
+				    	<br/>
+					<p:commandButton value="Attribuer" action="#{attributionControl.doAttribute()}" ajax="false" />
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

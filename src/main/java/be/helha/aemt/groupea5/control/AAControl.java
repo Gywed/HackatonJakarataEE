@@ -64,6 +64,11 @@ public class AAControl implements Serializable {
 	{
 		return beanGestion.findAll();
 	}
+	
+	public List<AA> doFindNotAttribuedAA()
+	{
+		return beanGestion.findNotAttribuedAA();
+	}
 			
 	public void doAdd() {
 		try {

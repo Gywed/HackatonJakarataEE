@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,7 +24,7 @@ public class Enseignant implements Serializable {
 	private String mail;
 	private String remarque;
 	
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = Attribution.class)
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Attribution.class, fetch = FetchType.EAGER)
 	private List<Attribution> attribution;
 	
 	public Enseignant() {
@@ -37,6 +38,10 @@ public class Enseignant implements Serializable {
 		this.mail = mail;
 		this.remarque = remarque;
 		this.attribution = attribution;
+	}
+	
+	public void addAttribution(Attribution a) {
+		attribution.add(a);
 	}
 
 	public Integer getId() {
@@ -89,7 +94,7 @@ public class Enseignant implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(attribution, id, mail, nom, prenom, remarque);
+		return Objects.hash(id, mail, nom, prenom);
 	}
 
 	@Override
@@ -101,9 +106,15 @@ public class Enseignant implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Enseignant other = (Enseignant) obj;
-		return Objects.equals(attribution, other.attribution) && Objects.equals(id, other.id)
-				&& Objects.equals(mail, other.mail) && Objects.equals(nom, other.nom)
-				&& Objects.equals(prenom, other.prenom) && Objects.equals(remarque, other.remarque);
+		return Objects.equals(id, other.id) && Objects.equals(mail, other.mail) && Objects.equals(nom, other.nom)
+				&& Objects.equals(prenom, other.prenom);
 	}
+
+	@Override
+	public String toString() {
+		return nom + " " + prenom + " | " + mail;
+	}
+	
+	
 	
 }
