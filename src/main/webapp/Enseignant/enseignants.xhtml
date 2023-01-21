@@ -95,13 +95,13 @@
             </p:column>
             
         </p:selectManyMenu>
-   		<p:commandButton type="button" value="Suivant" onclick="PF('aas').show(); PF('missions').hide()"></p:commandButton>
+   		<p:commandButton type="button" update="aas" value="Suivant" onclick="PF('aas').show(); PF('missions').hide()"></p:commandButton>
 </p:dialog>
 
 <p:dialog id="aas" widgetVar="aas" header="Sélectionner les AA de l'enseignant">
 		<p:selectManyMenu value="#{enseignantControl.aas}" converter="converterAA"
                             var="aa" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced" modal="true">
-            <f:selectItems value="#{aAControl.doFindAll()}" var="aa" itemLabel="#{aa.intitule}"
+            <f:selectItems value="#{aAControl.doFindByYear(enseignantControl.anneeAcademique)}" var="aa" itemLabel="#{aa.intitule}"
                             itemValue="#{aA}"/>
 
             <p:column>
