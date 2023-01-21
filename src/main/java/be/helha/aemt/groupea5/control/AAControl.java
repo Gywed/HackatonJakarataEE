@@ -10,6 +10,7 @@ import be.helha.aemt.groupea5.ejb.AAEJB;
 import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Fraction;
+import be.helha.aemt.groupea5.entities.Mission;
 import be.helha.aemt.groupea5.entities.Utilisateur;
 import be.helha.aemt.groupea5.exception.WrongArgumentException;
 import jakarta.ejb.EJB;
@@ -63,6 +64,10 @@ public class AAControl implements Serializable {
 	public List<AA> doFindAll()
 	{
 		return beanGestion.findAll();
+	}
+	
+	public List<AA> doFindByYear(AnneeAcademique ac){
+		return beanGestion.findByYear(ac);
 	}
 			
 	public void doAdd() {
