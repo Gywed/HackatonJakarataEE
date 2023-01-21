@@ -4,6 +4,7 @@ import java.util.List;
 
 import be.helha.aemt.groupea5.dao.AADAO;
 import be.helha.aemt.groupea5.entities.AA;
+import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.exception.WrongArgumentException;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
@@ -26,6 +27,10 @@ public class AAEJB {
 	
 	public List<AA> findNotAttribuedAA(){
 		return dao.findNotAttribuedAA();
+	}
+
+	public List<AA> findByYear(AnneeAcademique ac){
+		return dao.findByYear(ac);
 	}
 
 	public void add(AA e) throws WrongArgumentException {

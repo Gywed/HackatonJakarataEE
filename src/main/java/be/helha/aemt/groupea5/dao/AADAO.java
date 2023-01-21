@@ -4,6 +4,7 @@ import java.util.List;
 
 import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
+import be.helha.aemt.groupea5.entities.Mission;
 import be.helha.aemt.groupea5.exception.WrongArgumentException;
 import be.helha.aemt.groupea5.exception.WrongMailException;
 import jakarta.ejb.EJB;
@@ -54,6 +55,16 @@ public class AADAO {
 		// TODO Auto-generated method stub
 		String strQuery="Select a from AA a";
 		TypedQuery<AA> query = em.createQuery(strQuery,AA.class);
+		return query.getResultList();
+	}
+	
+	public List<AA> findByYear(AnneeAcademique ac){
+		if(ac==null)
+			ac = anneeDAO.findCurrentAndNextAcademicYear().get(0);
+		String strQuery = "select aa from AA aa where aa.anneeAcademique.id = ?1 ";
+		TypedQuery<AA> query = em.createQuery(strQuery,AA.class);
+
+		query.setParameter(1, ac.getId());
 		return query.getResultList();
 	}
 	
