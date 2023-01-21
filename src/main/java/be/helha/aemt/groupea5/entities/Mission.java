@@ -9,8 +9,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "findNotAttribuedMission", 
+			query ="select m from Mission m where m not in (Select mm from Attribution attri join attri.missions mm)")
+})
 public class Mission implements Serializable{
 	
 	@Id

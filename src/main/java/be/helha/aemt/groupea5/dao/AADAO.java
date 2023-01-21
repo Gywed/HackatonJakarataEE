@@ -4,9 +4,7 @@ import java.util.List;
 
 import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
-import be.helha.aemt.groupea5.entities.Mission;
 import be.helha.aemt.groupea5.exception.WrongArgumentException;
-import be.helha.aemt.groupea5.exception.WrongMailException;
 import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;

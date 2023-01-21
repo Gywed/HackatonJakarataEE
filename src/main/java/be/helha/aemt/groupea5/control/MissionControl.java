@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import be.helha.aemt.groupea5.ejb.MissionEJB;
+import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Mission;
 import jakarta.ejb.EJB;
@@ -32,6 +33,11 @@ public class MissionControl implements Serializable{
 	
 	public List<Mission> doFindByYear(AnneeAcademique ac){
 		return bean.findByYear(ac);
+	}
+	
+	public List<Mission> doFindNotAttribuedMission()
+	{
+		return bean.findNotAttribuedMission();
 	}
 	
 	public void doAdd() {

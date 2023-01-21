@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f = "http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">>
+<h:head>
+
+<title>Mission</title>
+<meta http-equiv="  Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+<h:body>
+		<ui:composition template="../menubar.xhtml">
+	    	<ui:define name="content">
+				<h1>Liste des missions non attribuée</h1>
+		
+	<h:form class="form">
+		<p:dataTable value = "#{missionControl.doFindNotAttribuedMission()}" var = "e" widgetVar="customersTable"
+			 rowKey="#{e.id}" headerCheckbox="true" selection="#{attributionControl.selectedMissions}">
+   	   <p:column selectionMode="multiple" style="width : 5%"/>
+	   <p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
+                sortBy="#{mission.anneeAcademique.anneeAcademique}" sortable="false" style="width : 10%">
+                 <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('customersTable').filter()" styleClass="ui-custom-filter">
+                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
+                    </p:selectOneMenu>
+                </f:facet>
+      </p:column>
+      
+	  <p:column field="intitule" headerText="Intitulé" sortable="false" filterMatchMode="contains"/>
+	  
+	  <p:column field="heures" headerText="Heures" sortable="false" style="width : 10%"/>
+	    
+
+	  <p:column>
+  		<p:commandButton value="Attribuer" 
+			action="#{attributionControl.doSetInformationMission(e,false)}" update="attribuer" 
+			oncomplete="PF('attribuer').show()"/>
+		      
+	  </p:column>
+	   
+	</p:dataTable>
+	<br/>
+	<p:commandButton value="Attribuer la sélection" action="#{attributionControl.doSetInformationMission(e,true)}"
+		 update="attribuer" oncomplete="PF('attribuer').show()"/>
+		
+	</h:form>
+		
+		<p:dialog id="attribuer" widgetVar="attribuer" header="Attribuer une aa" modal="true">
+				<h:form>
+					<h:panelGrid columns="2" cellpadding="1">
+						<h:outputLabel for="enseignant" value="Enseignant:" />
+			            <p:selectOneMenu id="enseignant" value="#{attributionControl.enseignant}">
+							<f:selectItems value="#{enseignantControl.doFindAll()}" var="e" itemValue="#{e.id}"/>
+						</p:selectOneMenu>
+						
+				    	<br/>
+					<p:commandButton value="Attribuer" action="#{attributionControl.doAttributeMission()}" ajax="false" />
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

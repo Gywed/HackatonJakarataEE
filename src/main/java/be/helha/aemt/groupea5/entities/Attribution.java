@@ -99,8 +99,8 @@ public class Attribution implements Serializable {
 		aas.add(newAa);
 	}
 	
-	public void addMission(List<Mission> newMissions) {
-		missions.addAll(newMissions);
+	public void addMission(Mission newMission) {
+		missions.add(newMission);
 	}
 
 	@Override

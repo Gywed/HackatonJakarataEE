@@ -47,6 +47,11 @@ public class MissionDAO {
 		return res;
 	}
 	
+	public List<Mission> findNotAttribuedMission(){
+		TypedQuery<Mission> query = em.createNamedQuery("findNotAttribuedMission", Mission.class);
+		return query.getResultList();
+	}
+	
 	public List<Mission> findByYear(AnneeAcademique ac){
 		if(ac==null)
 			ac = anneeDAO.findCurrentAndNextAcademicYear().get(0);

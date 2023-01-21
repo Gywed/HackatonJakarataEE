@@ -92,4 +92,23 @@ public class AttributionDAO {
 		dbE.addAttribution(newAttri);
 		em.merge(dbE);
 	}
+	
+	public void attributeMission(Enseignant e, Mission m) {
+		if (e == null || m == null) return;
+		
+		Enseignant dbE = enseignantDao.findById(e);
+		if (dbE.getAttribution() != null)
+			for (Attribution attri : dbE.getAttribution()) {
+				if (attri.getAnneeAcademique().getId() == m.getAnneeAcademique().getId()) {
+					attri.addMission(m);
+					em.persist(attri);
+					return;
+				}
+			}
+		Attribution newAttri = new Attribution(m.getAnneeAcademique(), new ArrayList<AA>(), new ArrayList<Mission>());
+		newAttri.addMission(m);
+		
+		dbE.addAttribution(newAttri);
+		em.merge(dbE);
+	}
 }

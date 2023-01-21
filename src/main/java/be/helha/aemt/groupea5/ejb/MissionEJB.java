@@ -3,6 +3,7 @@ package be.helha.aemt.groupea5.ejb;
 import java.util.List;
 
 import be.helha.aemt.groupea5.dao.MissionDAO;
+import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Mission;
 import jakarta.ejb.EJB;
@@ -16,6 +17,10 @@ public class MissionEJB {
 	
 	public List<Mission> fetchAll(){
 		return daoMission.findAll();
+	}
+	
+	public List<Mission> findNotAttribuedMission(){
+		return daoMission.findNotAttribuedMission();
 	}
 	
 	public Mission find(Mission m) {

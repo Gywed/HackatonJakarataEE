@@ -6,6 +6,7 @@ import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Attribution;
 import be.helha.aemt.groupea5.entities.Enseignant;
+import be.helha.aemt.groupea5.entities.Mission;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 
@@ -41,5 +42,9 @@ public class AttributionEJB {
 	
 	public void attributeAA(Enseignant e, AA a) {
 		dao.attributeAA(e, a);
+	}
+	
+	public void attributeMission(Enseignant e, Mission m) {
+		dao.attributeMission(e, m);
 	}
 }

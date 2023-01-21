@@ -5,6 +5,7 @@ import java.util.List;
 import be.helha.aemt.groupea5.ejb.AttributionEJB;
 import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.Enseignant;
+import be.helha.aemt.groupea5.entities.Mission;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -21,10 +22,12 @@ public class AttributionControl implements Serializable {
 	
 	private String enseignant;
 	private AA aa;
+	private Mission mission;
 	
 	private boolean multiple;
 	
 	private List<AA> selectedAAs;
+	private List<Mission> selectedMissions;
 
 	private List<String> anneeAcademiques;
 	
@@ -49,12 +52,17 @@ public class AttributionControl implements Serializable {
         addMessage(FacesMessage.SEVERITY_INFO, "Info", message);
     }
 	
-	public void doSetInformation(AA aa, boolean multiple) {
+	public void doSetInformationAA(AA aa, boolean multiple) {
 		setAa(aa);
 		setMultiple(multiple);
 	}
 	
-	public String doAttribute() {
+	public void doSetInformationMission(Mission m, boolean multiple) {
+		setMission(m);
+		setMultiple(multiple);
+	}
+	
+	public String doAttributeAA() {
 		Enseignant e = new Enseignant();
 		e.setId(Integer.parseInt(enseignant));
 		e.setMail("not Null");
@@ -67,6 +75,21 @@ public class AttributionControl implements Serializable {
 			beanGestion.attributeAA(e, aa);
 		clearData();
 		return "attributeAAs?faces-redirect=true";
+	}
+	
+	public String doAttributeMission() {
+		Enseignant e = new Enseignant();
+		e.setId(Integer.parseInt(enseignant));
+		e.setMail("not Null");
+		if (multiple) {
+			for (Mission m : selectedMissions) {
+				beanGestion.attributeMission(e, m);
+			}
+		}
+		else
+			beanGestion.attributeMission(e, mission);
+		clearData();
+		return "attributeMissions?faces-redirect=true";
 	}
 
 	public AttributionEJB getBeanGestion() {
@@ -116,5 +139,21 @@ public class AttributionControl implements Serializable {
 
 	public void setMultiple(boolean multiple) {
 		this.multiple = multiple;
+	}
+
+	public Mission getMission() {
+		return mission;
+	}
+
+	public void setMission(Mission mission) {
+		this.mission = mission;
+	}
+
+	public List<Mission> getSelectedMissions() {
+		return selectedMissions;
+	}
+
+	public void setSelectedMissions(List<Mission> selectedMissions) {
+		this.selectedMissions = selectedMissions;
 	}
 }

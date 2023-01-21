@@ -16,7 +16,7 @@
 		
 	<h:form class="form">
 		<p:dataTable value = "#{aAControl.doFindNotAttribuedAA()}" var = "e" 
-		widgetVar="customersTable" selection="#{attributionControl.selectedAAs}" rowKey="#{e.id}" headerCheckbox="true">
+			widgetVar="customersTable" selection="#{attributionControl.selectedAAs}" rowKey="#{e.id}" headerCheckbox="true">
 		   <p:column selectionMode="multiple"/>
 		   <p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
                 sortBy="#{e.anneeAcademique.anneeAcademique}" sortable="false">
@@ -49,14 +49,14 @@
 		   
 		   <p:column>
 		   		<p:commandButton value="Attribuer" 
-					action="#{attributionControl.doSetInformation(e,false)}" update="attribuer" 
+					action="#{attributionControl.doSetInformationAA(e,false)}" update="attribuer" 
 					oncomplete="PF('attribuer').show()"/>
 		      
 		   </p:column>
 			   
 		</p:dataTable>
 		<br/>
-		<p:commandButton value="Attribuer la selection" action="#{attributionControl.doSetInformation(e,true)}" update="attribuer" 
+		<p:commandButton value="Attribuer la sélection" action="#{attributionControl.doSetInformationAA(e,true)}" update="attribuer" 
 					oncomplete="PF('attribuer').show()"/>
 		
 	</h:form>
@@ -70,7 +70,7 @@
 						</p:selectOneMenu>
 						
 				    	<br/>
-					<p:commandButton value="Attribuer" action="#{attributionControl.doAttribute()}" ajax="false" />
+					<p:commandButton value="Attribuer" action="#{attributionControl.doAttributeAA()}" ajax="false" />
 					</h:panelGrid>
 				</h:form>
 			</p:dialog>
