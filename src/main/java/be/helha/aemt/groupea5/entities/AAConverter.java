@@ -16,7 +16,7 @@ public class AAConverter implements Converter<AA>{
 	@Override
 	  public AA getAsObject(FacesContext fc, UIComponent comp, String value) {
 		String[] splittedString = value.split("\\+");
-		AA a = new AA(null, null, null, splittedString[1], null , null, null, null, null, null, null, null);
+		AA a = new AA(null, null, null, splittedString[1], null , null, null, null, null, null, null);
 		a.setId(Integer.parseInt(splittedString[0]));
 		return a;
 	  }

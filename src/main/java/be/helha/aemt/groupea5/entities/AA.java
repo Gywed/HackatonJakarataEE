@@ -44,11 +44,10 @@ public class AA implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public AA(Integer id, AnneeAcademique anneeAcademique, UE ue, String code, String intitule, Integer credit,
+	public AA(AnneeAcademique anneeAcademique, UE ue, String code, String intitule, Integer credit,
 			Integer heure, Integer heureQ1, Integer heureQ2, Integer nombreGroupe, Integer nombreEtudiant,
 			Fraction fraction) {
 		super();
-		this.id = id;
 		this.anneeAcademique = anneeAcademique;
 		this.ue = ue;
 		this.code = code;
@@ -185,13 +184,11 @@ public class AA implements Serializable{
 	}
 
 	public AA clone() {
-		return new AA(credit, anneeAcademique,ue, code, code, credit, credit, credit, credit, credit, credit, fraction);
+		return new AA(anneeAcademique, ue, code, intitule, credit, heure, heureQ1
+				, heureQ2, nombreGroupe, nombreEtudiant, fraction);
 	}
 	@Override
 	public String toString() {
 		return "AA [id="+id+", code=" + code + ", intitule=" + intitule + "]";
 	}
-
-	
-	
 }
