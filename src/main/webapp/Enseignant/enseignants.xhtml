@@ -55,35 +55,37 @@
 <p:dialog id="informations" widgetVar="informations" header="Entrer les informations" modal="true">
     <p:panel>
     	<p:outputLabel>Annee Academique pour les missionss et les AAs : </p:outputLabel>
-			<p:selectOneMenu value="#{enseignantControl.anneeAcademique}" converter="converterAnnee">
-        		<f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}"/>
+			<p:selectOneMenu value="#{enseignantControl.anneeAcademique}" converter="converterAnnee" valueChangeListener="#{enseignantControl.doSetAnnee(enseignantControl.anneeAcademique)}">
+        		<f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
+        		<p:ajax update="@this"/>
     		</p:selectOneMenu>
         <h:panelGrid columns="2" cellpadding="5">
         	
     		
-            <h:outputLabel for="name" value="Nom:" />
+            <h:outputLabel for="name" value="Nom: *" />
             <p:inputText id="name" value="#{enseignantControl.nom}" required="true" label="Nom" />
             
-            <h:outputLabel for="surname" value="Prénom:" />
+            <h:outputLabel for="surname" value="Prénom: *" />
             <p:inputText id="surname" value="#{enseignantControl.prenom}" required="true" label="Prenom" />
             
-            <h:outputLabel for="mail" value="E-Mail:" />
+            <h:outputLabel for="mail" value="E-Mail: *" />
             <p:inputText id="mail" value="#{enseignantControl.mail}" required="true" label="E-Mail">
             	<!-- <f:validateRegex pattern="^\S+@helha\.be$"/>  -->
             </p:inputText>
             
             <h:outputLabel for="remarque" value="Remarque:" />
-            <p:inputText id="remarque" value="#{enseignantControl.remarque}" required="true" label="Remarque:" />
+            <p:inputText id="remarque" value="#{enseignantControl.remarque}" label="Remarque:" />
         </h:panelGrid>
     </p:panel>
-    <p:commandButton value="Suivant" onclick="PF('missions').show(); PF('informations').hide()"></p:commandButton>
+    <br/>
+    <p:commandButton value="Suivant"  style="float:right;" update="missions" oncomplete="PF('missions').show(); PF('informations').hide()"></p:commandButton>
    
 </p:dialog>
 
 <p:dialog id="missions" widgetVar="missions" header="Sélectionner les missions de l'enseignant" modal="true">
    		<p:selectManyMenu value="#{enseignantControl.missions}" converter="converterMission"
                             var="m" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced">
-            <f:selectItems value="#{missionControl.doFindAll()}" var="miss" itemLabel="#{miss.intitule}"
+            <f:selectItems value="#{missionControl.doFindByYear(enseignantControl.anneeAcademique)}" var="miss" itemLabel="#{miss.intitule}"
                             itemValue="#{miss}"/>
 
             <p:column>
@@ -94,13 +96,15 @@
             </p:column>
             
         </p:selectManyMenu>
-   		<p:commandButton type="button" value="Suivant" onclick="PF('aas').show(); PF('missions').hide()"></p:commandButton>
+        <br/>
+        <p:commandButton type="button" value="Précédent" onclick="PF('informations').show(); PF('missions').hide()"></p:commandButton>
+   		<p:commandButton type="button" style="float:right;" update="aas" value="Suivant" onclick="PF('aas').show(); PF('missions').hide()"></p:commandButton>
 </p:dialog>
 
 <p:dialog id="aas" widgetVar="aas" header="Sélectionner les AA de l'enseignant">
 		<p:selectManyMenu value="#{enseignantControl.aas}" converter="converterAA"
                             var="aa" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced" modal="true">
-            <f:selectItems value="#{aAControl.doFindAll()}" var="aa" itemLabel="#{aa.intitule}"
+            <f:selectItems value="#{aAControl.doFindByYear(enseignantControl.anneeAcademique)}" var="aa" itemLabel="#{aa.intitule}"
                             itemValue="#{aA}"/>
 
             <p:column>
@@ -108,7 +112,9 @@
             </p:column>
             
         </p:selectManyMenu>
-   		<p:commandButton ajax="false" value="Confirmer" onclick="PF('aas').hide()" actionListener="#{enseignantControl.doAdd()}" update="growl"></p:commandButton>
+        <br/>
+        <p:commandButton type="button" value="Précédent" onclick="PF('missions').show(); PF('aas').hide()"></p:commandButton>
+   		<p:commandButton ajax="false" style="float:right;" value="Confirmer" onclick="PF('aas').hide()" actionListener="#{enseignantControl.doAdd()}" update="growl"></p:commandButton>
 </p:dialog>
 </h:form>
 
@@ -117,22 +123,22 @@
     <p:panel>
         <h:panelGrid columns="2" cellpadding="5">
         	
-            <h:outputLabel for="nameUpdate" value="Nom:" />
+            <h:outputLabel for="nameUpdate" value="Nom: *" />
             <p:inputText id="nameUpdate" value="#{enseignantControl.nom}" required="true" label="Nom" />
             
-            <h:outputLabel for="surnameUpdate" value="Prénom:" />
+            <h:outputLabel for="surnameUpdate" value="Prénom: *" />
             <p:inputText id="surnameUpdate" value="#{enseignantControl.prenom}" required="true" label="Prenom" />
             
-            <h:outputLabel for="mailUpdate" value="E-Mail:" />
+            <h:outputLabel for="mailUpdate" value="E-Mail: *" />
             <p:inputText id="mailUpdate" value="#{enseignantControl.mail}" required="true" label="E-Mail">
             	<!-- <f:validateRegex pattern="^\S+@helha\.be$"/>  -->
             </p:inputText>
             
-            <h:outputLabel for="remarqueUpdate" value="Remarque:" />
+            <h:outputLabel for="remarqueUpdate" value="Remarque: *" />
             <p:inputText id="remarqueUpdate" value="#{enseignantControl.remarque}" required="true" label="Remarque:" />
         </h:panelGrid>
     </p:panel>
-    <p:commandButton value="Confirmer" onclick=" PF('modification').hide()" action="#{enseignantControl.doUpdate()}" ajax="false"></p:commandButton>
+    <p:commandButton value="Confirmer" style="float:right;" onclick=" PF('modification').hide()" action="#{enseignantControl.doUpdate()}" ajax="false"></p:commandButton>
    </h:form>
 </p:dialog>
 </ui:define>

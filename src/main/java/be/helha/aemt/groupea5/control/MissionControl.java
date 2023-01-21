@@ -30,6 +30,10 @@ public class MissionControl implements Serializable{
 		return bean.fetchAll();
 	}
 	
+	public List<Mission> doFindByYear(AnneeAcademique ac){
+		return bean.findByYear(ac);
+	}
+	
 	public void doAdd() {
 		bean.add(new Mission(new AnneeAcademique(anneeAcademique),intitule,heures));
 		clearData();
