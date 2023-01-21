@@ -16,10 +16,20 @@
     <ui:define name="content">
         <h1>Liste des Missions</h1>
 	
+
 	<h:form class="form">
+	
 	<p:commandButton type="button" value="Ajouter" icon="pi pi-plus" onclick="PF('ajouter').show()"></p:commandButton>
 	
-	<p:dataTable value = "#{missionControl.doFindAll()}" var = "mission" widgetVar="customersTable">
+	
+
+	
+	
+
+	<p:dataTable id="missionID" value = "#{missionControl.doFindAll()}" var = "mission" widgetVar="customersTable" style="margin-bottom:20px">
+	
+  
+   
    
 	   <p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
                 sortBy="#{mission.anneeAcademique.anneeAcademique}" sortable="false">
@@ -36,7 +46,7 @@
 	  <p:column field="heures" headerText="Heures" sortable="false"/>
 	    
 
-	   <p:column  filterable="false">		
+	   <p:column  filterable="false" exportable="false">		
 			<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" 
 			action="#{missionControl.doSetInformation(mission)}" update="modifier" 
 			oncomplete="PF('modifier').show()"/>
@@ -49,7 +59,23 @@
 	   </p:column>
 	   
 	</p:dataTable>
+	
+		<p:panel header="Exporter toutes les données" style="margin-right:50px;">
+	            <h:commandLink>
+				    <p:graphicImage value="/images/excel.png" height="50" />
+				    <p:dataExporter type="csv" target="missionID" fileName="missions"/>
+				</h:commandLink>
+				 <h:commandLink>
+				    <p:graphicImage value="/images/PDF.png" height="50" />
+				    <p:dataExporter type="pdf" target="missionID" fileName="missions"/>
+				</h:commandLink>
+		
+	    </p:panel>
 	</h:form>
+		
+		
+	
+	
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
             <p:commandButton value="Non" styleClass="ui-confirmdialog-no ui-button-flat" ajax="false" />
             <p:commandButton value="Oui" styleClass="ui-confirmdialog-yes" ajax="false"/>
