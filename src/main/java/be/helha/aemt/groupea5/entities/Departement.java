@@ -27,7 +27,7 @@ public class Departement implements Serializable, Comparable<Departement>
 	private Integer id;
 	
 	private String nom;
-	@OneToMany(targetEntity = Section.class,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity = Section.class,fetch=FetchType.EAGER, orphanRemoval = true)
 	private List<Section> sections;
 	@ManyToMany(targetEntity = Mission.class,fetch=FetchType.EAGER)
 	private List<Mission> missions;

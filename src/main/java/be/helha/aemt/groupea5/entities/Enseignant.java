@@ -24,7 +24,7 @@ public class Enseignant implements Serializable {
 	private String mail;
 	private String remarque;
 	
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = Attribution.class, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Attribution.class, fetch = FetchType.EAGER, orphanRemoval = true)
 	private List<Attribution> attribution;
 	
 	public Enseignant() {

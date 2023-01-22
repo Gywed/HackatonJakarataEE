@@ -28,7 +28,7 @@ public class Section implements Serializable{
 	private Departement departement;
 	private String nom;
 	
-	@OneToMany(targetEntity = Mission.class)
+	@OneToMany(targetEntity = Mission.class, orphanRemoval = true)
 	private List<Mission> missions;
 	
 	

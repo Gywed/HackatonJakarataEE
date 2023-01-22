@@ -99,7 +99,7 @@
             <form-error-page>/loginerror.xhtml</form-error-page>
         </form-login-config>
     </login-config>
-    
+  
     <context-param>
 	  	<param-name>primefaces.THEME</param-name>
 	  	<param-value>arya</param-value>

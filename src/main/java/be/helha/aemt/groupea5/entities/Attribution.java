@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
@@ -29,9 +30,9 @@ public class Attribution implements Serializable {
 	
 	@ManyToOne
 	private AnneeAcademique anneeAcademique;
-	@ManyToMany(targetEntity = AA.class, fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = AA.class, fetch = FetchType.EAGER, orphanRemoval = true)
 	private List<AA> aas;
-	@ManyToMany(targetEntity = Mission.class, fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = Mission.class, fetch = FetchType.EAGER, orphanRemoval = true)
 	private List<Mission> missions;
 	
 	public Attribution() {

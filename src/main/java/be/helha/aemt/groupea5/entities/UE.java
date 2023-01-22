@@ -35,7 +35,7 @@ public class UE implements Serializable
 	private String intitule;
 	private Integer credit;
 	
-	@OneToMany(mappedBy = "ue", cascade = CascadeType.ALL,targetEntity = AA.class)
+	@OneToMany(mappedBy = "ue", cascade = CascadeType.ALL,targetEntity = AA.class, orphanRemoval = true)
 	private List<AA> aas;
 	
 	public UE() 
