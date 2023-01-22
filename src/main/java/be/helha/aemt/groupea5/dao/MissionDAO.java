@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
+import be.helha.aemt.groupea5.entities.Attribution;
 import be.helha.aemt.groupea5.entities.Mission;
 import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
@@ -20,6 +21,9 @@ public class MissionDAO {
 	
 	@EJB
 	private AnneeAcademiqueDAO anneeDAO;
+	
+	@EJB
+	private AttributionDAO attriDAO;
 	
 	public MissionDAO() {
 	}
@@ -74,6 +78,13 @@ public class MissionDAO {
 			return null;
 		Mission mASupp = find(m);
 		if(mASupp==null)return null;
+		
+		List<Attribution> attris = attriDAO.findAll();
+		for (Attribution attri : attris) {
+			attri.getMissions().removeIf(e -> e.getId() == mASupp.getId());
+			em.merge(attri);
+		}
+		
 		em.remove(mASupp);
 		return mASupp;
 		

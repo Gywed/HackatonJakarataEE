@@ -4,6 +4,7 @@ import java.util.List;
 
 import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
+import be.helha.aemt.groupea5.entities.Attribution;
 import be.helha.aemt.groupea5.exception.WrongArgumentException;
 import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
@@ -21,6 +22,9 @@ public class AADAO {
 	
 	@EJB
 	private AnneeAcademiqueDAO anneeDAO;
+	
+	@EJB
+	private AttributionDAO attriDAO; 
 	
 	public AADAO() {
 		// TODO Auto-generated constructor stub
@@ -92,7 +96,7 @@ public class AADAO {
 		if (e.getNombreGroupe() > 1)
 			for (int i = 1; i <= e.getNombreGroupe() ; i++) {
 				AA newAa = e.clone();
-				newAa.setCode(e.getCode()+"-"+(char)(i + 96));
+				newAa.setCode(e.getCode()+""+i);
 				em.merge(newAa);
 			}
 		else
@@ -104,6 +108,12 @@ public class AADAO {
 		
 		AA dbE = findById(e);
 		if (dbE == null) return null;
+		
+		List<Attribution> attris = attriDAO.findAll();
+		for (Attribution attri : attris) {
+			attri.getAas().removeIf(a -> a.getId() == dbE.getId());
+			em.merge(attri);
+		}
 		
 		em.remove(em.merge(dbE));
 		return dbE;

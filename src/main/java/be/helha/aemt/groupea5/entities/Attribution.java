@@ -30,9 +30,9 @@ public class Attribution implements Serializable {
 	
 	@ManyToOne
 	private AnneeAcademique anneeAcademique;
-	@OneToMany(targetEntity = AA.class, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToMany(targetEntity = AA.class, fetch = FetchType.EAGER)
 	private List<AA> aas;
-	@OneToMany(targetEntity = Mission.class, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToMany(targetEntity = Mission.class, fetch = FetchType.EAGER)
 	private List<Mission> missions;
 	
 	public Attribution() {
