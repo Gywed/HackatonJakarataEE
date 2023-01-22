@@ -47,4 +47,7 @@ public class EnseignantEJB {
 		return daoEnseignant.update(e);
 	}
 
+	public void copyAttributionsToNextYear(Enseignant e) {
+		daoEnseignant.copyAttributionsToNextYear(e);
+	}
 }

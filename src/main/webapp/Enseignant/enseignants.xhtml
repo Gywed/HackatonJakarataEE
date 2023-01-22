@@ -46,6 +46,10 @@
 	   		<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning"  action="#{enseignantControl.doSetInformations(e)}"
 	   		update="modification" oncomplete="PF('modification').show();"/>
 	   		<span>  </span>
+	   		<p:commandButton icon="pi pi-copy" styleClass="rounded-button ui-button-info" action="#{enseignantControl.doCopyAttributionsToNextYear(e)}">
+	   			<p:confirm header="Confirmation" message="Êtes-vous sûr(e) de vouloir copier les attributions de l'année #{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear().get(0).anneeAcademique} à l'année #{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear().get(1).anneeAcademique} ?" icon="pi pi-info-circle"/>
+	   		</p:commandButton>
+	   		<span> </span>
 	   		<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-danger" action="#{enseignantControl.doDelete(e)}">
 	   			<p:confirm header="Confirmation" message="Êtes-vous sûr(e) de vouloir supprimer cet(te) enseigant(e) ?" icon="pi pi-info-circle"/>
 	   		</p:commandButton>

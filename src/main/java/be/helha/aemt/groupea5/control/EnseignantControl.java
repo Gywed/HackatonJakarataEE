@@ -105,6 +105,10 @@ public class EnseignantControl implements Serializable {
 		}
 	}
 	
+	public void doCopyAttributionsToNextYear(Enseignant e) {
+		bean.copyAttributionsToNextYear(e);
+	}
+	
 	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(severity, summary, detail));

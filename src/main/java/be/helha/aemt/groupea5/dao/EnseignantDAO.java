@@ -1,10 +1,13 @@
 package be.helha.aemt.groupea5.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
+import be.helha.aemt.groupea5.entities.Attribution;
 import be.helha.aemt.groupea5.entities.Enseignant;
+import be.helha.aemt.groupea5.entities.Mission;
 import be.helha.aemt.groupea5.entities.UE;
 import be.helha.aemt.groupea5.exception.AlreadyExistsException;
 import be.helha.aemt.groupea5.exception.WrongMailException;
@@ -53,6 +56,7 @@ public class EnseignantDAO {
 	public List<AA> findLessonsGrid(AnneeAcademique ac, Enseignant e){
 		if(ac==null)
 			ac = anneeDAO.findCurrentAndNextAcademicYear().get(0);
+		System.out.println(ac);
 		if(e==null) return null;
 		TypedQuery<AA> query = em.createQuery("Select aa from AA aa where aa.anneeAcademique.id = ?1 and aa in (Select aa from Enseignant e join e.attribution attr join attr.aas aa where e.id = ?2)", AA.class);
 		query.setParameter(1, ac.getId());
@@ -105,6 +109,31 @@ public class EnseignantDAO {
 		
 		return em.merge(e);
 	
+	}
+	
+	public void copyAttributionsToNextYear(Enseignant e) {
+		AnneeAcademique currentYear = anneeDAO.findCurrentAndNextAcademicYear().get(0);
+		AnneeAcademique nextYear = anneeDAO.findCurrentAndNextAcademicYear().get(1);
+		Enseignant eDB = find(e);
+		Attribution currentYearAttribution = (Attribution) eDB.getAttribution().stream().filter( attr -> attr.getAnneeAcademique().getAnneeAcademique().equals(currentYear.getAnneeAcademique())).findFirst().get();
+		Attribution newAttr = new Attribution(nextYear, new ArrayList<AA>(), new ArrayList<Mission>());
+		System.out.println(currentYearAttribution);
+		for (AA aa : currentYearAttribution.getAas()) {
+			UE ue = aa.getUe();
+			UE newUE;
+			if(ue==null) 
+				newUE = null;
+			else
+				newUE = new UE(nextYear, ue.getDepartement(), ue.getSection(), ue.getBloc(), ue.getCode(), ue.getIntitule(), ue.getCredit(), new ArrayList<AA>());
+			AA newAA = new AA(nextYear, newUE, aa.getCode(), aa.getIntitule(), aa.getCredit(), aa.getHeure(), aa.getHeureQ1(), aa.getHeureQ2(), aa.getNombreGroupe(), aa.getNombreEtudiant(), aa.getFraction());
+			newAttr.addAA(newAA);
+		}
+		for (Mission m : currentYearAttribution.getMissions()) {
+			Mission newM = new Mission(nextYear, m.getIntitule(), m.getHeures());
+			newAttr.addMission(newM);
+		}
+		eDB.addAttribution(newAttr);
+		em.merge(e);
 	}
 
 }
