@@ -43,6 +43,18 @@ public class Enseignant implements Serializable {
 	public void addAttribution(Attribution a) {
 		attribution.add(a);
 	}
+	
+	public void replaceAttribution(Attribution newA) {
+		int index = -1;
+		for (Attribution attr : attribution) {
+			if(attr.getId() == newA.getId())
+				index = attribution.indexOf(attr);
+				
+		}
+		if(index!=-1)
+			attribution.set(index, newA);
+	}
+	
 
 	public Integer getId() {
 		return id;
