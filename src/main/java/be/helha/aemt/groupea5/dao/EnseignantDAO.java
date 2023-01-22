@@ -2,9 +2,13 @@ package be.helha.aemt.groupea5.dao;
 
 import java.util.List;
 
+import be.helha.aemt.groupea5.entities.AA;
+import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Enseignant;
+import be.helha.aemt.groupea5.entities.UE;
 import be.helha.aemt.groupea5.exception.AlreadyExistsException;
 import be.helha.aemt.groupea5.exception.WrongMailException;
+import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -17,6 +21,9 @@ public class EnseignantDAO {
 	
 	@PersistenceContext(unitName = "groupeA5-JTA")
 	private EntityManager em;
+	
+	@EJB
+	private AnneeAcademiqueDAO anneeDAO;
 
 	public EnseignantDAO() {
 		super();
@@ -41,6 +48,17 @@ public class EnseignantDAO {
 		query.setParameter(1, e.getId());
 		List<Enseignant> result = query.getResultList();
 		return result.isEmpty() ? null : result.get(0);
+	}
+	
+	public List<AA> findLessonsGrid(AnneeAcademique ac, Enseignant e){
+		if(ac==null)
+			ac = anneeDAO.findCurrentAndNextAcademicYear().get(0);
+		if(e==null) return null;
+		TypedQuery<AA> query = em.createQuery("Select aa from AA aa where aa.anneeAcademique.id = ?1 and aa in (Select aa from Enseignant e join e.attribution attr join attr.aas aa where e.id = ?2)", AA.class);
+		query.setParameter(1, ac.getId());
+		query.setParameter(2, e.getId());
+		List<AA> result = query.getResultList();
+		return result;
 	}
 	
 	public Enseignant add(Enseignant e) throws AlreadyExistsException, WrongMailException {
