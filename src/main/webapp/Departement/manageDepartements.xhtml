@@ -119,11 +119,11 @@
 	  <p:column field="id" headerText="Identifiant" sortable="false" filterMatchMode="contains"/>
 	  <p:column field="nom" headerText="nom" sortable="false" filterMatchMode="contains"/>
 	  
-	  <p:column >
+	  <p:column exportable="false">
 	      <f:facet name="header">Sections</f:facet>
 	      <p:commandButton  value="Sections" action="#{departementControl.actualiseDepartement(departement)}" oncomplete="PF('sectionsDialog').show()" update="sectionsDialog"  />
 	  </p:column>
-      <p:column >
+      <p:column exportable="false">
 	  	<f:facet name="header">Missions</f:facet>
 	    <p:commandButton  value="Missions" action="#{departementControl.actualiseDepartement(departement)}" oncomplete="PF('missionsDialog').show()" update="missionsDialog" />
 	  </p:column>
