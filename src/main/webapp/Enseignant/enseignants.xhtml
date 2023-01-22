@@ -40,6 +40,8 @@
 	   </p:column>
 	   
 	   <p:column exportable="false">
+	   		<p:commandButton icon="pi pi-info-circle" styleClass="rounded-button ui-button-success"/>
+	   		<span>  </span>
 	   		<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning"  action="#{enseignantControl.doSetInformations(e)}"
 	   		update="modification" oncomplete="PF('modification').show();"/>
 	   		<span>  </span>
