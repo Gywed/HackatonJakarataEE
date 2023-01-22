@@ -30,6 +30,11 @@ public class EnseignantDAO {
 	
 	@EJB
 	private AttributionDAO attrDAO;
+	@EJB
+	private AADAO aaDAO;
+	@EJB
+	private MissionDAO missionDAO;
+	
 
 	public EnseignantDAO() {
 		super();
@@ -111,6 +116,8 @@ public class EnseignantDAO {
 	}
 	
 	public void copyAttributionsToNextYear(Enseignant e) {
+		List<AA> aasDB = aaDAO.findAll();
+		List<Mission> missionsDB = missionDAO.findAll();
 		AnneeAcademique currentYear = anneeDAO.findCurrentAndNextAcademicYear().get(0);
 		AnneeAcademique nextYear = anneeDAO.findCurrentAndNextAcademicYear().get(1);
 		Enseignant eDB = find(e);
@@ -132,10 +139,18 @@ public class EnseignantDAO {
 			else
 				newUE = new UE(nextYear, ue.getDepartement(), ue.getSection(), ue.getBloc(), ue.getCode(), ue.getIntitule(), ue.getCredit(), new ArrayList<AA>());
 			AA newAA = new AA(nextYear, newUE, aa.getCode(), aa.getIntitule(), aa.getCredit(), aa.getHeure(), aa.getHeureQ1(), aa.getHeureQ2(), aa.getNombreGroupe(), aa.getNombreEtudiant(), aa.getFraction());
+			for (AA aaDB : aasDB) {
+				if(aaDB.getCode().equals(newAA.getCode()) && aaDB.getAnneeAcademique().getAnneeAcademique().equals(newAA.getAnneeAcademique().getAnneeAcademique()))
+					newAA.setId(aaDB.getId());
+			}
 			newAttr.addAA(newAA);
 		}
 		for (Mission m : currentYearAttribution.getMissions()) {
 			Mission newM = new Mission(nextYear, m.getIntitule(), m.getHeures());
+			for (Mission mDB : missionsDB) {
+				if(mDB.getIntitule().equals(newM.getIntitule()) && mDB.getAnneeAcademique().getAnneeAcademique().equals(newM.getAnneeAcademique().getAnneeAcademique()))
+					newM.setId(mDB.getId());
+			}
 			newAttr.addMission(newM);
 		}
 		if(newAttr.getId() == null)
