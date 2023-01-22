@@ -23,8 +23,8 @@ public class EnseignantEJB {
 		return daoEnseignant.findAll();
 	}
 	
-	public List<AA> findLessonsGrid(AnneeAcademique ac, Enseignant e){
-		return daoEnseignant.findLessonsGrid(ac, e);
+	public List<AA> findLessonsGrid(Enseignant e){
+		return daoEnseignant.findLessonsGrid(e);
 	}
 
 	public Enseignant add(Enseignant e) throws AlreadyExistsException, WrongMailException {

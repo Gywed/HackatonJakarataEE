@@ -53,13 +53,9 @@ public class EnseignantDAO {
 		return result.isEmpty() ? null : result.get(0);
 	}
 	
-	public List<AA> findLessonsGrid(AnneeAcademique ac, Enseignant e){
-		if(ac==null)
-			ac = anneeDAO.findCurrentAndNextAcademicYear().get(0);
-		System.out.println(ac);
+	public List<AA> findLessonsGrid(Enseignant e){
 		if(e==null) return null;
-		TypedQuery<AA> query = em.createQuery("Select aa from AA aa where aa.anneeAcademique.id = ?1 and aa in (Select aa from Enseignant e join e.attribution attr join attr.aas aa where e.id = ?2)", AA.class);
-		query.setParameter(1, ac.getId());
+		TypedQuery<AA> query = em.createQuery("Select aa from AA aa where aa in (Select aa from Enseignant e join e.attribution attr join attr.aas aa where e.id = ?2)", AA.class);
 		query.setParameter(2, e.getId());
 		List<AA> result = query.getResultList();
 		return result;
@@ -133,7 +129,7 @@ public class EnseignantDAO {
 			newAttr.addMission(newM);
 		}
 		eDB.addAttribution(newAttr);
-		em.merge(e);
+		em.merge(eDB);
 	}
 
 }

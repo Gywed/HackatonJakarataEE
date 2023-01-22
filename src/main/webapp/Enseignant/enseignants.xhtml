@@ -170,11 +170,12 @@
 
 <p:dialog id="details" width="50%" widgetVar="details" header="Grille des cours" modal="true">
 	<h:form>
-		<p:dataTable id="detailsEnseignant" widgetVar="detailsEnseignant" value = "#{enseignantControl.doFindLessonsGrid(enseignantControl.anneeAcademique, enseignantControl.enseignant)}" var = "aa">
+		<p:dataTable id="detailsEnseignant" widgetVar="detailsEnseignant" value = "#{enseignantControl.doFindLessonsGrid(enseignantControl.enseignant)}" var = "aa">
 			<p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
                 sortBy="#{aA.anneeAcademique.anneeAcademique}" sortable="false">
                  <f:facet name="filter">
                     <p:selectOneMenu onchange="PF('detailsEnseignant').filter()" styleClass="ui-custom-filter">
+                    	<f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
                         <f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
                     </p:selectOneMenu>
                 </f:facet>

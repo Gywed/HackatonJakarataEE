@@ -57,8 +57,8 @@ public class EnseignantControl implements Serializable {
 		return bean.findAll();
 	}
 	
-	public List<AA> doFindLessonsGrid(AnneeAcademique ac, Enseignant e){
-		return bean.findLessonsGrid(ac, e);
+	public List<AA> doFindLessonsGrid(Enseignant e){
+		return bean.findLessonsGrid(e);
 	}
 	public void doAdd() {
 		Attribution attr = new Attribution(anneeAcademique, aas, missions);
