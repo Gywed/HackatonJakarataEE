@@ -6,6 +6,7 @@ import be.helha.aemt.groupea5.dao.EnseignantDAO;
 import be.helha.aemt.groupea5.entities.AA;
 import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Enseignant;
+import be.helha.aemt.groupea5.entities.Mission;
 import be.helha.aemt.groupea5.entities.UE;
 import be.helha.aemt.groupea5.exception.AlreadyExistsException;
 import be.helha.aemt.groupea5.exception.WrongMailException;
@@ -25,6 +26,10 @@ public class EnseignantEJB {
 	
 	public List<AA> findLessonsGrid(Enseignant e){
 		return daoEnseignant.findLessonsGrid(e);
+	}
+	
+	public List<Mission> findMissions(Enseignant e){
+		return daoEnseignant.findMissions(e);
 	}
 
 	public Enseignant add(Enseignant e) throws AlreadyExistsException, WrongMailException {

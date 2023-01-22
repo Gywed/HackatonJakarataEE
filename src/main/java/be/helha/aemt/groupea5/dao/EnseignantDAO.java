@@ -69,6 +69,14 @@ public class EnseignantDAO {
 		return result;
 	}
 	
+	public List<Mission> findMissions(Enseignant e){
+		if(e==null) return null;
+		TypedQuery<Mission> query = em.createQuery("Select m from Mission m where m in (Select m from Enseignant e join e.attribution attr join attr.missions m where e.id = ?2)", Mission.class);
+		query.setParameter(2, e.getId());
+		List<Mission> result = query.getResultList();
+		return result;
+	}
+	
 	public Enseignant add(Enseignant e) throws AlreadyExistsException, WrongMailException {
 		String pattern = "^\\S+@helha\\.be$";
 		
