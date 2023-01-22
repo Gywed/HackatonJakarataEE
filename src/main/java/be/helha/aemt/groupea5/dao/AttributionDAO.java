@@ -93,6 +93,10 @@ public class AttributionDAO {
 		em.merge(dbE);
 	}
 	
+	public void removeAttribution(Enseignant e) {
+		em.merge(e);
+	}
+	
 	public void attributeMission(Enseignant e, Mission m) {
 		if (e == null || m == null) return;
 		

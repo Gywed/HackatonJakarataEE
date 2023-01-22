@@ -47,4 +47,8 @@ public class AttributionEJB {
 	public void attributeMission(Enseignant e, Mission m) {
 		dao.attributeMission(e, m);
 	}
+	
+	public void removeAttribution(Enseignant e) {
+		dao.removeAttribution(e);
+	}
 }

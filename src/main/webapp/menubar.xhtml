@@ -17,13 +17,18 @@
 			   	<p:menuitem value="Mission" outcome="/Mission/Mission.xhtml"/>
 			       
 		        
-	        S	<p:menuitem value="AA" outcome="/AA/aas.xhtml"/>
+	        	<p:menuitem value="AA" outcome="/AA/aas.xhtml"/>
 		        
 			   	
 			   	<p:menuitem value="UE" outcome="/UE/UE.xhtml"/>
 			   	<p:submenu label="Attribution">
 					<p:menuitem value="Attribution de AA" outcome="/Attribution/attributeAAs.xhtml"/>
 					<p:menuitem value="Attribution de Mission" outcome="/Attribution/attributeMissions.xhtml"/>
+				</p:submenu>
+				
+				<p:submenu label="Désattribution">
+					<p:menuitem value="Désattribution de AA" outcome="/Attribution/removeAttributedAAs.xhtml"/>
+					<p:menuitem value="Désattribution de Mission" outcome="/Attribution/removeAttributedMissions.xhtml"/>
 				</p:submenu>
 			   	<p:menuitem value="Departement" outcome="/Departement/manageDepartements.xhtml" />
 			   	<p:menuitem value="Section" outcome="/Section/manageV2.xhtml" />
