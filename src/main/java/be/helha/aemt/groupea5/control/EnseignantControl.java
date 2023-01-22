@@ -72,6 +72,7 @@ public class EnseignantControl implements Serializable {
 	
 	public void doDelete(Enseignant e) {
 		bean.delete(e);
+		showInfo("Suppression réussie.");
 	}
 	
 	public void doSetInformations(Enseignant e) {

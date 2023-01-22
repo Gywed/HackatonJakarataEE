@@ -43,7 +43,11 @@
 	   		<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning"  action="#{enseignantControl.doSetInformations(e)}"
 	   		update="modification" oncomplete="PF('modification').show();"/>
 	   		<span>  </span>
-	   		<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" ajax="false" action="#{enseignantControl.doDelete(e)}"/>
+	   		<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-danger" action="#{enseignantControl.doDelete(e)}">
+	   			<p:confirm header="Confirmation" message="Êtes-vous sûr(e) de vouloir supprimer cet(te) enseigant(e) ?" icon="pi pi-info-circle"/>
+	   		</p:commandButton>
+	   		
+	   		
 	   </p:column>
 	</p:dataTable>
 		<p:panel header="Exporter toutes les données" style="margin-right:50px;">
@@ -59,6 +63,11 @@
 	   	</p:panel>
 	
 </h:form>
+
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+	<p:commandButton value="Non" styleClass="ui-confirmdialog-no ui-button-flat" ajax="false"/>
+	<p:commandButton value="Oui" styleClass="ui-confirmdialog-yes" ajax="false"/>
+</p:confirmDialog>
 
 <h:form>
 <p:growl id="growl" showDetail="true" />
