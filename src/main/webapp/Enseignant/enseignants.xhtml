@@ -47,7 +47,9 @@
 	   		update="modification" oncomplete="PF('modification').show();"/>
 	   		<span>  </span>
 	   		<p:commandButton icon="pi pi-copy" styleClass="rounded-button ui-button-info" action="#{enseignantControl.doCopyAttributionsToNextYear(e)}">
-	   			<p:confirm header="Confirmation" message="Êtes-vous sûr(e) de vouloir copier les attributions de l'année #{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear().get(0).anneeAcademique} à l'année #{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear().get(1).anneeAcademique} ?" icon="pi pi-info-circle"/>
+	   			<p:confirm header="Confirmation" message="Êtes-vous sûr(e) de vouloir copier les attributions de l'année #{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear().get(0).anneeAcademique}
+	   			 à l'année #{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear().get(1).anneeAcademique} ? 
+	   			 \nLa copie écrasera les attributions de #{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear().get(1).anneeAcademique}." icon="pi pi-info-circle"/>
 	   		</p:commandButton>
 	   		<span> </span>
 	   		<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-danger" action="#{enseignantControl.doDelete(e)}">

@@ -27,6 +27,9 @@ public class EnseignantDAO {
 	
 	@EJB
 	private AnneeAcademiqueDAO anneeDAO;
+	
+	@EJB
+	private AttributionDAO attrDAO;
 
 	public EnseignantDAO() {
 		super();
@@ -99,7 +102,7 @@ public class EnseignantDAO {
 		if(!e.getMail().matches(pattern))
 			throw new WrongMailException("L'adresse e-mail doit respecter le format : ******@helha.be");
 		
-		if (find(e) != null) {
+		if (find(e) != null && find(e).getId() != e.getId()) {
 			 throw new AlreadyExistsException("Cet e-mail est déjà utilisé");
 		}
 		
@@ -113,7 +116,14 @@ public class EnseignantDAO {
 		Enseignant eDB = find(e);
 		Attribution currentYearAttribution = (Attribution) eDB.getAttribution().stream().filter( attr -> attr.getAnneeAcademique().getAnneeAcademique().equals(currentYear.getAnneeAcademique())).findFirst().get();
 		Attribution newAttr = new Attribution(nextYear, new ArrayList<AA>(), new ArrayList<Mission>());
-		System.out.println(currentYearAttribution);
+		for (Attribution attr : eDB.getAttribution()) {
+			if(attr.getAnneeAcademique().getAnneeAcademique().equals(nextYear.getAnneeAcademique())) {
+				System.out.println(attr.getId());
+				newAttr.setId(attr.getId());
+				break;
+			}
+				
+		}
 		for (AA aa : currentYearAttribution.getAas()) {
 			UE ue = aa.getUe();
 			UE newUE;
@@ -128,7 +138,10 @@ public class EnseignantDAO {
 			Mission newM = new Mission(nextYear, m.getIntitule(), m.getHeures());
 			newAttr.addMission(newM);
 		}
-		eDB.addAttribution(newAttr);
+		if(newAttr.getId() == null)
+			eDB.addAttribution(newAttr);
+		else
+			eDB.replaceAttribution(newAttr);
 		em.merge(eDB);
 	}
 
