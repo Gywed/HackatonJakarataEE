@@ -12,6 +12,7 @@ import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Attribution;
 import be.helha.aemt.groupea5.entities.Enseignant;
 import be.helha.aemt.groupea5.entities.Mission;
+import be.helha.aemt.groupea5.entities.UE;
 import be.helha.aemt.groupea5.exception.AlreadyExistsException;
 import be.helha.aemt.groupea5.exception.WrongMailException;
 import jakarta.ejb.EJB;
@@ -55,6 +56,10 @@ public class EnseignantControl implements Serializable {
 	public List<Enseignant> doFindAll() {
 		return bean.findAll();
 	}
+	
+	public List<AA> doFindLessonsGrid(AnneeAcademique ac, Enseignant e){
+		return bean.findLessonsGrid(ac, e);
+	}
 	public void doAdd() {
 		Attribution attr = new Attribution(anneeAcademique, aas, missions);
 		List<Attribution> attrs = new ArrayList<>();
@@ -81,7 +86,6 @@ public class EnseignantControl implements Serializable {
 		setPrenom(e.getPrenom());
 		setRemarque(e.getMail());
 		setEnseignant(e);
-		System.out.println(mail);
 	}
 	
 	public void doSetAnnee(AnneeAcademique ac) {
