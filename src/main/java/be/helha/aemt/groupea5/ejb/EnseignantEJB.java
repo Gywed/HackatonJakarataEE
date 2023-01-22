@@ -3,7 +3,10 @@ package be.helha.aemt.groupea5.ejb;
 import java.util.List;
 
 import be.helha.aemt.groupea5.dao.EnseignantDAO;
+import be.helha.aemt.groupea5.entities.AA;
+import be.helha.aemt.groupea5.entities.AnneeAcademique;
 import be.helha.aemt.groupea5.entities.Enseignant;
+import be.helha.aemt.groupea5.entities.UE;
 import be.helha.aemt.groupea5.exception.AlreadyExistsException;
 import be.helha.aemt.groupea5.exception.WrongMailException;
 import jakarta.ejb.EJB;
@@ -18,6 +21,10 @@ public class EnseignantEJB {
 	public List<Enseignant> findAll() {
 		// TODO Auto-generated method stub
 		return daoEnseignant.findAll();
+	}
+	
+	public List<AA> findLessonsGrid(Enseignant e){
+		return daoEnseignant.findLessonsGrid(e);
 	}
 
 	public Enseignant add(Enseignant e) throws AlreadyExistsException, WrongMailException {
@@ -40,4 +47,7 @@ public class EnseignantEJB {
 		return daoEnseignant.update(e);
 	}
 
+	public void copyAttributionsToNextYear(Enseignant e) {
+		daoEnseignant.copyAttributionsToNextYear(e);
+	}
 }

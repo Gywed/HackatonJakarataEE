@@ -15,7 +15,8 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name = "findSectionByName", query ="select s from Section s where s.nom = ?1")
+	@NamedQuery(name = "findSectionByName", query ="select s from Section s where s.nom = ?1"),
+	@NamedQuery(name = "findSectionById", query ="select s from Section s where s.id = ?1")
 })
 public class Section implements Serializable{
 

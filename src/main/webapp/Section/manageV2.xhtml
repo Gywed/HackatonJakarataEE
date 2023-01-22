@@ -37,36 +37,33 @@
 	            </f:facet>
 	            
 	
-	            <p:column field="nom" headerText="Nom"  sortBy="#{section.nom}" filterable="false" >
+	            <p:column field="nom" headerText="Nom"  sortBy="#{section.nom}" filterable="true" filterMatchMode="contains" >
 	                <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{section.nom}" />
 	            </p:column>
 	            
 	            
-	            <p:column field="departement.nom" headerText="Département" filterable="false" sortBy="#{departementNameComparator}">
+	            <p:column field="departement.nom" headerText="Département" filterable="true" filterMatchMode="contains" sortBy="#{departementNameComparator}">
 					<h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{section.departement}" />
 				</p:column>
-	           
 	            
-	            <p:column exportable="false">
-				    <f:facet name="header">Modifier</f:facet>
-				    <p:commandButton value="Modifier" action="#{sectionControl.goToUpdateSection(section)}" onclick="PF('updateDialog').show()"  />
-				</p:column>
-				
-				<p:column exportable="false">
-					<f:facet name = "header">Supprimer</f:facet>
-					
-					<p:commandButton value = "Supprimer" action = "#{sectionControl.doDelete(section)}">
-						<p:confirm header="Confirmation" message="Voulez-vous supprimer cette section ?" icon="pi pi-info-circle"/>
-					</p:commandButton>
+
+		    	<p:column  filterable="false" exportable="false">		
+					<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" 
+					action="#{sectionControl.goToUpdateSection(section)}" update="modifier" 
+					oncomplete="PF('modifier').show()"/>
+			      <span></span>
 			      
-			        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
-			        	<p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
-			            <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" />
-			    	</p:confirmDialog>
-			    	
-				</p:column>
-	
+			      
+			      	<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-warning" 
+			      	action="#{sectionControl.doDelete(section)}" >
+			      		<p:confirm header="Confirmation" message="Voulez-vous supprimer ce département ?" icon="pi pi-info-circle" ajax="false"/>
+			      	</p:commandButton>
+		
+			   </p:column>
 	        </p:dataTable>
+	        
+	        
+	
 	        <p:panel header="Exporter toutes les données" style="margin-right:50px;">
 	            <h:commandLink>
 				    <p:graphicImage value="/images/excel.png" height="50" />
@@ -79,23 +76,33 @@
 		
 	    	</p:panel>
 	    </h:form>
+	    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="Non" styleClass="ui-confirmdialog-no ui-button-flat" ajax="false" />
+            <p:commandButton value="Oui" styleClass="ui-confirmdialog-yes" ajax="false"/>
+        </p:confirmDialog>
+        
+      
+			
+			<p:dialog id="modifier" widgetVar="modifier" header="Modifier une section" modal="true" closeOnEscape="true" resizable="false">
+				<h:form>
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="nom" value="Nom :" > <p:inputText id="nom" value="#{sectionControl.selectedSection.nom}" /> </h:outputLabel>
+			        
+			        <br/>
+			        <p:selectOneMenu value="#{sectionControl.departement}">
+						<f:selectItems value="#{departementControl.doFindAll()}" var="departement"/>
+	                </p:selectOneMenu>
+	                <br/>
+					            
+					<p:commandButton value="Modifier" action="#{sectionControl.doUpdate()}" ajax="false" ></p:commandButton>
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
 	</div>
 
-<!-- pop up modifier une section -->
-	<p:dialog id="updateDialog" header="Modification" widgetVar="updateDialog" modal="true">
-		<h:form id="updateForm">
-	        <h:panelGrid columns="2" cellpadding="5">
-	            <h:outputLabel for="nom" value="Nom :" />
-	            <p:inputText id="nom" value="#{sectionControl.selectedSection.nom}" />
-	            <p:selectOneMenu id="departement" value="#{sectionControl.departement}">     
-	                <f:selectItems value="#{departementControl.doFindAll()}" var="departement"
-	                              itemLabel="#{departement.nom}" itemValue="#{departement}" />
-	            </p:selectOneMenu>
-	        </h:panelGrid>
-	        <p:commandButton value="Enregistrer" action="#{sectionControl.doUpdateSection()}" oncomplete="PF('updateDialog').hide()" />
-	    </h:form>
-	    
-	</p:dialog>
+
+	
+	
 	
 	<!--  pop up ajouter une section -->
     <p:dialog id="createDialog" header="Ajouter une section" widgetVar="createDialog" modal="true">

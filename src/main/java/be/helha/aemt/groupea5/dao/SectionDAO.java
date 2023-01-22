@@ -38,6 +38,18 @@ public class SectionDAO
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	public Section findById(Section section) 
+	{
+		TypedQuery<Section> query = em.createNamedQuery("findSectionById",Section.class);
+		query.setParameter(1, section.getId());
+		List<Section> list = query.getResultList();
+		
+		em.clear();
+		
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	
 	public List<Section> findAll() 
 	{
 		String strQuery="Select s from Section s";
@@ -85,7 +97,7 @@ public class SectionDAO
 	{
 		if (e == null) return null;
 		
-		Section dbE = find(e);
+		Section dbE = findById(e);
 		
 		e.setId(dbE.getId());
 		

@@ -47,17 +47,13 @@ public class DepartementControl implements Serializable
 	{
 		beanGestion.delete(e);
 		
-		return "Departement/manageDepartements.xhtml?faces-redirect=true"; 
+		return "manageDepartements?faces-redirect=true"; 
 	}
 	
 	public String doUpdate() 
 	{
-		System.out.println("salut");
-		System.out.println(selectedDepartement.getNom());
-		System.out.println(selectedDepartement.getId());
-		
 		beanGestion.update(selectedDepartement);
-		return "Departement/manageDepartements.xhtml?faces-redirect=true";
+		return "manageDepartements?faces-redirect=true";
 	}
 	
 	public DepartementEJB getBeanGestion() 

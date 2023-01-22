@@ -40,9 +40,16 @@
 	   </p:column>
 	   
 	   <p:column exportable="false">
+	   		<p:commandButton icon="pi pi-info-circle" styleClass="rounded-button ui-button-success" action="#{enseignantControl.doSetInformations(e)}"
+	   		update="details" oncomplete="PF('details').show();"/>
+	   		<span>  </span>
 	   		<p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning"  action="#{enseignantControl.doSetInformations(e)}"
 	   		update="modification" oncomplete="PF('modification').show();"/>
 	   		<span>  </span>
+	   		<p:commandButton icon="pi pi-copy" styleClass="rounded-button ui-button-info" action="#{enseignantControl.doCopyAttributionsToNextYear(e)}">
+	   			<p:confirm header="Confirmation" message="Êtes-vous sûr(e) de vouloir copier les attributions de l'année #{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear().get(0).anneeAcademique} à l'année #{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear().get(1).anneeAcademique} ?" icon="pi pi-info-circle"/>
+	   		</p:commandButton>
+	   		<span> </span>
 	   		<p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-danger" action="#{enseignantControl.doDelete(e)}">
 	   			<p:confirm header="Confirmation" message="Êtes-vous sûr(e) de vouloir supprimer cet(te) enseigant(e) ?" icon="pi pi-info-circle"/>
 	   		</p:commandButton>
@@ -159,6 +166,26 @@
     </p:panel>
     <p:commandButton value="Confirmer" style="float:right;" onclick=" PF('modification').hide()" action="#{enseignantControl.doUpdate()}" ajax="false"></p:commandButton>
    </h:form>
+</p:dialog>
+
+<p:dialog id="details" width="50%" widgetVar="details" header="Grille des cours" modal="true">
+	<h:form>
+		<p:dataTable id="detailsEnseignant" widgetVar="detailsEnseignant" value = "#{enseignantControl.doFindLessonsGrid(enseignantControl.enseignant)}" var = "aa">
+			<p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
+                sortBy="#{aA.anneeAcademique.anneeAcademique}" sortable="false">
+                 <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('detailsEnseignant').filter()" styleClass="ui-custom-filter">
+                    	<f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
+                    </p:selectOneMenu>
+                </f:facet>
+      </p:column>
+			<p:column field="code" headerText="Code" sortable="false" filterable="false"/>
+			<p:column field="intitule" headerText="Intitule" sortable="false" filterable="false"/>
+		
+		</p:dataTable>
+	
+	</h:form>
 </p:dialog>
 </ui:define>
 </ui:composition>

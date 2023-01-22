@@ -32,25 +32,32 @@ public class SectionControl implements Serializable
 		return beanGestion.findAllSorted();
 	}
 	
-	public Section doAdd() 
+	public String doAdd() 
 	{
 		Section SectiontoAdd = new Section(new Departement(departement,null,null), nom, null);
-		return beanGestion.add(SectiontoAdd);
+		 beanGestion.add(SectiontoAdd);
+		
+		return "manageV2?faces-redirect=true"; 
 	}
 	
 	public void goToUpdateSection(Section section) 
 	{
-		selectedSection =null;
 	    selectedSection = section;
+	}
+	
+	public String doUpdate() 
+	{
+		selectedSection.setDepartement(new Departement(departement,null,null));
+		beanGestion.update(selectedSection);
+		return "manageV2?faces-redirect=true";
 	}
 	
 	public String doDelete(Section e) 
 	{
 		beanGestion.delete(e);
 		
-		return "Section/manageV2?faces-redirect=true"; 
+		return "manageV2?faces-redirect=true"; 
 	}
-	
 	
 
 	public SectionEJB getBeanGestion() 
