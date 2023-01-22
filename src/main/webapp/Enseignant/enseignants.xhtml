@@ -170,22 +170,40 @@
    </h:form>
 </p:dialog>
 
-<p:dialog id="details" width="50%" widgetVar="details" header="Grille des cours" modal="true">
+<p:dialog id="details" width="50%" widgetVar="details" header="Details" modal="true">
 	<h:form>
-		<p:dataTable id="detailsEnseignant" widgetVar="detailsEnseignant" value = "#{enseignantControl.doFindLessonsGrid(enseignantControl.enseignant)}" var = "aa">
-			<p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
-                sortBy="#{aA.anneeAcademique.anneeAcademique}" sortable="false">
-                 <f:facet name="filter">
-                    <p:selectOneMenu onchange="PF('detailsEnseignant').filter()" styleClass="ui-custom-filter">
-                    	<f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
-                        <f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
-                    </p:selectOneMenu>
-                </f:facet>
-      </p:column>
-			<p:column field="code" headerText="Code" sortable="false" filterable="false"/>
-			<p:column field="intitule" headerText="Intitule" sortable="false" filterable="false"/>
+		<p:panel header="AAs">
+			<p:dataTable id="detailsEnseignantAA" widgetVar="detailsEnseignantAA" value = "#{enseignantControl.doFindLessonsGrid(enseignantControl.enseignant)}" var = "aa">
+				<p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
+	                sortBy="#{aA.anneeAcademique.anneeAcademique}" sortable="false">
+	                 <f:facet name="filter">
+	                    <p:selectOneMenu onchange="PF('detailsEnseignantAA').filter()" styleClass="ui-custom-filter">
+	                    	<f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+	                        <f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
+	                    </p:selectOneMenu>
+	                </f:facet>
+	      		</p:column>
+				<p:column field="code" headerText="Code" sortable="false" filterable="false"/>
+				<p:column field="intitule" headerText="Intitule" sortable="false" filterable="false"/>
+			
+			</p:dataTable>
+		</p:panel>
 		
-		</p:dataTable>
+		<p:panel header="Missions" style="display: inline-block; float: right;">
+			<p:dataTable id="detailsEnseignantMission" widgetVar="detailsEnseignantMission" value = "#{enseignantControl.doFindMissions(enseignantControl.enseignant)}" var = "mission">
+				<p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
+	                sortBy="#{aA.anneeAcademique.anneeAcademique}" sortable="false">
+	                 <f:facet name="filter">
+	                    <p:selectOneMenu onchange="PF('detailsEnseignantMission').filter()" styleClass="ui-custom-filter">
+	                    	<f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+	                        <f:selectItems value="#{anneeAcademiqueControl.doFindCurrentAndNextAcademicYear()}" />
+	                    </p:selectOneMenu>
+	                </f:facet>
+	      		</p:column>
+				<p:column field="intitule" headerText="Intitule" sortable="false" filterable="false"/>
+			
+			</p:dataTable>
+		</p:panel>
 	
 	</h:form>
 </p:dialog>
