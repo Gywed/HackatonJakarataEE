@@ -4,11 +4,6 @@
 	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" 
 	version="5.0">
 	
-  <context-param>
-  	<param-name>primefaces.THEME</param-name>
-  	<param-value>arya</param-value>
-  </context-param>
-  
   <display-name>groupeA5</display-name>
   <welcome-file-list>
     <welcome-file>home.xhtml</welcome-file>
@@ -22,17 +17,18 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
-  <error-page>
-   <error-code>403</error-code>
-   <location>/403.xhtml</location>
-  </error-page>
   <security-constraint>
         <display-name>Secretary Pages</display-name>
         <web-resource-collection>
             <web-resource-name>Protected Secretary Area</web-resource-name>
             <description></description>
-            <url-pattern>/sec/*</url-pattern>
-            <url-pattern>/sec.xhtml</url-pattern>
+            <url-pattern>/Attribution/*</url-pattern>
+            <url-pattern>/AA/*</url-pattern>
+            <url-pattern>/Departement/*</url-pattern>
+            <url-pattern>/Enseignant/*</url-pattern>
+            <url-pattern>/Mission/*</url-pattern>
+            <url-pattern>/Section/*</url-pattern>
+            <url-pattern>/UE/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
             <http-method>HEAD</http-method>
@@ -44,41 +40,41 @@
         <auth-constraint>
             <description/>
             <role-name>S</role-name>
-        </auth-constraint>
-        <user-data-constraint>
-            <transport-guarantee>NONE</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
-    <security-constraint>
-        <display-name>Department director Pages</display-name>
-        <web-resource-collection>
-            <web-resource-name>Protected Secretary Area</web-resource-name>
-            <description></description>
-            <url-pattern>/dep/*</url-pattern>
-            <url-pattern>/dep.xhtml</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-            <http-method>HEAD</http-method>
-            <http-method>PUT</http-method>
-            <http-method>OPTIONS</http-method>
-            <http-method>TRACE</http-method>
-            <http-method>DELETE</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <description/>
             <role-name>DDE</role-name>
+            <role-name>DDOM</role-name>
         </auth-constraint>
         <user-data-constraint>
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+<!--     <security-constraint> -->
+<!--         <display-name>Department director Pages</display-name> -->
+<!--         <web-resource-collection> -->
+<!--             <web-resource-name>Protected Secretary Area</web-resource-name> -->
+<!--             <description></description> -->
+<!--             <http-method>GET</http-method> -->
+<!--             <http-method>POST</http-method> -->
+<!--             <http-method>HEAD</http-method> -->
+<!--             <http-method>PUT</http-method> -->
+<!--             <http-method>OPTIONS</http-method> -->
+<!--             <http-method>TRACE</http-method> -->
+<!--             <http-method>DELETE</http-method> -->
+<!--         </web-resource-collection> -->
+<!--         <auth-constraint> -->
+<!--             <description/> -->
+<!--             <role-name>DDE</role-name> -->
+<!--             <role-name>DDOM</role-name> -->
+<!--         </auth-constraint> -->
+<!--         <user-data-constraint> -->
+<!--             <transport-guarantee>NONE</transport-guarantee> -->
+<!--         </user-data-constraint> -->
+<!--     </security-constraint> -->
     <security-constraint>
         <display-name>Domain director Pages</display-name>
         <web-resource-collection>
             <web-resource-name>Protected Secretary Area</web-resource-name>
             <description></description>
-            <url-pattern>/dom/*</url-pattern>
-            <url-pattern>/dom.xhtml</url-pattern>
+            <url-pattern>/Utilisateur/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
             <http-method>HEAD</http-method>
@@ -103,4 +99,9 @@
             <form-error-page>/loginerror.xhtml</form-error-page>
         </form-login-config>
     </login-config>
+    
+    <context-param>
+	  	<param-name>primefaces.THEME</param-name>
+	  	<param-value>arya</param-value>
+  </context-param>
 </web-app>

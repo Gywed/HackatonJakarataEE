@@ -6,34 +6,20 @@
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
 <h:head>
-<title>Start Page</title>
-<meta http-equiv="
-	Content-Type" content="text/html; charset=UTF-8" />
+	<title>Start Page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </h:head>
 <h:body>
-	
-	<ui:composition template="/menubar.xhtml">
-	    <ui:define name="content">
-	     <h:form method="POST" action="j_security_check">
-	        <h:panelGrid header="Se Connecter" columns="2" cellpadding="5">
-	            
-	               
-	                <p:outputLabel>Login : </p:outputLabel>
-					<p:inputText id="login" name="j_username"/>
-					
-	                <p:outputLabel>Password : </p:outputLabel>
-					<p:inputText type="password" id="password" name="j_password"/>
-					
-					<p:commandButton type="submit" value="Login">
-					</p:commandButton>
-	                <p:commandButton type="reset" value="Reset">
-					</p:commandButton>
-	               
-	            
-        	</h:panelGrid>
-        	</h:form>
-	    </ui:define>
+<ui:composition template="menubar.xhtml">
+    	<ui:define name="content">
+		    <p:panel header="Formulaire de connexion">
+		        <form method="POST" action="j_security_check">
+		            Email: <input type="text" name="j_username" /> <br /><br /> Mot de passe:
+		            <input type="password" name="j_password" /> <br /><br /> <input
+		                type="submit" value="Se connecter" />
+		        </form>
+		    </p:panel>
+    	</ui:define>
 	</ui:composition>
-	
 </h:body>
 </html>

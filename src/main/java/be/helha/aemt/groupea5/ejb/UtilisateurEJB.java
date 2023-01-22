@@ -6,6 +6,7 @@ import be.helha.aemt.groupea5.dao.EnseignantDAO;
 import be.helha.aemt.groupea5.dao.UtilisateurDAO;
 import be.helha.aemt.groupea5.entities.Enseignant;
 import be.helha.aemt.groupea5.entities.Utilisateur;
+import be.helha.aemt.groupea5.exception.PasswordHashingException;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateful;
 import jakarta.ejb.Stateless;
@@ -21,7 +22,7 @@ public class UtilisateurEJB {
 		return daoUtilisateur.findAll();
 	}
 
-	public Utilisateur add(Utilisateur e) {
+	public Utilisateur add(Utilisateur e) throws PasswordHashingException {
 		// TODO Auto-generated method stub
 		return daoUtilisateur.add(e);
 	}
@@ -36,9 +37,9 @@ public class UtilisateurEJB {
 		return daoUtilisateur.find(e);
 	}
 
-	public Utilisateur update(Utilisateur e) {
+	public Utilisateur update(Utilisateur e, boolean changed) throws PasswordHashingException {
 		// TODO Auto-generated method stub
-		return daoUtilisateur.update(e);
+		return daoUtilisateur.update(e, changed);
 	}
 
 }

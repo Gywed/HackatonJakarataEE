@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,6 +31,8 @@ public class Utilisateur implements Serializable{
 	
 	@ManyToOne(targetEntity = Departement.class)
 	private Departement departement;
+	
+	@Enumerated(EnumType.STRING)
 	private Role role;
 		
 	public Utilisateur() {

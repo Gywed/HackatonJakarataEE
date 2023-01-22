@@ -4,9 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.List;
 import be.helha.aemt.groupea5.entities.Departement;
 import be.helha.aemt.groupea5.entities.Utilisateur;
+import be.helha.aemt.groupea5.exception.PasswordHashingException;
 import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateful;
@@ -52,7 +54,7 @@ public class UtilisateurDAO {
 		return query.getResultList();
 	}
 	
-	public Utilisateur add(Utilisateur e) {
+	public Utilisateur add(Utilisateur e) throws PasswordHashingException {
 		if (e == null) return null;
 		if (e == find(e)) return null;
 		Departement dep = depDao.find(e.getDepartement());
@@ -60,21 +62,29 @@ public class UtilisateurDAO {
 		if (dep != null)
 			e.setDepartement(dep);
 		
-		try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            String text = e.getPassword();
+		e.setPassword(hashPassword(e.getPassword()));
+		
+		return em.merge(e);
+	}
+	
+	public static String hashPassword(String password) throws PasswordHashingException
+    {
+        try 
+        {
+            //hash password with SHA-256
+        	MessageDigest md = MessageDigest.getInstance("SHA-256");
+            String text = password;
             md.update(text.getBytes("UTF-8")); // Change this to "UTF-16" if needed
             byte[] digest = md.digest();
             BigInteger bigInt = new BigInteger(1, digest);
             String output = bigInt.toString(16);
-            e.setPassword(output);
-
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-            return null;
+            return output;
+        } 
+        catch (NoSuchAlgorithmException | UnsupportedEncodingException e) 
+        {
+            throw new PasswordHashingException("Error hashing password", e);
         }
-		
-		return em.merge(e);
-	}
+    }
 	
 	public Utilisateur delete(Utilisateur e) {
 		if (e == null) return null;
@@ -86,7 +96,7 @@ public class UtilisateurDAO {
 		return dbE;
 	}
 
-	public Utilisateur update(Utilisateur e) {
+	public Utilisateur update(Utilisateur e, boolean changed) throws PasswordHashingException {
 		if (e == null) return null;
 		Utilisateur dbE = findById(e);
 		Departement dep = depDao.find(e.getDepartement());
@@ -94,17 +104,9 @@ public class UtilisateurDAO {
 		if (dep != null)
 			e.setDepartement(dep);
 		
-		try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            String text = e.getPassword();
-            md.update(text.getBytes("UTF-8")); // Change this to "UTF-16" if needed
-            byte[] digest = md.digest();
-            BigInteger bigInt = new BigInteger(1, digest);
-            String output = bigInt.toString(16);
-            e.setPassword(output);
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-            return null;
-        }
+		if (changed)
+			e.setPassword(hashPassword(e.getPassword()));
+        
 		
 		e.setId(dbE.getId());
 		

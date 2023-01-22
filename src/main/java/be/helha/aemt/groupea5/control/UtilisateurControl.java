@@ -7,6 +7,7 @@ import be.helha.aemt.groupea5.ejb.UtilisateurEJB;
 import be.helha.aemt.groupea5.entities.Departement;
 import be.helha.aemt.groupea5.entities.Role;
 import be.helha.aemt.groupea5.entities.Utilisateur;
+import be.helha.aemt.groupea5.exception.PasswordHashingException;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
@@ -55,17 +56,27 @@ public class UtilisateurControl implements Serializable {
 	}
 	
 	public String doUpdate() {
+		boolean changed = false;
 		utilisateur.setDepartement(new Departement(departement,null,null));
 		utilisateur.setEmail(email);
 		utilisateur.setPrenom(prenom);
 		utilisateur.setNom(nom);
 		utilisateur.setRole(role);
-		if (password == null)
+		if (password.isBlank()) {
 			utilisateur.setPassword(oldPassword);
+		}
 		else
+		{
 			utilisateur.setPassword(password);
-		beanUser.update(utilisateur);
-		clearData();
+			changed = true;
+		}
+		try {
+			beanUser.update(utilisateur,changed);
+			clearData();
+		} catch (PasswordHashingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "utilisateurs?faces-redirect=true";
 	}
 	
@@ -74,7 +85,14 @@ public class UtilisateurControl implements Serializable {
 	}
 	
 	public void doAdd() {
-		beanUser.add(new Utilisateur(nom, prenom, email, password,new Departement(departement, null, null), role));
+		try {
+			beanUser.add(new Utilisateur(nom, prenom, email, password,new Departement(departement, null, null), role));
+			clearData();
+		} catch (PasswordHashingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void doSetInformation(Utilisateur utilisateur) {
