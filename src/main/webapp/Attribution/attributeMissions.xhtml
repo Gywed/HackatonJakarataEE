@@ -17,9 +17,9 @@
 	<h:form class="form">
 		<p:dataTable value = "#{missionControl.doFindNotAttribuedMission()}" var = "e" widgetVar="customersTable"
 			 rowKey="#{e.id}" headerCheckbox="true" selection="#{attributionControl.selectedMissions}">
-   	   <p:column selectionMode="multiple" style="width : 5%"/>
+   	   <p:column selectionMode="multiple" style="width : 1%"/>
 	   <p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
-                sortBy="#{mission.anneeAcademique.anneeAcademique}" sortable="false" style="width : 10%">
+                sortBy="#{mission.anneeAcademique.anneeAcademique}" sortable="false" style="width : 8%">
                  <f:facet name="filter">
                     <p:selectOneMenu onchange="PF('customersTable').filter()" styleClass="ui-custom-filter">
                         <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />

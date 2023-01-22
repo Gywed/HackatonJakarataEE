@@ -22,9 +22,9 @@
     	</p:selectOneMenu>
 		
 		<p:dataTable value="#{attributionControl.teacherMissions}" var="mission" widgetVar="customersTable" 
-			id="dataTable" rowKey="#{mission.id}" lazy="true">
+			id="dataTable" rowKey="#{mission.id}" lazy="false">
 			 <p:column field="anneeAcademique" headerText="Année Académique" filterMatchMode="exact"
-                sortBy="#{e.anneeAcademique.anneeAcademique}" sortable="false" style="width : 10%">
+                sortBy="#{e.anneeAcademique.anneeAcademique}" sortable="false" style="width : 8%">
                  <f:facet name="filter">
                     <p:selectOneMenu onchange="PF('customersTable').filter()" styleClass="ui-custom-filter">
                         <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
